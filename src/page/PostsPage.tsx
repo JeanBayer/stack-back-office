@@ -1,5 +1,6 @@
 import { useShallow } from 'zustand/react/shallow';
 import '../App.css';
+import { PostTable } from '../components/PostTable';
 import { usePosts } from '../hooks/usePosts';
 import { useStore } from '../store/useStore';
 
@@ -12,6 +13,11 @@ export const PostsPage = () => {
       decrementPage: state.decrementPage,
     })),
   );
+
+  // eslint-disable-next-line no-constant-condition
+  if (true) {
+    return <PostTable />;
+  }
 
   return (
     <div className="content">
