@@ -1,9 +1,9 @@
 import { useShallow } from 'zustand/react/shallow';
-import './App.css';
-import { usePosts } from './hooks/usePosts';
-import { useStore } from './store/useStore';
+import '../App.css';
+import { usePosts } from '../hooks/usePosts';
+import { useStore } from '../store/useStore';
 
-const App = () => {
+export const PostsPage = () => {
   const { postQuery } = usePosts();
   const { page, incrementPage, decrementPage } = useStore(
     useShallow((state) => ({
@@ -50,5 +50,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
