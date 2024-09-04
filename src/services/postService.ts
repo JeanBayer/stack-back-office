@@ -1,6 +1,6 @@
 import { api } from '../api/api';
 import { Paginate } from '../types/paginate';
-import { PostResponse } from '../types/post';
+import { Post, PostResponse } from '../types/post';
 
 export class PostService {
   public static async getPosts({
@@ -14,6 +14,16 @@ export class PostService {
       return response.data;
     } catch (error) {
       console.error('Error fetching posts:', error);
+      throw error;
+    }
+  }
+
+  public static async getPostById(postId: string): Promise<Post> {
+    try {
+      const response = await api.get<Post>(`/posts/${postId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching post by ID:', error);
       throw error;
     }
   }
