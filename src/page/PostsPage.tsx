@@ -1,4 +1,3 @@
-import { Button } from '@nextui-org/button';
 import { useShallow } from 'zustand/react/shallow';
 import '../App.css';
 import { PostTable } from '../components/PostTable';
@@ -39,7 +38,6 @@ export const PostsPage = () => {
           />
         )}
       </div>
-      <Button>Press me</Button>
     </div>
   );
 };
