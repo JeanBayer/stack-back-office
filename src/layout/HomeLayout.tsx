@@ -2,7 +2,13 @@ import { Link, Outlet } from 'react-router-dom';
 
 export const HomeLayout = () => {
   return (
-    <div>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
       <header>
         <nav>
           <ul>
@@ -15,7 +21,13 @@ export const HomeLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>
+      <footer
+        style={{
+          marginTop: 'auto',
+          padding: '1rem',
+          textAlign: 'center',
+        }}
+      >
         <p>© 2024 My Website</p>
       </footer>
     </div>

@@ -1352,6 +1352,14 @@ video {
   max-width: 20rem;
 }
 
+.max-w-\[610px\] {
+  max-width: 610px;
+}
+
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -2294,6 +2302,10 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-background\/60 {
+  background-color: hsl(var(--nextui-background) / 0.6);
 }
 
 .bg-stripe-gradient {
@@ -7463,6 +7475,10 @@ video {
 
 .dark\:bg-transparent:is(.dark *) {
   background-color: transparent;
+}
+
+.dark\:bg-default-100\/50:is(.dark *) {
+  background-color: hsl(var(--nextui-default-100) / 0.5);
 }
 
 .dark\:text-danger-500:is(.dark *) {
