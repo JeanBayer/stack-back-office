@@ -1,8 +1,10 @@
+import { NextUIProvider } from '@nextui-org/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
+import './output.css';
 import { router } from './router/router';
 
 const queryClient = new QueryClient();
@@ -13,7 +15,9 @@ if (rootEl) {
   root.render(
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <NextUIProvider>
+          <RouterProvider router={router} />
+        </NextUIProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </React.StrictMode>,

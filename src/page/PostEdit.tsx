@@ -29,8 +29,8 @@ export const PostEdit = () => {
         </p>
       </div>
       <div className={styles.footer}>
-        <Link to={`/posts/${id}`} className={styles.button}>
-          Back to Post
+        <Link to={`/posts`} className={styles.button}>
+          Back to Posts
         </Link>
       </div>
     </div>

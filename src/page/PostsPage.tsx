@@ -1,3 +1,4 @@
+import { Button } from '@nextui-org/button';
 import { useShallow } from 'zustand/react/shallow';
 import '../App.css';
 import { PostTable } from '../components/PostTable';
@@ -14,45 +15,33 @@ export const PostsPage = () => {
     })),
   );
 
-  // eslint-disable-next-line no-constant-condition
-  if (true) {
-    return <PostTable />;
-  }
+  console.log('page', page);
+  console.log('incrementPage', incrementPage);
+  console.log('decrementPage', decrementPage);
 
   return (
     <div className="content">
       <h1>Listado</h1>
-      <div>
-        {postQuery?.data?.map((post) => (
-          <div key={post.id}>
-            <h2>{post.title}</h2>
-            <p>{post.author}</p>
-          </div>
-        ))}
+      <div className="bg-gray-700">
+        {postQuery.isPending ? (
+          <p>Loading...</p>
+        ) : postQuery.isError ? (
+          <p>Error: </p>
+        ) : (
+          <PostTable
+            data={postQuery.data || []}
+            // paginator={{
+            //   hasPrevPage: page > 1,
+            //   hasNextPage: postQuery.data?.length === 10,
+            //   incrementPage,
+            //   decrementPage,
+            //   page,
+            //   maxPages: 10,
+            // }}
+          />
+        )}
       </div>
-      <div>
-        <p>
-          Page {page} / {postQuery.maxPages}
-        </p>
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            if (postQuery.havePrevPage) decrementPage();
-          }}
-          disabled={!postQuery.havePrevPage}
-        >
-          back
-        </button>
-        <button
-          disabled={!postQuery.haveNextPage}
-          onClick={() => {
-            if (postQuery.haveNextPage) incrementPage();
-          }}
-        >
-          next
-        </button>
-      </div>
+      <Button>Press me</Button>
     </div>
   );
 };

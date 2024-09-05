@@ -23,6 +23,7 @@ export const Table: React.FC<TableProps> & {
   TBody: React.FC<TableSectionProps>;
   TR: React.FC<TableRowProps>;
   TD: React.FC<TableCellProps>;
+  TFoot: React.FC<TableSectionProps>;
   // eslint-disable-next-line react/prop-types
 } = ({ children, ...props }) => {
   return <table {...props}>{children}</table>;
@@ -53,12 +54,17 @@ const TD: React.FC<TableCellProps> = ({ children, ...props }) => {
   return <td {...props}>{children}</td>;
 };
 
+const TFoot: React.FC<TableSectionProps> = ({ children, ...props }) => {
+  return <tfoot {...props}>{children}</tfoot>;
+};
+
 // Añadir los subcomponentes al componente Table
 Table.THead = THead;
 Table.TH = TH;
 Table.TBody = TBody;
 Table.TR = TR;
 Table.TD = TD;
+Table.TFoot = TFoot;
 
 // import {
 //   createColumnHelper,

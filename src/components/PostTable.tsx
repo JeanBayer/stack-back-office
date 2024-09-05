@@ -1,24 +1,13 @@
 import { Link } from 'react-router-dom';
+import { Post } from '../types/post';
+import { Paginator } from './Paginator';
 import { Table } from './Table';
 
-export const PostTable = () => {
-  const data = [
-    {
-      id: '1',
-      title: 'Post Title 1',
-      views: 120,
-      author: 'Alice',
-      date: '2024-01-01',
-    },
-    {
-      id: '2',
-      title: 'Post Title 2',
-      views: 220,
-      author: 'Juan',
-      date: '2024-02-02',
-    },
-  ];
+type PostTable = {
+  data: Post[];
+};
 
+export const PostTable = ({ data }: PostTable) => {
   return (
     <Table>
       <Table.THead>
@@ -33,7 +22,7 @@ export const PostTable = () => {
         </Table.TR>
       </Table.THead>
       <Table.TBody>
-        {data.map((row) => (
+        {data?.map((row) => (
           <Table.TR key={row.id}>
             <Table.TD>{row.id}</Table.TD>
             <Table.TD>{row.title}</Table.TD>
@@ -41,10 +30,19 @@ export const PostTable = () => {
             <Table.TD>{row.author}</Table.TD>
             <Table.TD>
               <Link to={`/posts/${row.id}/edit`}>Edit</Link>
+              <br />
+              <Link to={`/posts/${row.id}`}>show</Link>
             </Table.TD>
           </Table.TR>
         ))}
       </Table.TBody>
+      <Table.TFoot>
+        <Table.TR>
+          <Table.TD colSpan={5}>
+            <Paginator />
+          </Table.TD>
+        </Table.TR>
+      </Table.TFoot>
     </Table>
   );
 };
