@@ -1,6 +1,6 @@
+import { Pagination } from '@nextui-org/react';
+
 type PaginatorProps = {
-  hasPrevPage: boolean;
-  hasNextPage: boolean;
   incrementPage: () => void;
   decrementPage: () => void;
   page: number;
@@ -8,38 +8,29 @@ type PaginatorProps = {
 };
 
 export const Paginator = ({
-  hasPrevPage,
-  hasNextPage,
   incrementPage,
   decrementPage,
   page,
   maxPages,
 }: PaginatorProps) => {
   return (
-    <div>
-      <div>
-        <p>
-          Page {page} / {maxPages}
-        </p>
-      </div>
-      <div>
-        <button
-          onClick={() => {
-            if (hasPrevPage) decrementPage();
-          }}
-          disabled={!hasPrevPage}
-        >
-          back
-        </button>
-        <button
-          disabled={!hasNextPage}
-          onClick={() => {
-            if (hasNextPage) incrementPage();
-          }}
-        >
-          next
-        </button>
-      </div>
+    <div className="flex w-full justify-center">
+      <Pagination
+        isCompact
+        showControls
+        showShadow
+        color="secondary"
+        page={page}
+        total={maxPages}
+        onChange={(newPage) => {
+          if (newPage > page) {
+            incrementPage();
+          }
+          if (newPage < page) {
+            decrementPage();
+          }
+        }}
+      />
     </div>
   );
 };

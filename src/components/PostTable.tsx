@@ -1,48 +1,84 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@nextui-org/table';
 import { Link } from 'react-router-dom';
 import { Post } from '../types/post';
+import { Actions } from './Actions';
 import { Paginator } from './Paginator';
-import { Table } from './Table';
 
 type PostTable = {
   data: Post[];
+  paginator: {
+    incrementPage: () => void;
+    decrementPage: () => void;
+    page: number;
+    maxPages: number;
+  };
 };
 
-export const PostTable = ({ data }: PostTable) => {
+export const PostTable = ({ data, paginator }: PostTable) => {
   return (
-    <Table>
-      <Table.THead>
-        <Table.TR>
-          <Table.TH>Id</Table.TH>
-          <Table.TH>Title</Table.TH>
-          <Table.TH>Views</Table.TH>
-          <Table.TH>
-            Author <em>hola</em>
-          </Table.TH>
-          <Table.TH>Action</Table.TH>
-        </Table.TR>
-      </Table.THead>
-      <Table.TBody>
-        {data?.map((row) => (
-          <Table.TR key={row.id}>
-            <Table.TD>{row.id}</Table.TD>
-            <Table.TD>{row.title}</Table.TD>
-            <Table.TD>{row.views}</Table.TD>
-            <Table.TD>{row.author}</Table.TD>
-            <Table.TD>
-              <Link to={`/posts/${row.id}/edit`}>Edit</Link>
-              <br />
-              <Link to={`/posts/${row.id}`}>show</Link>
-            </Table.TD>
-          </Table.TR>
+    <Table
+      aria-label="Example static collection table"
+      className="text-slate-900"
+      selectionMode="single"
+      bottomContent={
+        <Paginator
+          incrementPage={paginator.incrementPage}
+          decrementPage={paginator.decrementPage}
+          page={paginator.page}
+          maxPages={paginator.maxPages}
+        />
+      }
+    >
+      <TableHeader>
+        <TableColumn>TITLE</TableColumn>
+        <TableColumn>AUTHOR</TableColumn>
+        <TableColumn>VIEWS</TableColumn>
+        <TableColumn>ACTIONS</TableColumn>
+      </TableHeader>
+      <TableBody>
+        {data.map((post) => (
+          <TableRow key={post.id}>
+            <TableCell>{post.title}</TableCell>
+            <TableCell>{post.author}</TableCell>
+            <TableCell>{post.views}</TableCell>
+            <TableCell width={30}>
+              <Actions
+                actions={[
+                  {
+                    value: (
+                      <Link
+                        to={`/posts/${post.id}`}
+                        className="flex items-center"
+                      >
+                        View
+                      </Link>
+                    ),
+                    label: 'View',
+                  },
+                  {
+                    value: (
+                      <Link
+                        to={`/posts/${post.id}/edit`}
+                        className="flex items-center"
+                      >
+                        Edit
+                      </Link>
+                    ),
+                    label: 'Edit',
+                  },
+                ]}
+              />
+            </TableCell>
+          </TableRow>
         ))}
-      </Table.TBody>
-      <Table.TFoot>
-        <Table.TR>
-          <Table.TD colSpan={5}>
-            <Paginator />
-          </Table.TD>
-        </Table.TR>
-      </Table.TFoot>
+      </TableBody>
     </Table>
   );
 };

@@ -30,14 +30,12 @@ export const PostsPage = () => {
         ) : (
           <PostTable
             data={postQuery.data || []}
-            // paginator={{
-            //   hasPrevPage: page > 1,
-            //   hasNextPage: postQuery.data?.length === 10,
-            //   incrementPage,
-            //   decrementPage,
-            //   page,
-            //   maxPages: 10,
-            // }}
+            paginator={{
+              incrementPage,
+              decrementPage,
+              page,
+              maxPages: postQuery.maxPages,
+            }}
           />
         )}
       </div>
