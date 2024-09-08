@@ -5,7 +5,7 @@ import { Post } from '../types/post';
 import styles from './PostDetail.module.css';
 
 export const PostEdit = () => {
-  const { postQuery } = usePost();
+  const { postQuery, postUpdate } = usePost();
   const { id } = useSelectId();
 
   if (!id) return <div>Empty data</div>;
@@ -14,17 +14,16 @@ export const PostEdit = () => {
   if (postQuery.isError) return <div>Error: {postQuery.error?.message}</div>;
   if (!postQuery.data) return <div>No data</div>;
 
+  console.log({ postUpdate });
+
   const handleSubmit = (data: Post) => {
-    console.log(data);
+    postUpdate.mutate(data);
   };
 
   return (
     <div className={styles.container}>
       {/* // TODO: crear componente que reciba el isPending, isError, isEmpty y que renderice */}
-      <FormEditPost
-        post={postQuery.data!}
-        onSubmit={handleSubmit}
-      />
+      <FormEditPost post={postQuery.data!} onSubmit={handleSubmit} />
     </div>
   );
 };

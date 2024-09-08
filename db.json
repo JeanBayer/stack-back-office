@@ -2,9 +2,9 @@
   "posts": [
     {
       "id": "1",
-      "title": "Post Title 1",
+      "title": "Post Title 2",
+      "author": "Alabon",
       "views": 120,
-      "author": "Al",
       "date": "2024-01-01"
     },
     {

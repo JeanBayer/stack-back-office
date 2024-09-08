@@ -1,6 +1,6 @@
 import { api } from '../api/api';
 import { Paginate } from '../types/paginate';
-import { Post, PostResponse } from '../types/post';
+import { Post, PostResponse, PostSchema } from '../types/post';
 
 export class PostService {
   public static async getPosts({
@@ -13,7 +13,7 @@ export class PostService {
       );
       return response.data;
     } catch (error) {
-      console.error('Error fetching posts:', error);
+      console.error('Error in getPosts method', error);
       throw error;
     }
   }
@@ -23,7 +23,43 @@ export class PostService {
       const response = await api.get<Post>(`/posts/${postId}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching post by ID:', error);
+      console.error('Error in getPostById method', error);
+      throw error;
+    }
+  }
+
+  public static async createPost(post: Post): Promise<Post> {
+    try {
+      const validPost = PostSchema.parse(post);
+      const response = await api.post<Post>('/posts', validPost);
+      return response.data;
+    } catch (error) {
+      console.error('Error in createPost method', error);
+      throw error;
+    }
+  }
+
+  public static async updatePost(post: Post): Promise<Post> {
+    try {
+      const validPost = PostSchema.parse(post);
+
+      console.log('validPost', validPost);
+      const response = await api.put<Post>(
+        `/posts/${validPost?.id}`,
+        validPost,
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error in updatePost method', error);
+      throw error;
+    }
+  }
+
+  public static async deletePost(postId: string): Promise<void> {
+    try {
+      await api.delete(`/posts/${postId}`);
+    } catch (error) {
+      console.error('Error in deletePost method', error);
       throw error;
     }
   }

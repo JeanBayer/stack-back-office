@@ -1,7 +1,8 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
 import { useShallow } from 'zustand/react/shallow';
 import { PostService } from '../services/postService';
 import { useStore } from '../store/useStore';
+import { Post } from '../types/post';
 
 export const usePost = () => {
   const { selectedPostId } = useStore(
@@ -21,6 +22,11 @@ export const usePost = () => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
+  const postUpdate = useMutation({
+    mutationKey: ['post', 'update', selectedPostId],
+    mutationFn: (post: Post) => PostService.updatePost(post),
+  });
+
   return {
     postQuery: {
       isPending: postQuery.isPending,
@@ -29,6 +35,12 @@ export const usePost = () => {
       data: postQuery.data,
       isFetching: postQuery.isFetching,
       isPlaceholderData: postQuery.isPlaceholderData,
+    },
+    postUpdate: {
+      mutate: postUpdate.mutate,
+      isPending: postUpdate.isPending,
+      isError: postUpdate.isError,
+      error: postUpdate.error,
     },
   };
 };
