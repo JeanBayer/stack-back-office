@@ -2,7 +2,6 @@ import { FormEditPost } from '../components/FormEditPost';
 import { usePost } from '../hooks/usePost';
 import { useSelectId } from '../hooks/useSelectId';
 import { Post } from '../types/post';
-import styles from './PostDetail.module.css';
 
 export const PostEdit = () => {
   const { postQuery, postUpdate } = usePost();
@@ -21,7 +20,7 @@ export const PostEdit = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       {/* // TODO: crear componente que reciba el isPending, isError, isEmpty y que renderice */}
       <FormEditPost post={postQuery.data!} onSubmit={handleSubmit} />
     </div>
