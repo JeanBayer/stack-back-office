@@ -6,21 +6,16 @@ import { useStore } from '../store/useStore';
 
 export const PostsPage = () => {
   const { postQuery } = usePosts();
-  const { page, incrementPage, decrementPage } = useStore(
+  const { page, changePage } = useStore(
     useShallow((state) => ({
       page: state.page,
-      incrementPage: state.incrementPage,
-      decrementPage: state.decrementPage,
+      changePage: state.setPage,
     })),
   );
 
-  console.log('page', page);
-  console.log('incrementPage', incrementPage);
-  console.log('decrementPage', decrementPage);
-
   return (
     <div className="content">
-      <h1>Listado</h1>
+      <h1>Listado de ofertas</h1>
       <div className="bg-gray-700">
         {postQuery.isPending ? (
           <p>Loading...</p>
@@ -30,8 +25,7 @@ export const PostsPage = () => {
           <PostTable
             data={postQuery.data || []}
             paginator={{
-              incrementPage,
-              decrementPage,
+              changePage,
               page,
               maxPages: postQuery.maxPages,
             }}

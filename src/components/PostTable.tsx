@@ -14,8 +14,7 @@ import { Paginator } from './Paginator';
 type PostTable = {
   data: Post[];
   paginator: {
-    incrementPage: () => void;
-    decrementPage: () => void;
+    changePage: (page: number) => void;
     page: number;
     maxPages: number;
   };
@@ -29,8 +28,7 @@ export const PostTable = ({ data, paginator }: PostTable) => {
       selectionMode="single"
       bottomContent={
         <Paginator
-          incrementPage={paginator.incrementPage}
-          decrementPage={paginator.decrementPage}
+          changePage={paginator.changePage}
           page={paginator.page}
           maxPages={paginator.maxPages}
         />

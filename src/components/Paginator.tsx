@@ -1,18 +1,12 @@
 import { Pagination } from '@nextui-org/react';
 
 type PaginatorProps = {
-  incrementPage: () => void;
-  decrementPage: () => void;
+  changePage: (page: number) => void;
   page: number;
   maxPages: number;
 };
 
-export const Paginator = ({
-  incrementPage,
-  decrementPage,
-  page,
-  maxPages,
-}: PaginatorProps) => {
+export const Paginator = ({ changePage, page, maxPages }: PaginatorProps) => {
   return (
     <div className="flex w-full justify-center">
       <Pagination
@@ -22,14 +16,7 @@ export const Paginator = ({
         color="secondary"
         page={page}
         total={maxPages}
-        onChange={(newPage) => {
-          if (newPage > page) {
-            incrementPage();
-          }
-          if (newPage < page) {
-            decrementPage();
-          }
-        }}
+        onChange={changePage}
       />
     </div>
   );

@@ -1,4 +1,5 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { NavbarList } from '../components/NavbarList';
 
 export const HomeLayout = () => {
   return (
@@ -9,15 +10,8 @@ export const HomeLayout = () => {
         minHeight: '100vh',
       }}
     >
-      <header>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/posts">Posts</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <NavbarList />
+
       <main>
         <Outlet />
       </main>
