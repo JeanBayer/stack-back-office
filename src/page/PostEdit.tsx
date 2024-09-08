@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { FormEditPost } from '../components/FormEditPost';
 import { usePost } from '../hooks/usePost';
 import { useSelectId } from '../hooks/useSelectId';
+import { Post } from '../types/post';
 import styles from './PostDetail.module.css';
 
 export const PostEdit = () => {
@@ -8,31 +9,22 @@ export const PostEdit = () => {
   const { id } = useSelectId();
 
   if (!id) return <div>Empty data</div>;
+
+  if (postQuery.isPending) return <div>Loading...</div>;
+  if (postQuery.isError) return <div>Error: {postQuery.error?.message}</div>;
+  if (!postQuery.data) return <div>No data</div>;
+
+  const handleSubmit = (data: Post) => {
+    console.log(data);
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <img
-          src={`https://via.placeholder.com/800x400?text=${encodeURIComponent(postQuery.data?.title || '')}`}
-          alt={postQuery.data?.title}
-          width={800}
-          height={400}
-          className={styles.image}
-        />
-        <h1 className={styles.title}>{postQuery.data?.title}</h1>
-        <p className={styles.views}>Views: {postQuery.data?.views}</p>
-      </div>
-      <div className={styles.content}>
-        <p>
-          This is a detailed view of the post. You can add additional content,
-          such as the post body, author information, or any other relevant
-          details.
-        </p>
-      </div>
-      <div className={styles.footer}>
-        <Link to={`/posts`} className={styles.button}>
-          Back to Posts
-        </Link>
-      </div>
+      {/* // TODO: crear componente que reciba el isPending, isError, isEmpty y que renderice */}
+      <FormEditPost
+        post={postQuery.data!}
+        onSubmit={handleSubmit}
+      />
     </div>
   );
 };

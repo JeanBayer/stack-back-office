@@ -5,11 +5,13 @@
   "scripts": {
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
+    "db": "json-server --watch db.json --port 3002",
     "format": "prettier --write .",
     "lint": "eslint .",
     "preview": "rsbuild preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@nextui-org/react": "^2.4.6",
     "@tanstack/react-query": "^5.54.1",
     "@tanstack/react-query-devtools": "^5.54.1",
