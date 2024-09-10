@@ -1,6 +1,10 @@
-import { api } from '../api/api';
-import { Paginate } from '../types/paginate';
-import { Post, PostResponse, PostSchema } from '../types/post';
+import { api } from '@/api';
+import {
+  type Paginate,
+  type Post,
+  type PostResponse,
+  PostSchema,
+} from '@/types';
 
 export class PostService {
   public static async getPosts({

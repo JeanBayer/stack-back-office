@@ -1,7 +1,7 @@
+import { PostService } from '@/services';
+import { useStore } from '@/store';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useShallow } from 'zustand/react/shallow';
-import { PostService } from '../services/postService';
-import { useStore } from '../store/useStore';
 
 export const usePosts = () => {
   const { page, perPage } = useStore(

@@ -1,8 +1,5 @@
+import { PostDetail, PostEdit, PostsPage, HomeLayout } from '@/page';
 import { createBrowserRouter } from 'react-router-dom';
-import { HomeLayout } from '../layout/HomeLayout';
-import { PostDetail } from '../page/PostDetail';
-import { PostEdit } from '../page/PostEdit';
-import { PostsPage } from '../page/PostsPage';
 
 export const router = createBrowserRouter([
   {

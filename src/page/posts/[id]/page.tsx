@@ -1,7 +1,6 @@
+import { usePost, useSelectId } from '@/hooks';
 import { Card, CardBody, Image } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
-import { usePost } from '../hooks/usePost';
-import { useSelectId } from '../hooks/useSelectId';
 
 export const PostDetail = () => {
   const { postQuery } = usePost();

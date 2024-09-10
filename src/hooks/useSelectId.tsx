@@ -1,6 +1,6 @@
+import { useStore } from '@/store';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useStore } from '../store/useStore';
 
 export const useSelectId = () => {
   const { id } = useParams();

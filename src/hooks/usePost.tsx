@@ -1,8 +1,8 @@
+import { PostService } from '@/services';
+import { useStore } from '@/store';
+import { Post } from '@/types';
 import { keepPreviousData, useMutation, useQuery } from '@tanstack/react-query';
 import { useShallow } from 'zustand/react/shallow';
-import { PostService } from '../services/postService';
-import { useStore } from '../store/useStore';
-import { Post } from '../types/post';
 
 export const usePost = () => {
   const { selectedPostId } = useStore(

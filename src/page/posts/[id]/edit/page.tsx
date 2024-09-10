@@ -1,7 +1,6 @@
-import { FormEditPost } from '../components/FormEditPost';
-import { usePost } from '../hooks/usePost';
-import { useSelectId } from '../hooks/useSelectId';
-import { Post } from '../types/post';
+import { FormEditPost } from '@/components';
+import { usePost, useSelectId } from '@/hooks';
+import { Post } from '@/types';
 
 export const PostEdit = () => {
   const { postQuery, postUpdate } = usePost();

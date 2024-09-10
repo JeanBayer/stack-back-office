@@ -1,7 +1,7 @@
+import { type Post, PostSchema } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Spacer } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-import { Post, PostSchema } from '../types/post';
 
 // Componente para editar el post
 interface EditPostFormProps {
@@ -20,8 +20,6 @@ export const FormEditPost = ({ post, onSubmit }: EditPostFormProps) => {
     criteriaMode: 'all', // muestre todos los inputs con error
     defaultValues: post,
   });
-
-  console.log({ errors });
 
   // ejecutar la validación de los campos al cargar el formulario, opcional
   // useEffect(() => {

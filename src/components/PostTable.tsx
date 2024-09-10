@@ -1,3 +1,5 @@
+import { Actions, Paginator } from '@/components';
+import type { Post } from '@/types';
 import {
   Table,
   TableBody,
@@ -7,9 +9,6 @@ import {
   TableRow,
 } from '@nextui-org/table';
 import { Link } from 'react-router-dom';
-import { Post } from '../types/post';
-import { Actions } from './Actions';
-import { Paginator } from './Paginator';
 
 type PostTable = {
   data: Post[];

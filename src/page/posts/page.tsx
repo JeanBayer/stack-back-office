@@ -1,8 +1,7 @@
+import { PostTable } from '@/components';
+import { usePosts } from '@/hooks';
+import { useStore } from '@/store';
 import { useShallow } from 'zustand/react/shallow';
-import '../App.css';
-import { PostTable } from '../components/PostTable';
-import { usePosts } from '../hooks/usePosts';
-import { useStore } from '../store/useStore';
 
 export const PostsPage = () => {
   const { postQuery } = usePosts();

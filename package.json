@@ -8,7 +8,8 @@
     "db": "json-server --watch db.json --port 3002",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "tailwind": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

@@ -1,3 +1,4 @@
+import { VerticalDotsIcon } from '@/icons';
 import {
   Button,
   Dropdown,
@@ -6,7 +7,6 @@ import {
   DropdownTrigger,
 } from '@nextui-org/react';
 import React from 'react';
-import { VerticalDotsIcon } from '../icons/VerticalDotsIcon';
 
 type ActionsProps = {
   actions: {
