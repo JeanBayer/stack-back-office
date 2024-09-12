@@ -1,6 +1,7 @@
 import { PostTable } from '@/components';
 import { usePosts } from '@/hooks';
 import { useStore } from '@/store';
+import { Link } from '@nextui-org/react';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {
@@ -15,6 +16,7 @@ export const PostsPage = () => {
   return (
     <div className="content">
       <h1>Listado de ofertas</h1>
+      <Link href="/posts/create">Crear oferta</Link>
       <div className="bg-gray-700">
         {postQuery.isPending ? (
           <p>Loading...</p>

@@ -1,38 +1,36 @@
-import { PostDetail, PostEdit, PostsPage, HomeLayout } from '@/page';
-import { createBrowserRouter } from 'react-router-dom';
+import {
+  HomeLayout,
+  PostCreate,
+  PostDetail,
+  PostEdit,
+  PostsPage,
+} from '@/page';
+import { Route, Routes } from 'react-router-dom';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomeLayout />,
-    children: [
-      {
-        path: '/',
-        element: (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '90vh',
-            }}
-          >
-            Home
-          </div>
-        ),
-      },
-      {
-        path: '/posts',
-        element: <PostsPage />,
-      },
-      {
-        path: '/posts/:id',
-        element: <PostDetail />,
-      },
-      {
-        path: '/posts/:id/edit',
-        element: <PostEdit />,
-      },
-    ],
-  },
-]);
+export const CustomRouter = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<HomeLayout />}>
+        <Route
+          path="/"
+          element={
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '90vh',
+              }}
+            >
+              Home
+            </div>
+          }
+        />
+        <Route path="/posts" element={<PostsPage />} />
+        <Route path="/posts/:id" element={<PostDetail />} />
+        <Route path="/posts/:id/edit" element={<PostEdit />} />
+        <Route path="/posts/create" element={<PostCreate />} />
+      </Route>
+    </Routes>
+  );
+};
