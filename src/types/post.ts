@@ -1,4 +1,4 @@
-import { z, ZodType } from 'zod';
+import { z } from 'zod';
 
 export interface Post {
   id: string;
@@ -18,8 +18,8 @@ export interface PostResponse {
   data: Post[];
 }
 
-export const PostSchema: ZodType<Post> = z.object({
-  id: z.string().min(1),
+export const PostSchema = z.object({
+  id: z.string().optional(),
   title: z.string().min(5).max(20),
   author: z.string().min(5).max(20),
   views: z

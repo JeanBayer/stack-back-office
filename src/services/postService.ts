@@ -32,7 +32,7 @@ export class PostService {
     }
   }
 
-  public static async createPost(post: Post): Promise<Post> {
+  public static async createPost(post: Omit<Post, 'id'>): Promise<Post> {
     try {
       const validPost = PostSchema.parse(post);
       const response = await api.post<Post>('/posts', validPost);
@@ -48,10 +48,7 @@ export class PostService {
       const validPost = PostSchema.parse(post);
 
       console.log('validPost', validPost);
-      const response = await api.put<Post>(
-        `/posts/${validPost?.id}`,
-        validPost,
-      );
+      const response = await api.put<Post>(`/posts/${post?.id}`, validPost);
       return response.data;
     } catch (error) {
       console.error('Error in updatePost method', error);

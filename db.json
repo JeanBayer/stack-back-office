@@ -2,7 +2,7 @@
   "posts": [
     {
       "id": "1",
-      "title": "Post Title 2",
+      "title": "Post Title 1",
       "author": "Alabon",
       "views": 120,
       "date": "2024-01-01"
@@ -139,6 +139,34 @@
       "views": 360,
       "author": "Tina",
       "date": "2024-01-20"
+    },
+    {
+      "id": "dcca",
+      "title": "nuevo post 0",
+      "author": "jean bayer",
+      "views": 1,
+      "date": "2024-09-04"
+    },
+    {
+      "id": "cfe0",
+      "title": "post nuevo 2",
+      "author": "joaquin",
+      "views": 3,
+      "date": "2024-09-04"
+    },
+    {
+      "id": "03ba",
+      "title": "oferta 3 ",
+      "author": "chino",
+      "views": 1,
+      "date": ""
+    },
+    {
+      "id": "b294",
+      "title": "nueva 4",
+      "author": "nacho",
+      "views": 1,
+      "date": ""
     }
   ]
 }

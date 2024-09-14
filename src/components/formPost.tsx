@@ -3,13 +3,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input, Spacer } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 
-// Componente para editar el post
-interface EditPostFormProps {
-  post: Post;
+interface formPostProps {
+  post?: Post;
   onSubmit: (updatedPost: Post) => void;
 }
 
-export const FormEditPost = ({ post, onSubmit }: EditPostFormProps) => {
+export const FormPost = ({ post, onSubmit }: formPostProps) => {
   const {
     register,
     handleSubmit,
