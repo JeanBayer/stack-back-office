@@ -1,4 +1,5 @@
-import { PostTable } from '@/components';
+import { Fallback, PostTable, TableSkeleton } from '@/components';
+import { WrapperStateContent } from '@/components/wrapperStateContent';
 import { usePosts } from '@/hooks';
 import { useStore } from '@/store';
 import { Link } from '@nextui-org/react';
@@ -13,26 +14,53 @@ export const PostsPage = () => {
     })),
   );
 
+  // const ContentComponent = getComponentState({
+  //   error: {
+  //     isError: postQuery.isError,
+  //     component: (
+  //       <ErrorCard
+  //         errorMessage={postQuery?.error?.message || 'Error'}
+  //         onRetry={postQuery?.refetch}
+  //       />
+  //     ),
+  //   },
+  //   empty: {
+  //     isEmpty: !postQuery.data?.length,
+  //     component: <p>No hay ofertas</p>,
+  //   },
+  // });
+
   return (
     <div className="content">
-      <h1>Listado de ofertas</h1>
-      <Link href="/posts/create">Crear oferta</Link>
-      <div className="bg-gray-700">
-        {postQuery.isPending ? (
-          <p>Loading...</p>
-        ) : postQuery.isError ? (
-          <p>Error: </p>
-        ) : (
-          <PostTable
-            data={postQuery.data || []}
-            paginator={{
-              changePage,
-              page,
-              maxPages: postQuery.maxPages,
-            }}
-          />
-        )}
+      <div className="flex justify-between items-center mb-4 px-4">
+        <h1 className="text-2xl font-bold">Listado de ofertas</h1>
+        <Link href="/posts/create" className="text-blue-500 hover:underline">
+          Crear oferta
+        </Link>
       </div>
+
+      <Fallback
+        isLoading={postQuery?.isPending}
+        fallbackLoading={<TableSkeleton />}
+      >
+        <PostTable
+          data={postQuery.data || []}
+          paginator={{
+            changePage,
+            page,
+            maxPages: postQuery.maxPages,
+          }}
+          emptyContent={
+            <WrapperStateContent
+              isError={postQuery.isError}
+              errorMessage={postQuery.error?.message || 'Error'}
+              refetch={postQuery.refetch}
+              isEmpty={!postQuery.data?.length}
+              emptyMessage="No hay Posts"
+            />
+          }
+        />
+      </Fallback>
     </div>
   );
 };

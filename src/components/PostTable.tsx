@@ -17,9 +17,10 @@ type PostTable = {
     page: number;
     maxPages: number;
   };
+  emptyContent?: React.ReactNode;
 };
 
-export const PostTable = ({ data, paginator }: PostTable) => {
+export const PostTable = ({ data, paginator, emptyContent }: PostTable) => {
   return (
     <Table
       aria-label="Example static collection table"
@@ -39,8 +40,8 @@ export const PostTable = ({ data, paginator }: PostTable) => {
         <TableColumn>VIEWS</TableColumn>
         <TableColumn>ACTIONS</TableColumn>
       </TableHeader>
-      <TableBody>
-        {data.map((post) => (
+      <TableBody emptyContent={emptyContent}>
+        {data?.map((post) => (
           <TableRow key={post.id}>
             <TableCell>{post.title}</TableCell>
             <TableCell>{post.author}</TableCell>

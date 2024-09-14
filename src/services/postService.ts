@@ -6,12 +6,15 @@ import {
   PostSchema,
 } from '@/types';
 
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export class PostService {
   public static async getPosts({
     page,
     perPage,
   }: Paginate): Promise<PostResponse> {
     try {
+      await sleep(500);
       const response = await api.get<PostResponse>(
         `/posts?_page=${page}&_per_page=${perPage}`,
       );

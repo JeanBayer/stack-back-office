@@ -34,6 +34,7 @@ export const usePosts = () => {
       maxPages,
       haveNextPage,
       havePrevPage,
+      refetch: postQuery.refetch,
     },
   };
 };
