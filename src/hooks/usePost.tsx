@@ -69,10 +69,12 @@ export const usePost = () => {
     postQuery: {
       isPending: postQuery.isPending,
       isError: postQuery.isError,
+      isLoading: postQuery.isLoading,
       error: postQuery.error,
       data: postQuery.data,
       isFetching: postQuery.isFetching,
       isPlaceholderData: postQuery.isPlaceholderData,
+      refetch: postQuery.refetch,
     },
     postUpdate: {
       mutate: postUpdate.mutate,

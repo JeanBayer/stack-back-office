@@ -27,6 +27,7 @@ export class PostService {
 
   public static async getPostById(postId: string): Promise<Post> {
     try {
+      await sleep(5000);
       const response = await api.get<Post>(`/posts/${postId}`);
       return response.data;
     } catch (error) {

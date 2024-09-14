@@ -6,6 +6,7 @@ type FallbackProps = {
   fallbackLoading?: React.ReactNode;
   fallbackError?: React.ReactNode;
   fallbackEmpty?: React.ReactNode;
+  isChildrenEnabled?: boolean;
 };
 
 export const Fallback = ({
@@ -16,18 +17,11 @@ export const Fallback = ({
   fallbackLoading = null,
   fallbackError = null,
   fallbackEmpty = null,
+  isChildrenEnabled = true,
 }: FallbackProps) => {
-  if (isLoading) {
-    return fallbackLoading;
-  }
-
-  if (isError) {
-    return fallbackError;
-  }
-
-  if (isEmpty) {
-    return fallbackEmpty;
-  }
-
+  if (isLoading) return fallbackLoading;
+  if (isError) return fallbackError;
+  if (isEmpty) return fallbackEmpty;
+  if (!isChildrenEnabled) return fallbackLoading;
   return children;
 };

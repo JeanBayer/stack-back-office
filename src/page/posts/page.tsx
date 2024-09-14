@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {
-  const { postQuery } = usePosts();
+  const { postsQuery } = usePosts();
   const { page, changePage } = useStore(
     useShallow((state) => ({
       page: state.page,
@@ -32,22 +32,22 @@ export const PostsPage = () => {
       </div>
 
       <Fallback
-        isLoading={postQuery?.isPending}
+        isLoading={postsQuery?.isPending}
         fallbackLoading={<TableSkeleton />}
       >
         <PostTable
-          data={postQuery.data || []}
+          data={postsQuery.data || []}
           paginator={{
             changePage,
             page,
-            maxPages: postQuery.maxPages,
+            maxPages: postsQuery.maxPages,
           }}
           emptyContent={
             <WrapperStateContent
-              isError={postQuery.isError}
-              errorMessage={postQuery.error?.message || 'Error'}
-              refetch={postQuery.refetch}
-              isEmpty={!postQuery.data?.length}
+              isError={postsQuery.isError}
+              errorMessage={postsQuery.error?.message || 'Error'}
+              refetch={postsQuery.refetch}
+              isEmpty={!postsQuery.data?.length}
               emptyMessage="No hay Posts"
             />
           }

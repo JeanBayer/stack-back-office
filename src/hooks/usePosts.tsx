@@ -11,30 +11,30 @@ export const usePosts = () => {
     })),
   );
 
-  const postQuery = useQuery({
+  const postsQuery = useQuery({
     queryKey: ['posts', page, perPage],
     queryFn: () => PostService.getPosts({ page, perPage }),
     placeholderData: keepPreviousData,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 
-  const maxPages = postQuery.data?.pages || 1;
+  const maxPages = postsQuery.data?.pages || 1;
 
-  const haveNextPage = postQuery.data?.next ? true : false;
-  const havePrevPage = postQuery.data?.prev ? true : false;
+  const haveNextPage = postsQuery.data?.next ? true : false;
+  const havePrevPage = postsQuery.data?.prev ? true : false;
 
   return {
-    postQuery: {
-      isPending: postQuery.isPending,
-      isError: postQuery.isError,
-      error: postQuery.error,
-      data: postQuery.data?.data,
-      isFetching: postQuery.isFetching,
-      isPlaceholderData: postQuery.isPlaceholderData,
+    postsQuery: {
+      isPending: postsQuery.isPending,
+      isError: postsQuery.isError,
+      error: postsQuery.error,
+      data: postsQuery.data?.data,
+      isFetching: postsQuery.isFetching,
+      isPlaceholderData: postsQuery.isPlaceholderData,
       maxPages,
       haveNextPage,
       havePrevPage,
-      refetch: postQuery.refetch,
+      refetch: postsQuery.refetch,
     },
   };
 };
