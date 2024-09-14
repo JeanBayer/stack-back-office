@@ -6,3 +6,4 @@ export * from './navbarList';
 export * from './paginator';
 export * from './postTable';
 export * from './tableSkeleton';
+export * from './toaster';

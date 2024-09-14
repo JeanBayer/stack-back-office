@@ -1,3 +1,11 @@
 {
-  "posts": []
+  "posts": [
+    {
+      "id": "022e",
+      "title": "new title",
+      "author": "jean b",
+      "views": 1,
+      "date": "2024-09-15"
+    }
+  ]
 }

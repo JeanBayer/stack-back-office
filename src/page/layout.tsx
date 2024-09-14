@@ -1,4 +1,4 @@
-import { NavbarList } from '@/components';
+import { NavbarList, Toaster } from '@/components';
 import { Outlet } from 'react-router-dom';
 
 export const HomeLayout = () => {
@@ -24,6 +24,7 @@ export const HomeLayout = () => {
       >
         <p>© 2024 My Website</p>
       </footer>
+      <Toaster />
     </div>
   );
 };
