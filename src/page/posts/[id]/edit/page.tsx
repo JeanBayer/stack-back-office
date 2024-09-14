@@ -22,14 +22,18 @@ export const PostEdit = () => {
   if (id !== postQuery?.data?.id) return null;
 
   const handleSubmit = (data: Post) => {
-    console.log('data', data);
     postUpdate.mutate(data);
   };
 
   return (
     <div>
       {/* // TODO: crear componente que reciba el isPending, isError, isEmpty y que renderice */}
-      <FormPost post={postQuery.data!} onSubmit={handleSubmit} />
+      <FormPost
+        post={postQuery.data!}
+        onSubmit={handleSubmit}
+        isDisabledButton={postUpdate.isPending || postUpdate.isSuccess}
+        isSubmitting={postUpdate.isPending}
+      />
     </div>
   );
 };

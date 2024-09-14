@@ -1,14 +1,21 @@
 import { type Post, PostSchema } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input, Spacer } from '@nextui-org/react';
+import { Button, Input, Spacer, Spinner } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 
 interface formPostProps {
   post?: Post;
   onSubmit: (updatedPost: Post) => void;
+  isDisabledButton?: boolean;
+  isSubmitting?: boolean;
 }
 
-export const FormPost = ({ post, onSubmit }: formPostProps) => {
+export const FormPost = ({
+  post,
+  onSubmit,
+  isDisabledButton = false,
+  isSubmitting,
+}: formPostProps) => {
   const {
     register,
     handleSubmit,
@@ -20,10 +27,7 @@ export const FormPost = ({ post, onSubmit }: formPostProps) => {
     defaultValues: post,
   });
 
-  // ejecutar la validación de los campos al cargar el formulario, opcional
-  // useEffect(() => {
-  //   trigger();
-  // }, [trigger]);
+  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
 
   return (
     <div>
@@ -64,12 +68,9 @@ export const FormPost = ({ post, onSubmit }: formPostProps) => {
           fullWidth
         />
         <Spacer y={1} />
-        <Button
-          type="submit"
-          color="primary"
-          isDisabled={Object.keys(errors).length > 0}
-        >
+        <Button type="submit" color="primary" isDisabled={disabledButton}>
           Save
+          {isSubmitting && <Spinner size="sm" color="secondary" />}
         </Button>
       </form>
     </div>

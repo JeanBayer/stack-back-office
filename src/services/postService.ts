@@ -37,6 +37,7 @@ export class PostService {
 
   public static async createPost(post: Omit<Post, 'id'>): Promise<Post> {
     try {
+      await sleep(5000);
       const validPost = PostSchema.parse(post);
       const response = await api.post<Post>('/posts', validPost);
       return response.data;
@@ -48,9 +49,8 @@ export class PostService {
 
   public static async updatePost(post: Post): Promise<Post> {
     try {
+      await sleep(5000);
       const validPost = PostSchema.parse(post);
-
-      console.log('validPost', validPost);
       const response = await api.put<Post>(`/posts/${post?.id}`, validPost);
       return response.data;
     } catch (error) {

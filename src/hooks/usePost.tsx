@@ -7,10 +7,13 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 export const usePost = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { selectedPostId } = useStore(
     useShallow((state) => ({
@@ -31,18 +34,34 @@ export const usePost = () => {
 
   const postUpdate = useMutation({
     mutationKey: ['post', 'update', selectedPostId],
-    mutationFn: (post: Post) => PostService.updatePost(post),
+    mutationFn: async (post: Post) => {
+      toast.info('Actualizando post...');
+      return await PostService.updatePost(post);
+    },
     onSuccess: () => {
+      toast.success('Post actualizado correctamente');
       queryClient.invalidateQueries({ queryKey: ['post', selectedPostId] });
       queryClient.invalidateQueries({ queryKey: ['posts'] });
+      navigate('/posts');
+    },
+    onError: () => {
+      toast.error('Error al actualizar el post');
     },
   });
 
   const postCreate = useMutation({
     mutationKey: ['post', 'create'],
-    mutationFn: (post: Omit<Post, 'id'>) => PostService.createPost(post),
+    mutationFn: async (post: Omit<Post, 'id'>) => {
+      toast.info('Creando post...');
+      return await PostService.createPost(post);
+    },
     onSuccess: () => {
+      toast.success('Post creado correctamente');
       queryClient.invalidateQueries({ queryKey: ['posts'] });
+      navigate('/posts');
+    },
+    onError: () => {
+      toast.error('Error al crear el post');
     },
   });
 
@@ -60,12 +79,14 @@ export const usePost = () => {
       isPending: postUpdate.isPending,
       isError: postUpdate.isError,
       error: postUpdate.error,
+      isSuccess: postUpdate.isSuccess,
     },
     postCreate: {
       mutate: postCreate.mutate,
       isPending: postCreate.isPending,
       isError: postCreate.isError,
       error: postCreate.error,
+      isSuccess: postCreate.isSuccess,
     },
   };
 };

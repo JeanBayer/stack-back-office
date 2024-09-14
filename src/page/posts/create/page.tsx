@@ -11,8 +11,11 @@ export const PostCreate = () => {
 
   return (
     <div>
-      {/* // TODO: crear componente que reciba el isPending, isError, isEmpty y que renderice */}
-      <FormPost onSubmit={handleSubmit} />
+      <FormPost
+        onSubmit={handleSubmit}
+        isDisabledButton={postCreate.isPending || postCreate.isSuccess}
+        isSubmitting={postCreate.isPending}
+      />
     </div>
   );
 };
