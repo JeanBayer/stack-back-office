@@ -14,7 +14,7 @@ export class PostService {
     perPage,
   }: Paginate): Promise<PostResponse> {
     try {
-      await sleep(500);
+      await sleep(5000);
       const response = await api.get<PostResponse>(
         `/posts?_page=${page}&_per_page=${perPage}`,
       );
@@ -62,6 +62,7 @@ export class PostService {
 
   public static async deletePost(postId: string): Promise<void> {
     try {
+      await sleep(1000);
       await api.delete(`/posts/${postId}`);
     } catch (error) {
       console.error('Error in deletePost method', error);

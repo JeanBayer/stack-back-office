@@ -18,9 +18,15 @@ type PostTable = {
     maxPages: number;
   };
   emptyContent?: React.ReactNode;
+  onDelete: (id: string) => void;
 };
 
-export const PostTable = ({ data, paginator, emptyContent }: PostTable) => {
+export const PostTable = ({
+  data,
+  paginator,
+  emptyContent,
+  onDelete,
+}: PostTable) => {
   return (
     <Table
       aria-label="Example static collection table"
@@ -70,6 +76,11 @@ export const PostTable = ({ data, paginator, emptyContent }: PostTable) => {
                       </Link>
                     ),
                     label: 'Edit',
+                  },
+                  {
+                    value: 'Delete',
+                    label: 'Delete',
+                    handleClick: () => onDelete(post.id),
                   },
                 ]}
               />

@@ -1,6 +1,7 @@
 import { PostService } from '@/services';
 import { useStore } from '@/store';
-import { Post } from '@/types';
+import { Post, PostResponse } from '@/types';
+import { QueryClientUtil } from '@/utils';
 import {
   keepPreviousData,
   useMutation,
@@ -65,6 +66,46 @@ export const usePost = () => {
     },
   });
 
+  const postDelete = useMutation({
+    mutationKey: ['post', 'delete'],
+    mutationFn: async (postId: string) => {
+      toast.info('Eliminando post...');
+      return await PostService.deletePost(postId);
+    },
+    onMutate: async (postId: string) => {
+      await queryClient.cancelQueries({ queryKey: ['posts'] });
+      const previousPosts = QueryClientUtil.getQueryData<PostResponse>(
+        queryClient,
+        ['posts'],
+      );
+      if (!previousPosts) return { previousPosts: undefined };
+      QueryClientUtil.setQueryData<PostResponse>(queryClient, ['posts'], {
+        ...previousPosts,
+        data: previousPosts.data.filter((post) => post.id !== postId),
+      });
+
+      return { previousPosts };
+    },
+    onSuccess: () => {
+      toast.success('Post eliminado correctamente');
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      navigate('/posts');
+    },
+
+    onError: (_, __, context) => {
+      toast.error('Error al eliminar el post');
+      if (!context?.previousPosts) return;
+      QueryClientUtil.setQueryData(
+        queryClient,
+        ['posts'],
+        context.previousPosts,
+      );
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['posts'] });
+    },
+  });
+
   return {
     postQuery: {
       isPending: postQuery.isPending,
@@ -89,6 +130,13 @@ export const usePost = () => {
       isError: postCreate.isError,
       error: postCreate.error,
       isSuccess: postCreate.isSuccess,
+    },
+    postDelete: {
+      mutate: postDelete.mutate,
+      isPending: postDelete.isPending,
+      isError: postDelete.isError,
+      error: postDelete.error,
+      isSuccess: postDelete.isSuccess,
     },
   };
 };

@@ -1,6 +1,6 @@
 import { Fallback, PostTable, TableSkeleton } from '@/components';
 import { WrapperStateContent } from '@/components/wrapperStateContent';
-import { usePosts } from '@/hooks';
+import { usePost, usePosts } from '@/hooks';
 import { useStore } from '@/store';
 import { Button, Link } from '@nextui-org/react';
 import { toast } from 'sonner';
@@ -8,6 +8,8 @@ import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {
   const { postsQuery } = usePosts();
+  const { postDelete } = usePost();
+
   const { page, changePage } = useStore(
     useShallow((state) => ({
       page: state.page,
@@ -51,6 +53,7 @@ export const PostsPage = () => {
               emptyMessage="No hay Posts"
             />
           }
+          onDelete={postDelete.mutate}
         />
       </Fallback>
     </div>
