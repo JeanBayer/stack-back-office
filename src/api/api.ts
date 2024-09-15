@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+const BASE_URL = import.meta.env.PUBLIC_BASE_URL_BACK;
 export const api = axios.create({
-  baseURL: 'http://localhost:3002',
+  baseURL: BASE_URL,
 });
