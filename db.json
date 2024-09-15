@@ -1,13 +1,6 @@
 {
   "posts": [
     {
-      "id": "280e",
-      "title": "post 2",
-      "author": "jean ba",
-      "views": 1,
-      "date": "2024-09-12"
-    },
-    {
       "id": "280f",
       "title": "post 3",
       "author": "jean ba",
@@ -15,11 +8,25 @@
       "date": "2024-09-12"
     },
     {
-      "id": "2810",
-      "title": "post 4",
-      "author": "jean ba",
-      "views": 3,
+      "id": "2559",
+      "title": "fideazo",
+      "author": "fidel castro",
+      "views": 1,
       "date": "2024-09-12"
+    },
+    {
+      "id": "18f3",
+      "title": "nuevo t",
+      "author": "jean b",
+      "views": 1,
+      "date": ""
+    },
+    {
+      "id": "9020",
+      "title": "segunda pagina",
+      "author": "arthur",
+      "views": 2,
+      "date": ""
     }
   ]
 }
