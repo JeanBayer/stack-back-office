@@ -1,15 +1,16 @@
 import { FormPost } from '@/components';
 import { usePost } from '@/hooks';
 import { type Post } from '@/types';
-import { FileUtil } from '@/utils';
+import { Constants, FileUtil } from '@/utils';
 
 export const PostCreate = () => {
   const { postCreate } = usePost();
 
   const handleSubmit = async (data: Omit<Post, 'id'>) => {
-    const dataWithImage = await FileUtil.convertFilesListToBase64(data, [
-      'imagenURL',
-    ]);
+    const dataWithImage = await FileUtil.convertFilesListToBase64(
+      data,
+      Constants.FIELDS_POST_WITH_IMAGE as string[],
+    );
     postCreate.mutate(dataWithImage);
   };
 

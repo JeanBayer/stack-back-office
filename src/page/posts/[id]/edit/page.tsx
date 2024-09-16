@@ -1,7 +1,7 @@
 import { ErrorCard, Fallback, FormPost, FormSkeleton } from '@/components';
 import { usePost, useSelectId } from '@/hooks';
 import { Post } from '@/types';
-import { FileUtil, ObjectUtil } from '@/utils';
+import { Constants, FileUtil, ObjectUtil } from '@/utils';
 
 export const PostEdit = () => {
   const { postQuery, postUpdate } = usePost();
@@ -15,7 +15,7 @@ export const PostEdit = () => {
 
     const changeFieldsWithImage = await FileUtil.convertFilesListToBase64(
       changedFields,
-      ['imagenURL'],
+      Constants.FIELDS_POST_WITH_IMAGE as string[],
     );
 
     postUpdate.mutate(changeFieldsWithImage);
