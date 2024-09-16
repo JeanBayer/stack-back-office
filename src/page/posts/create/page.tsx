@@ -1,13 +1,16 @@
 import { FormPost } from '@/components';
 import { usePost } from '@/hooks';
 import { type Post } from '@/types';
+import { FileUtil } from '@/utils';
 
 export const PostCreate = () => {
   const { postCreate } = usePost();
 
-  const handleSubmit = (data: Omit<Post, 'id'>) => {
-    console.log(data);
-    // postCreate.mutate(data);
+  const handleSubmit = async (data: Omit<Post, 'id'>) => {
+    const dataWithImage = await FileUtil.convertFilesListToBase64(data, [
+      'imagenURL',
+    ]);
+    postCreate.mutate(dataWithImage);
   };
 
   return (

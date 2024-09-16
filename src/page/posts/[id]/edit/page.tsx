@@ -12,19 +12,10 @@ export const PostEdit = () => {
   const handleSubmit = async (data: Post) => {
     const changedFields = ObjectUtil.getChangedFields(postQuery.data!, data);
     changedFields.id = postQuery.data!.id;
-    const changedFieldsKeysImage = ObjectUtil.listMatchKeys(changedFields, [
-      'imagenURL',
-      'title',
-    ]);
-
-    if (changedFieldsKeysImage.length === 0) {
-      postUpdate.mutate(changedFields);
-      return;
-    }
 
     const changeFieldsWithImage = await FileUtil.convertFilesListToBase64(
       changedFields,
-      changedFieldsKeysImage,
+      ['imagenURL'],
     );
 
     postUpdate.mutate(changeFieldsWithImage);

@@ -1,3 +1,5 @@
+// import { ObjectUtil } from '@/utils';
+
 export class FileUtil {
   public static toBase64(
     fileList: FileList,
@@ -28,19 +30,22 @@ export class FileUtil {
     if (typeof data !== 'object' || data === null) return data;
     if (!keysFileList.length) return data;
 
+    // const changedFieldsKeysImage = ObjectUtil.listMatchKeys(data, keysFileList);
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newData: Record<string, any> = structuredClone(data);
 
-    // modificamos solo los campos que son FileList a base64 que se encuentran en keysFileList
-    for (const keyFileList of keysFileList) {
-      if (!newData[keyFileList]) continue;
-      const imageFile = newData[keyFileList];
+    // modificamos solo los campos que son FileList a base64 que se encuentran en changedFieldsKeysImage
+    // for (const keyImage of changedFieldsKeysImage) {
+    for (const keyImage of keysFileList) {
+      if (!newData[keyImage]) continue;
+      const imageFile = newData[keyImage];
       try {
         const base64File = await FileUtil.toBase64(imageFile as FileList);
-        newData[keyFileList] = base64File;
+        newData[keyImage] = base64File;
       } catch (error) {
         console.warn(
-          `Error converting file to base64 in field \n\t\t{'${keyFileList}':'${imageFile}'}\n :`,
+          `Conflict in converting file to base64 in field \n\t\t{'${keyImage}':'${imageFile}'}\n :`,
           error,
         );
       }
