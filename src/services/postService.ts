@@ -5,6 +5,7 @@ import {
   type Post,
   type PostResponse,
   PostSchema,
+  Status,
 } from '@/types';
 import { ObjectUtil } from '@/utils';
 
@@ -80,6 +81,16 @@ export class PostService {
       await api.delete(`/items/${postId}`);
     } catch (error) {
       console.error('Error in deletePost method', error);
+      throw error;
+    }
+  }
+
+  public static async getStatus(): Promise<Status[]> {
+    try {
+      const response = await api.get<Status[]>(`/status`);
+      return response.data;
+    } catch (error) {
+      console.error('Error in getStatus method', error);
       throw error;
     }
   }

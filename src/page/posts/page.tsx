@@ -7,7 +7,7 @@ import {
 } from '@/components';
 import { usePost, usePosts } from '@/hooks';
 import { useStore } from '@/store';
-import { Link } from '@nextui-org/react';
+import { Link, Spacer } from '@nextui-org/react';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {
@@ -22,16 +22,16 @@ export const PostsPage = () => {
   );
 
   return (
-    <div className="content">
+    <div className="content p-4">
       <div className="flex justify-between items-center mb-4 px-4">
         <h1 className="text-2xl font-bold">Listado de ofertas</h1>
         <Link href="/posts/create" className="text-blue-500 hover:underline">
           Crear oferta
         </Link>
       </div>
-      
-      <FilterPosts />
 
+      <FilterPosts />
+      <Spacer y={10} />
       <Fallback
         isLoading={postsQuery?.isPending}
         fallbackLoading={<TableSkeleton />}

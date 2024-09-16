@@ -1,23 +1,19 @@
-import { Filter, FilterSchema } from '@/types';
+import { Filter, FilterSchema, Status } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Select, SelectItem, Spacer, Spinner } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 
 interface FormFilterProps {
   filter?: Filter;
+  status: Status[];
   onSubmit: (updatedPost: Filter) => void;
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
 }
 
-const estados = [
-  { key: '', label: 'Todos' },
-  { key: 'disponible', label: 'Disponible' },
-  { key: 'archivado', label: 'Archivado' },
-];
-
 export const FormFilter = ({
   filter,
+  status,
   onSubmit,
   isDisabledButton = false,
   isSubmitting,
@@ -39,7 +35,7 @@ export const FormFilter = ({
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-gray-900">
         <Select
-          items={estados}
+          items={status}
           label="State"
           placeholder="Select an State"
           className="max-w-xs"

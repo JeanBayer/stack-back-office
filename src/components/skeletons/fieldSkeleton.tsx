@@ -1,7 +1,11 @@
 import { Skeleton } from '@nextui-org/react';
 
-const Input = () => (
-  <Skeleton className="w-full rounded-lg h-14">
+type InputProps = {
+  className?: string;
+};
+
+const Input = ({ className = '' }: InputProps) => (
+  <Skeleton className={`w-full rounded-lg h-14 ${className}`}>
     <div className="h-full w-full rounded-lg  bg-default-200"></div>
   </Skeleton>
 );
