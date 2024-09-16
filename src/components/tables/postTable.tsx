@@ -44,6 +44,7 @@ export const PostTable = ({
         <TableColumn>TITLE</TableColumn>
         <TableColumn>AUTHOR</TableColumn>
         <TableColumn>VIEWS</TableColumn>
+        <TableColumn>STATE</TableColumn>
         <TableColumn>ACTIONS</TableColumn>
       </TableHeader>
       <TableBody emptyContent={emptyContent}>
@@ -52,6 +53,7 @@ export const PostTable = ({
             <TableCell>{post.title}</TableCell>
             <TableCell>{post.author}</TableCell>
             <TableCell>{post.views}</TableCell>
+            <TableCell>{post.estado}</TableCell>
             <TableCell width={30}>
               <Actions
                 actions={[

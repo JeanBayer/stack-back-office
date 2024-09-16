@@ -31,11 +31,18 @@ export const TableSkeleton = () => {
         <TableColumn>
           <FieldSkeleton.Line />
         </TableColumn>
+        <TableColumn>
+          <FieldSkeleton.Line />
+        </TableColumn>
       </TableHeader>
 
       <TableBody>
         {ITEMS.map((row) => (
           <TableRow key={row}>
+            <TableCell>
+              <FieldSkeleton.Line />
+            </TableCell>
+
             <TableCell>
               <FieldSkeleton.Line />
             </TableCell>

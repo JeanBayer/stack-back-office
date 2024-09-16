@@ -5,6 +5,7 @@ export interface Post {
   title: string;
   views: number;
   author: string;
+  estado: string;
   date?: string;
   imageUrl?: string;
 }
@@ -31,6 +32,7 @@ export const PostSchema = z.object({
     })
     .int()
     .positive(),
+  estado: z.string(),
   date: z.string().optional(),
   imageUrl: z.any().optional(),
 });
