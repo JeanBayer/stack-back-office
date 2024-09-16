@@ -48,11 +48,12 @@ export class PostService {
     }
   }
 
-  public static async updatePost(post: Post): Promise<Post> {
+  public static async updatePost(post: Partial<Post>): Promise<Post> {
     try {
       await sleep(500);
-      const validPost = PostSchema.parse(post);
-      const response = await api.put<Post>(`/posts/${post?.id}`, validPost);
+      const { id, ...restPost } = post;
+      const validPost = PostSchema.partial().parse(restPost);
+      const response = await api.patch<Post>(`/posts/${id}`, validPost);
       return response.data;
     } catch (error) {
       console.error('Error in updatePost method', error);

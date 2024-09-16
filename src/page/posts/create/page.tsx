@@ -6,7 +6,8 @@ export const PostCreate = () => {
   const { postCreate } = usePost();
 
   const handleSubmit = (data: Omit<Post, 'id'>) => {
-    postCreate.mutate(data);
+    console.log(data);
+    // postCreate.mutate(data);
   };
 
   return (

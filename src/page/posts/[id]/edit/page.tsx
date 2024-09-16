@@ -1,6 +1,7 @@
 import { ErrorCard, Fallback, FormPost, FormSkeleton } from '@/components';
 import { usePost, useSelectId } from '@/hooks';
 import { Post } from '@/types';
+import { FileUtil, ObjectUtil } from '@/utils';
 
 export const PostEdit = () => {
   const { postQuery, postUpdate } = usePost();
@@ -8,8 +9,25 @@ export const PostEdit = () => {
 
   if (!id) return <div>Empty data</div>;
 
-  const handleSubmit = (data: Post) => {
-    postUpdate.mutate(data);
+  const handleSubmit = async (data: Post) => {
+    const changedFields = ObjectUtil.getChangedFields(postQuery.data!, data);
+    changedFields.id = postQuery.data!.id;
+    const changedFieldsKeysImage = ObjectUtil.listMatchKeys(changedFields, [
+      'imagenURL',
+      'title',
+    ]);
+
+    if (changedFieldsKeysImage.length === 0) {
+      postUpdate.mutate(changedFields);
+      return;
+    }
+
+    const changeFieldsWithImage = await FileUtil.convertFilesListToBase64(
+      changedFields,
+      changedFieldsKeysImage,
+    );
+
+    postUpdate.mutate(changeFieldsWithImage);
   };
 
   return (

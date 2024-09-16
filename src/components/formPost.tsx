@@ -19,7 +19,7 @@ export const FormPost = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Post>({
     resolver: zodResolver(PostSchema),
     mode: 'all', // muestre los errores en onchange, blur y submit
@@ -27,7 +27,8 @@ export const FormPost = ({
     defaultValues: post,
   });
 
-  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
+  const disabledButton =
+    isDisabledButton || Object.keys(errors).length > 0 || !isDirty;
 
   return (
     <div>
@@ -65,6 +66,14 @@ export const FormPost = ({
           {...register('date')}
           isInvalid={!!errors.date}
           errorMessage={errors.date?.message}
+          fullWidth
+        />
+        <Input
+          label="Imagen"
+          type="file"
+          {...register('imagenURL')}
+          isInvalid={!!errors.imagenURL}
+          errorMessage={errors.imagenURL?.message}
           fullWidth
         />
         <Spacer y={1} />

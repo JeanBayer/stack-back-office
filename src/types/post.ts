@@ -6,6 +6,7 @@ export interface Post {
   views: number;
   author: string;
   date?: string;
+  imagenURL?: unknown;
 }
 
 export interface PostResponse {
@@ -29,4 +30,5 @@ export const PostSchema = z.object({
     .int()
     .positive(),
   date: z.string().optional(),
+  imagenURL: z.any().optional(),
 });

@@ -35,7 +35,7 @@ export const usePost = () => {
 
   const postUpdate = useMutation({
     mutationKey: ['post', 'update', selectedPostId],
-    mutationFn: async (post: Post) => {
+    mutationFn: async (post: Partial<Post>) => {
       toast.info('Actualizando post...');
       return await PostService.updatePost(post);
     },
