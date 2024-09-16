@@ -1,5 +1,5 @@
+import { FieldSkeleton } from '@/components';
 import { Spacer } from '@nextui-org/react';
-import { FieldSkeleton } from './fieldSkeleton';
 
 export const FormSkeleton = () => {
   return (

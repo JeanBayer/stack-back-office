@@ -1,3 +1,4 @@
+import { Paginator } from '@/components';
 import {
   Skeleton,
   Table,
@@ -7,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
-import { Paginator } from './paginator';
 
 const ITEMS = Array.from({ length: 10 }).map((_, i) => i);
 
