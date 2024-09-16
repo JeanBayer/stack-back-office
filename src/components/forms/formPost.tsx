@@ -70,6 +70,15 @@ export const FormPost = ({
           fullWidth
         />
         <Spacer y={1} />
+        <Input
+          label="Estado"
+          type="string"
+          {...register('estado')}
+          isInvalid={!!errors.estado}
+          errorMessage={errors.estado?.message}
+          fullWidth
+        />
+        <Spacer y={1} />
         <InputImage
           error={errors.imageUrl}
           label="Post Image"
