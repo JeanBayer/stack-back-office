@@ -1,5 +1,3 @@
-// import { ObjectUtil } from '@/utils';
-
 export class FileUtil {
   public static toBase64(
     fileList: FileList,

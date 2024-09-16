@@ -1,4 +1,4 @@
-import { VerticalDotsIcon } from '@/icons';
+import { VerticalDotsIcon } from '@/components';
 import {
   Button,
   Dropdown,

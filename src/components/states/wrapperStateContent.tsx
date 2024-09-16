@@ -1,4 +1,4 @@
-import { ErrorCard } from './errorCard';
+import { ErrorCard } from '@/components';
 
 type WrapperStateContentProps = {
   isError: boolean;

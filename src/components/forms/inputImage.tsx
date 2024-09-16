@@ -1,6 +1,6 @@
 import { Label } from '@/components';
 import { useHandleImageFile } from '@/hooks';
-import { ImageInput } from '@/types';
+import { type ImageInput } from '@/types';
 import { Image, Input } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
