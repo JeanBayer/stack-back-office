@@ -1,7 +1,14 @@
 import { InputImage } from '@/components';
 import { type Post, PostSchema } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input, Spacer, Spinner } from '@nextui-org/react';
+import {
+  Button,
+  Input,
+  Select,
+  SelectItem,
+  Spacer,
+  Spinner,
+} from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 
 interface formPostProps {
@@ -10,6 +17,22 @@ interface formPostProps {
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
 }
+
+const estados = [
+  { key: 'cat', label: 'Cat' },
+  { key: 'dog', label: 'Dog' },
+  { key: 'elephant', label: 'Elephant' },
+  { key: 'lion', label: 'Lion' },
+  { key: 'tiger', label: 'Tiger' },
+  { key: 'giraffe', label: 'Giraffe' },
+  { key: 'dolphin', label: 'Dolphin' },
+  { key: 'penguin', label: 'Penguin' },
+  { key: 'zebra', label: 'Zebra' },
+  { key: 'shark', label: 'Shark' },
+  { key: 'whale', label: 'Whale' },
+  { key: 'otter', label: 'Otter' },
+  { key: 'crocodile', label: 'Crocodile' },
+];
 
 export const FormPost = ({
   post,
@@ -70,15 +93,17 @@ export const FormPost = ({
           fullWidth
         />
         <Spacer y={1} />
-        <Input
-          label="Estado"
-          type="string"
+        <Select
+          items={estados}
+          label="State"
+          placeholder="Select an State"
+          className="max-w-xs"
           {...register('estado')}
-          isInvalid={!!errors.estado}
-          errorMessage={errors.estado?.message}
-          fullWidth
-        />
+        >
+          {(estado) => <SelectItem key={estado.key}>{estado.label}</SelectItem>}
+        </Select>
         <Spacer y={1} />
+
         <InputImage
           error={errors.imageUrl}
           label="Post Image"

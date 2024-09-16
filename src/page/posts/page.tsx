@@ -1,5 +1,6 @@
 import {
   Fallback,
+  FilterPosts,
   PostTable,
   TableSkeleton,
   WrapperStateContent,
@@ -28,6 +29,8 @@ export const PostsPage = () => {
           Crear oferta
         </Link>
       </div>
+      
+      <FilterPosts />
 
       <Fallback
         isLoading={postsQuery?.isPending}

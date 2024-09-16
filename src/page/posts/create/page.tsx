@@ -11,7 +11,6 @@ export const PostCreate = () => {
       data,
       Constants.FIELDS_POST_WITH_IMAGE as string[],
     );
-
     postCreate.mutate(dataWithImage);
   };
 

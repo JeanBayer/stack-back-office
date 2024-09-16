@@ -6,20 +6,25 @@ import { toast } from 'sonner';
 import { useShallow } from 'zustand/react/shallow';
 
 export const usePosts = () => {
-  const { page, perPage, previousPage, changePage } = useStore(
+  const { page, perPage, previousPage, changePage, filterPost } = useStore(
     useShallow((state) => ({
       page: state.page,
       perPage: state.perPage,
       changePage: state.setPage,
       previousPage: state.previousPage,
+      filterPost: state.filterPost,
     })),
   );
 
   const postsQuery = useQuery({
-    queryKey: ['posts', page, perPage],
+    queryKey: ['posts', page, perPage, filterPost],
     queryFn: async () => {
       try {
-        const response = await PostService.getPosts({ page, perPage });
+        const response = await PostService.getPosts({
+          page,
+          perPage,
+          filter: filterPost,
+        });
         const currentPageAPI = response.pagination.currentPage;
         if (currentPageAPI !== page)
           changePage(response.pagination.currentPage);

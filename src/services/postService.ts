@@ -1,5 +1,6 @@
 import { api } from '@/api';
 import {
+  Filter,
   type Paginate,
   type Post,
   type PostResponse,
@@ -7,14 +8,30 @@ import {
 } from '@/types';
 import { ObjectUtil } from '@/utils';
 
+type GetPosts = {
+  page: Paginate['page'];
+  perPage: Paginate['perPage'];
+  filter: Partial<Filter>;
+};
 export class PostService {
   public static async getPosts({
     page,
     perPage,
-  }: Paginate): Promise<PostResponse> {
+    filter,
+  }: GetPosts): Promise<PostResponse> {
     try {
+      const params = new URLSearchParams();
+      params.append('page', page.toString());
+      params.append('perPage', perPage.toString());
+
+      Object.entries(filter).forEach(([key, value]) => {
+        if (value !== undefined && value !== null && value !== '') {
+          params.append(key, value.toString());
+        }
+      });
+
       const response = await api.get<PostResponse>(
-        `/items?page=${page}&perPage=${perPage}`,
+        `/items?${params.toString()}`,
       );
       return response.data;
     } catch (error) {

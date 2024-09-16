@@ -1,3 +1,4 @@
+import { Filter } from '@/types';
 import { Constants } from '@/utils';
 import { create } from 'zustand';
 
@@ -6,6 +7,8 @@ interface PaginationState {
   perPage: number;
   previousPage: number;
   selectedPostId: string | null;
+  filterPost: Filter;
+  setFilterPost: (filterPost: Partial<Filter>) => void;
   setPage: (page: number) => void;
   incrementPage: () => void;
   decrementPage: () => void;
@@ -19,6 +22,10 @@ export const useStore = create<PaginationState>((set) => ({
   perPage: Constants.PER_PAGE_GET_LIST_POST,
   previousPage: 1,
   selectedPostId: null,
+  filterPost: {
+    estado: '',
+  },
+
   setPage: (page) =>
     set((state) => {
       if (state.page !== page) {
@@ -26,6 +33,11 @@ export const useStore = create<PaginationState>((set) => ({
       }
       return state;
     }),
+
+  setFilterPost: (partialFilter) =>
+    set((state) => ({
+      filterPost: { ...state.filterPost, ...partialFilter },
+    })),
   incrementPage: () => set((state) => ({ page: state.page + 1 })),
   decrementPage: () => set((state) => ({ page: Math.max(state.page - 1, 1) })),
   setPerPage: (perPage) => set({ perPage }),
