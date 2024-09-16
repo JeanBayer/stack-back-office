@@ -34,6 +34,11 @@ export const FilterPosts = () => {
     setSearchParams(params);
   };
 
+  const statusWithAll = [
+    { key: '', label: 'Todos' },
+    ...(statusQuery?.data || []),
+  ];
+
   return (
     <div>
       <Fallback
@@ -50,7 +55,7 @@ export const FilterPosts = () => {
         <FormFilter
           key={JSON.stringify(filterPost)}
           filter={filterPost}
-          status={statusQuery.data || []}
+          status={statusWithAll}
           onSubmit={handleSubmit}
           isDisabledButton={false}
           isSubmitting={false}

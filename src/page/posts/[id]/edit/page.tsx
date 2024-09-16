@@ -1,10 +1,12 @@
 import { ErrorCard, Fallback, FormPost, FormSkeleton } from '@/components';
-import { usePost, useSelectId } from '@/hooks';
+import { usePost, useSelectId, useStatus } from '@/hooks';
 import { Post } from '@/types';
 import { Constants, FileUtil, ObjectUtil } from '@/utils';
 
 export const PostEdit = () => {
   const { postQuery, postUpdate } = usePost();
+  const { statusQuery } = useStatus();
+
   const { id } = useSelectId();
 
   if (!id) return <div>Empty data</div>;
@@ -24,19 +26,27 @@ export const PostEdit = () => {
   return (
     <div>
       <Fallback
-        isLoading={postQuery?.isLoading}
+        isLoading={postQuery?.isLoading || statusQuery?.isLoading}
         fallbackLoading={<FormSkeleton />}
-        isError={postQuery?.isError}
+        isError={postQuery?.isError || statusQuery?.isError}
         fallbackError={
           <ErrorCard
-            onRetry={postQuery?.refetch}
-            errorMessage={postQuery?.error?.message || 'Error'}
+            onRetry={() => {
+              postQuery?.refetch();
+              statusQuery?.refetch();
+            }}
+            errorMessage={
+              postQuery?.error?.message ||
+              statusQuery?.error?.message ||
+              'Error'
+            }
           />
         }
         isChildrenEnabled={id === postQuery?.data?.id}
       >
         <FormPost
           post={postQuery.data!}
+          status={statusQuery.data || []}
           onSubmit={handleSubmit}
           isDisabledButton={postUpdate.isPending || postUpdate.isSuccess}
           isSubmitting={postUpdate.isPending}

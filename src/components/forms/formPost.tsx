@@ -1,5 +1,5 @@
 import { InputImage } from '@/components';
-import { type Post, PostSchema } from '@/types';
+import { type Post, PostSchema, Status } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -13,29 +13,15 @@ import { useForm } from 'react-hook-form';
 
 interface formPostProps {
   post?: Post;
+  status: Status[];
   onSubmit: (updatedPost: Post) => void;
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
 }
 
-const estados = [
-  { key: 'cat', label: 'Cat' },
-  { key: 'dog', label: 'Dog' },
-  { key: 'elephant', label: 'Elephant' },
-  { key: 'lion', label: 'Lion' },
-  { key: 'tiger', label: 'Tiger' },
-  { key: 'giraffe', label: 'Giraffe' },
-  { key: 'dolphin', label: 'Dolphin' },
-  { key: 'penguin', label: 'Penguin' },
-  { key: 'zebra', label: 'Zebra' },
-  { key: 'shark', label: 'Shark' },
-  { key: 'whale', label: 'Whale' },
-  { key: 'otter', label: 'Otter' },
-  { key: 'crocodile', label: 'Crocodile' },
-];
-
 export const FormPost = ({
   post,
+  status,
   onSubmit,
   isDisabledButton = false,
   isSubmitting,
@@ -94,7 +80,7 @@ export const FormPost = ({
         />
         <Spacer y={1} />
         <Select
-          items={estados}
+          items={status}
           label="State"
           placeholder="Select an State"
           className="max-w-xs"
