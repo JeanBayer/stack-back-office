@@ -1,6 +1,5 @@
-import { Paginator } from '@/components';
+import { FieldSkeleton, Paginator } from '@/components';
 import {
-  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -14,31 +13,23 @@ const ITEMS = Array.from({ length: 10 }).map((_, i) => i);
 export const TableSkeleton = () => {
   return (
     <Table
-      aria-label="Example static collection table"
+      aria-label="Skeleton table"
       className="text-slate-900"
       selectionMode="single"
       bottomContent={<Paginator changePage={() => {}} page={1} maxPages={1} />}
     >
       <TableHeader>
         <TableColumn>
-          <Skeleton className="w-3/5 rounded-lg">
-            <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-          </Skeleton>
+          <FieldSkeleton.Line />
         </TableColumn>
         <TableColumn>
-          <Skeleton className="w-3/5 rounded-lg">
-            <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-          </Skeleton>
+          <FieldSkeleton.Line />
         </TableColumn>
         <TableColumn>
-          <Skeleton className="w-3/5 rounded-lg">
-            <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-          </Skeleton>
+          <FieldSkeleton.Line />
         </TableColumn>
         <TableColumn>
-          <Skeleton className="w-3/5 rounded-lg">
-            <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-          </Skeleton>
+          <FieldSkeleton.Line />
         </TableColumn>
       </TableHeader>
 
@@ -46,27 +37,19 @@ export const TableSkeleton = () => {
         {ITEMS.map((row) => (
           <TableRow key={row}>
             <TableCell>
-              <Skeleton className="w-3/5 rounded-lg">
-                <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-              </Skeleton>
+              <FieldSkeleton.Line />
             </TableCell>
 
             <TableCell>
-              <Skeleton className="w-3/5 rounded-lg">
-                <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-              </Skeleton>
+              <FieldSkeleton.Line />
             </TableCell>
 
             <TableCell>
-              <Skeleton className="w-3/5 rounded-lg">
-                <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-              </Skeleton>
+              <FieldSkeleton.Line />
             </TableCell>
 
             <TableCell width={30}>
-              <Skeleton className="w-3/5 rounded-lg">
-                <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
-              </Skeleton>
+              <FieldSkeleton.Line />
             </TableCell>
           </TableRow>
         ))}

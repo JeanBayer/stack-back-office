@@ -18,8 +18,15 @@ const Image = () => (
   </Skeleton>
 );
 
+const Line = () => (
+  <Skeleton className="w-3/5 rounded-lg">
+    <div className="h-3 w-3/5 rounded-lg bg-default-200"></div>
+  </Skeleton>
+);
+
 export const FieldSkeleton = {
   Input,
   Button,
   Image,
+  Line,
 };
