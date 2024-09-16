@@ -4,6 +4,7 @@ export * from './errorCard';
 export * from './fallback';
 export * from './formPost';
 export * from './formSkeleton';
+export * from './inputImage';
 export * from './navbarList';
 export * from './paginator';
 export * from './postTable';
