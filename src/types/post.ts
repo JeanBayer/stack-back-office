@@ -32,7 +32,7 @@ export const PostSchema = z.object({
     })
     .int()
     .positive(),
-  estado: z.string(),
+  estado: z.string().min(1, 'Please select an option'),
   date: z.string().optional(),
   imageUrl: z.any().optional(),
 });

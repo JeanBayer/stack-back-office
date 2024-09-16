@@ -83,8 +83,10 @@ export const FormPost = ({
           items={status}
           label="State"
           placeholder="Select an State"
-          className="max-w-xs"
           {...register('estado')}
+          isInvalid={!!errors.estado}
+          errorMessage={errors.estado?.message}
+          fullWidth
         >
           {(estado) => <SelectItem key={estado.key}>{estado.label}</SelectItem>}
         </Select>
