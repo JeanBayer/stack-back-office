@@ -15,4 +15,8 @@ jobs:
 
     steps:
       - name: "Hola mundo.!"
-        run: echo "Hola mundo.!"  
+        run: echo "Hola mundo.!"
+      - name: Dime la fecha
+        run: date
+      - name: Muestrame el contenido del directorio
+        run: ls -la    
