@@ -9,14 +9,16 @@ export interface Post {
   imagenURL?: unknown;
 }
 
+export interface Pagination {
+  count: number;
+  currentPage: number;
+  perPage: number;
+  totalPages: number;
+}
+
 export interface PostResponse {
-  first: number;
-  prev: number;
-  next: number;
-  last: number;
-  pages: number;
-  items: number;
-  data: Post[];
+  pagination: Pagination;
+  items: Post[];
 }
 
 export const PostSchema = z.object({

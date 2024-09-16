@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface PaginationState {
   page: number;
   perPage: number;
+  previousPage: number;
   selectedPostId: string | null;
   setPage: (page: number) => void;
   incrementPage: () => void;
@@ -15,8 +16,15 @@ interface PaginationState {
 export const useStore = create<PaginationState>((set) => ({
   page: 1,
   perPage: 5,
+  previousPage: 1,
   selectedPostId: null,
-  setPage: (page) => set({ page }),
+  setPage: (page) =>
+    set((state) => {
+      if (state.page !== page) {
+        return { page, previousPage: state.page };
+      }
+      return state;
+    }),
   incrementPage: () => set((state) => ({ page: state.page + 1 })),
   decrementPage: () => set((state) => ({ page: Math.max(state.page - 1, 1) })),
   setPerPage: (perPage) => set({ perPage }),
