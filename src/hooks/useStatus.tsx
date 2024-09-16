@@ -7,7 +7,7 @@ export const useStatus = () => {
     queryKey: ['status'],
     queryFn: PostService.getStatus,
     placeholderData: keepPreviousData,
-    staleTime: Constants.CACHE_TIME_GET_POST,
+    staleTime: Constants.CACHE_TIME_GET_LIST_STATUS,
   });
 
   return {
