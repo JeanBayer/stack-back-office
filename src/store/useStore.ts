@@ -1,3 +1,4 @@
+import { Constants } from '@/utils';
 import { create } from 'zustand';
 
 interface PaginationState {
@@ -15,7 +16,7 @@ interface PaginationState {
 
 export const useStore = create<PaginationState>((set) => ({
   page: 1,
-  perPage: 5,
+  perPage: Constants.PER_PAGE_GET_LIST_POST,
   previousPage: 1,
   selectedPostId: null,
   setPage: (page) =>

@@ -1,7 +1,7 @@
 import { PostService } from '@/services';
 import { useStore } from '@/store';
 import { Post, PostResponse } from '@/types';
-import { QueryClientUtil } from '@/utils';
+import { Constants, QueryClientUtil } from '@/utils';
 import {
   keepPreviousData,
   useMutation,
@@ -30,7 +30,7 @@ export const usePost = () => {
     },
     enabled: !!selectedPostId,
     placeholderData: keepPreviousData,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: Constants.CACHE_TIME_GET_POST,
   });
 
   const postUpdate = useMutation({
