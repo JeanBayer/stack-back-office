@@ -7,10 +7,11 @@ export const PostCreate = () => {
   const { postCreate } = usePost();
 
   const handleSubmit = async (data: Omit<Post, 'id'>) => {
-    const dataWithImage = await FileUtil.convertFilesListToBase64(
+    const dataWithImage = await FileUtil.convertFilesListToFile(
       data,
       Constants.FIELDS_POST_WITH_IMAGE as string[],
     );
+
     postCreate.mutate(dataWithImage);
   };
 

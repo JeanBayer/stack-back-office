@@ -18,4 +18,17 @@ export class ObjectUtil {
     // Return the keys that match in the data
     return keysToMatch.filter((keyToMatch) => keysData.includes(keyToMatch));
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public static toFormData(obj: Record<string, any>): FormData {
+    const formData = new FormData();
+    for (const key in obj) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (obj.hasOwnProperty(key)) {
+        formData.append(key, obj[key]);
+      }
+    }
+
+    return formData;
+  }
 }

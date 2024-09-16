@@ -53,4 +53,31 @@ export class FileUtil {
 
     return newData as T;
   }
+
+  public static async convertFilesListToFile<T>(
+    data: T,
+    keysFileList: string[],
+  ): Promise<T> {
+    if (typeof data !== 'object' || data === null) return data;
+    if (!keysFileList.length) return data;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newData: Record<string, any> = structuredClone(data);
+
+    for (const keyImage of keysFileList) {
+      if (!newData[keyImage]) continue;
+      const imageFileList = newData[keyImage];
+      try {
+        const file = imageFileList?.item(0);
+        newData[keyImage] = file;
+      } catch (error) {
+        console.warn(
+          `Conflict in converting FileList to File in field \n\t\t{'${keyImage}':'${imageFileList}'}\n :`,
+          error,
+        );
+      }
+    }
+
+    return newData as T;
+  }
 }

@@ -13,7 +13,7 @@ export const PostEdit = () => {
     const changedFields = ObjectUtil.getChangedFields(postQuery.data!, data);
     changedFields.id = postQuery.data!.id;
 
-    const changeFieldsWithImage = await FileUtil.convertFilesListToBase64(
+    const changeFieldsWithImage = await FileUtil.convertFilesListToFile(
       changedFields,
       Constants.FIELDS_POST_WITH_IMAGE as string[],
     );

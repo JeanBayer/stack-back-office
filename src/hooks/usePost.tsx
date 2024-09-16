@@ -81,7 +81,7 @@ export const usePost = () => {
       if (!previousPosts) return { previousPosts: undefined };
       QueryClientUtil.setQueryData<PostResponse>(queryClient, ['posts'], {
         ...previousPosts,
-        data: previousPosts.data.filter((post) => post.id !== postId),
+        items: previousPosts.items.filter((post) => post.id !== postId),
       });
 
       return { previousPosts };

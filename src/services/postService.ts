@@ -5,8 +5,7 @@ import {
   type PostResponse,
   PostSchema,
 } from '@/types';
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { ObjectUtil } from '@/utils';
 
 export class PostService {
   public static async getPosts({
@@ -14,7 +13,6 @@ export class PostService {
     perPage,
   }: Paginate): Promise<PostResponse> {
     try {
-      await sleep(500);
       const response = await api.get<PostResponse>(
         `/items?page=${page}&perPage=${perPage}`,
       );
@@ -27,7 +25,6 @@ export class PostService {
 
   public static async getPostById(postId: string): Promise<Post> {
     try {
-      await sleep(500);
       const response = await api.get<Post>(`/items/${postId}`);
       return response.data;
     } catch (error) {
@@ -38,9 +35,9 @@ export class PostService {
 
   public static async createPost(post: Omit<Post, 'id'>): Promise<Post> {
     try {
-      await sleep(500);
       const validPost = PostSchema.parse(post);
-      const response = await api.post<Post>('/items', validPost);
+      const postFormData = ObjectUtil.toFormData(validPost);
+      const response = await api.post<Post>('/items', postFormData);
       return response.data;
     } catch (error) {
       console.error('Error in createPost method', error);
@@ -50,10 +47,10 @@ export class PostService {
 
   public static async updatePost(post: Partial<Post>): Promise<Post> {
     try {
-      await sleep(500);
       const { id, ...restPost } = post;
       const validPost = PostSchema.partial().parse(restPost);
-      const response = await api.patch<Post>(`/items/${id}`, validPost);
+      const postFormData = ObjectUtil.toFormData(validPost);
+      const response = await api.patch<Post>(`/items/${id}`, postFormData);
       return response.data;
     } catch (error) {
       console.error('Error in updatePost method', error);
@@ -63,7 +60,6 @@ export class PostService {
 
   public static async deletePost(postId: string): Promise<void> {
     try {
-      await sleep(500);
       await api.delete(`/items/${postId}`);
     } catch (error) {
       console.error('Error in deletePost method', error);

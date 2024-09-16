@@ -6,7 +6,7 @@ export interface Post {
   views: number;
   author: string;
   date?: string;
-  imagenURL?: unknown;
+  imageUrl?: string;
 }
 
 export interface Pagination {
@@ -32,5 +32,5 @@ export const PostSchema = z.object({
     .int()
     .positive(),
   date: z.string().optional(),
-  imagenURL: z.any().optional(),
+  imageUrl: z.any().optional(),
 });
