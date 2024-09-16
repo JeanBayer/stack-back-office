@@ -5,6 +5,7 @@ export * from './fallback';
 export * from './formPost';
 export * from './formSkeleton';
 export * from './inputImage';
+export * from './label';
 export * from './navbarList';
 export * from './paginator';
 export * from './postTable';

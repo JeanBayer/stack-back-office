@@ -1,21 +1,14 @@
+import { Label } from '@/components';
 import { useHandleImageFile } from '@/hooks';
+import { ImageInput } from '@/types';
 import { Image, Input } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
-type Image = {
-  url: string;
-  alt: string;
-  height: number;
-  width: number;
-  fallbackSrc?: string;
-  className?: string;
-};
-
 type InputImageProps = {
   label: string;
   name: string;
-  image: Image;
+  image: ImageInput;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   error: FieldError | undefined;
@@ -35,6 +28,7 @@ export const InputImage = ({
     () =>
       register(name, {
         onChange: (e) => {
+          console.log('e', e);
           handleUploadedFile(e);
         },
       }),
@@ -43,30 +37,41 @@ export const InputImage = ({
 
   return (
     <>
-      <Input
+      <Label
         label={label}
-        type="file"
-        {...rest}
-        ref={(e) => {
-          registerRef(e);
-          hiddenInputRef.current = e;
-        }}
-        isInvalid={!!error}
-        errorMessage={error?.message}
-        fullWidth
-        className="hidden"
-      />
-      <Image
-        src={previewImagenURL || ''}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        fallbackSrc={image.fallbackSrc}
-        onClick={() => {
-          hiddenInputRef?.current?.click();
-        }}
-        style={{ cursor: 'pointer' }}
-      />
+        htmlFor={`file-${name}`}
+        value="Image Selected"
+        isExpand={!!previewImagenURL}
+      >
+        <Input
+          label={label}
+          type="file"
+          id={`file-${name}`}
+          {...rest}
+          ref={(e) => {
+            registerRef(e);
+            hiddenInputRef.current = e;
+          }}
+          isInvalid={!!error}
+          errorMessage={error?.message}
+          fullWidth
+          className="hidden"
+        />
+      </Label>
+      {previewImagenURL && (
+        <Image
+          src={previewImagenURL || ''}
+          alt={image.alt}
+          isBlurred
+          width={image.width}
+          height={image.height}
+          onClick={() => {
+            hiddenInputRef?.current?.click();
+          }}
+          style={{ cursor: 'pointer' }}
+          className={image?.className}
+        />
+      )}
     </>
   );
 };

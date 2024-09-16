@@ -12,7 +12,7 @@ export const useHandleImageFile = ({ url }: UseHandleImageFile) => {
 
   const handleUploadedFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event?.target?.files?.[0];
-    if (!file) return;
+    if (!file) return setPreviewImagenURL(null);
 
     const urlImage = URL.createObjectURL(file);
 

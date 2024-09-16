@@ -72,15 +72,15 @@ export const FormPost = ({
         <Spacer y={1} />
         <InputImage
           error={errors.imageUrl}
-          label="Image"
+          label="Post Image"
           name="imageUrl"
           register={register}
           image={{
             url: post?.imageUrl || '',
             alt: 'Image',
-            width: 600,
-            height: 300,
-            fallbackSrc: 'https://via.placeholder.com/300x200',
+            width: 200,
+            height: 113,
+            className: 'mt-2',
           }}
         />
         <Spacer y={1} />
