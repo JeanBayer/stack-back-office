@@ -1,5 +1,5 @@
 import { Fallback, PostTable, TableSkeleton } from '@/components';
-import { WrapperStateContent } from '@/components/wrapperStateContent';
+import { WrapperStateContent } from '@/components/states/wrapperStateContent';
 import { usePost, usePosts } from '@/hooks';
 import { useStore } from '@/store';
 import { Button, Link } from '@nextui-org/react';
