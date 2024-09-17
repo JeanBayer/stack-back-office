@@ -22,9 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
+      - uses: actions/cache@v3
         with:
           node-version: 18
           cache: "npm"
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
       - run: npm ci --legacy-peer-deps
       - run: npm run format
       - run: npm run test
