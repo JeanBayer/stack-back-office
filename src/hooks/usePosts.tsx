@@ -36,7 +36,7 @@ export const usePosts = () => {
       }
     },
     placeholderData: keepPreviousData,
-    staleTime: Constants.CACHE_TIME_GET_LIST_POST,
+    staleTime:  Constants.CACHE_TIME_GET_LIST_POST,
   });
 
   const pagination = postsQuery.data?.pagination;

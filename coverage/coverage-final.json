@@ -1,0 +1,84 @@
+{
+  "/Users/fpopaya/Desktop/stack-back-office/src/components/icons/verticalDotsIcon.tsx": {
+    "path": "/Users/fpopaya/Desktop/stack-back-office/src/components/icons/verticalDotsIcon.tsx",
+    "statementMap": {
+      "0": {
+        "start": { "line": 8, "column": 32 },
+        "end": { "line": 28, "column": null }
+      },
+      "1": {
+        "start": { "line": 14, "column": 2 },
+        "end": { "line": 27, "column": null }
+      },
+      "2": {
+        "start": { "line": 8, "column": 13 },
+        "end": { "line": 8, "column": 32 }
+      }
+    },
+    "fnMap": {
+      "0": {
+        "name": "(anonymous_0)",
+        "decl": {
+          "start": { "line": 8, "column": 32 },
+          "end": { "line": 8, "column": 33 }
+        },
+        "loc": {
+          "start": { "line": 14, "column": 2 },
+          "end": { "line": 27, "column": null }
+        }
+      }
+    },
+    "branchMap": {
+      "0": {
+        "loc": {
+          "start": { "line": 9, "column": 2 },
+          "end": { "line": 9, "column": 11 }
+        },
+        "type": "default-arg",
+        "locations": [
+          {
+            "start": { "line": 9, "column": 9 },
+            "end": { "line": 9, "column": 11 }
+          }
+        ]
+      },
+      "1": {
+        "loc": {
+          "start": { "line": 18, "column": 12 },
+          "end": { "line": 18, "column": 26 }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": { "line": 18, "column": 12 },
+            "end": { "line": 18, "column": 16 }
+          },
+          {
+            "start": { "line": 18, "column": 20 },
+            "end": { "line": 18, "column": 26 }
+          }
+        ]
+      },
+      "2": {
+        "loc": {
+          "start": { "line": 21, "column": 11 },
+          "end": { "line": 21, "column": 24 }
+        },
+        "type": "binary-expr",
+        "locations": [
+          {
+            "start": { "line": 21, "column": 11 },
+            "end": { "line": 21, "column": 15 }
+          },
+          {
+            "start": { "line": 21, "column": 19 },
+            "end": { "line": 21, "column": 24 }
+          }
+        ]
+      }
+    },
+    "s": { "0": 1, "1": 5, "2": 1 },
+    "f": { "0": 5 },
+    "b": { "0": [4], "1": [5, 0], "2": [5, 0] }
+  }
+}

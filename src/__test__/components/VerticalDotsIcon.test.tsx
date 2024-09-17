@@ -29,7 +29,9 @@ describe('VerticalDotsIcon', () => {
   });
 
   it('applies additional props', () => {
-    const { container } = render(<VerticalDotsIcon data-testid="vertical-dots-icon" />);
+    const { container } = render(
+      <VerticalDotsIcon data-testid="vertical-dots-icon" />,
+    );
     const svg = container.querySelector('svg');
     expect(svg).toHaveAttribute('data-testid', 'vertical-dots-icon');
   });
