@@ -1,38 +1,31 @@
 import { ErrorCard, Fallback, FilterSkeleton, FormFilter } from '@/components';
-import { useStatus } from '@/hooks';
+import { useHandleChangeURLParams, useStatus } from '@/hooks';
 import { useStore } from '@/store';
-import { Filter } from '@/types';
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Filter, FilterSchema } from '@/types';
+import { ObjectUtil } from '@/utils';
 
 export const FilterPosts = () => {
   const filterPost = useStore((state) => state.filterPost);
   const setFilterPost = useStore((state) => state.setFilterPost);
-  const [searchParams, setSearchParams] = useSearchParams();
   const { statusQuery } = useStatus();
+  const { updateSearchParams } = useHandleChangeURLParams({
+    handleChangeParams,
+  });
 
-  useEffect(() => {
-    const params: Partial<Filter> = {};
-    searchParams.forEach((value, key) => {
-      params[key as keyof Filter] = value;
-    });
-    setFilterPost(params as Filter);
-  }, [searchParams, setFilterPost]);
+  function handleChangeParams(params: Record<string, string>) {
+    const exactFields = ObjectUtil.extractExactFields(
+      params,
+      Object.keys(FilterSchema.shape),
+    );
+    const validParams = FilterSchema.safeParse(exactFields);
+    if (validParams.error) return;
+    setFilterPost(validParams.data);
+  }
 
-  const handleSubmit = async (data: Filter) => {
-    console.log(data);
-
+  async function handleSubmit(data: Filter) {
     setFilterPost(data);
-    const params = new URLSearchParams();
-    Object.entries(data).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
-        params.append(key, value.toString());
-      }
-    });
-
-    // Actualiza los parámetros de búsqueda en la URL
-    setSearchParams(params);
-  };
+    updateSearchParams(data);
+  }
 
   const statusWithAll = [
     { key: '', label: 'Todos' },
@@ -57,8 +50,8 @@ export const FilterPosts = () => {
           filter={filterPost}
           status={statusWithAll}
           onSubmit={handleSubmit}
-          isDisabledButton={false}
-          isSubmitting={false}
+          isDisabledButton={statusQuery?.isLoading}
+          isSubmitting={statusQuery?.isLoading}
         />
       </Fallback>
     </div>

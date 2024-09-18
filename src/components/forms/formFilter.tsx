@@ -1,6 +1,13 @@
 import { Filter, FilterSchema, Status } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Select, SelectItem, Spacer, Spinner } from '@nextui-org/react';
+import {
+  Button,
+  Input,
+  Select,
+  SelectItem,
+  Spacer,
+  Spinner,
+} from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 
 interface FormFilterProps {
@@ -44,7 +51,15 @@ export const FormFilter = ({
           {(estado) => <SelectItem key={estado.key}>{estado.label}</SelectItem>}
         </Select>
         <Spacer y={1} />
-
+        <Input
+          label="Title"
+          placeholder="Search by title"
+          className="max-w-xs"
+          {...register('title')}
+          isInvalid={!!errors.title}
+          errorMessage={errors.title?.message}
+        />
+        <Spacer y={1} />
         <Button type="submit" color="primary" isDisabled={disabledButton}>
           Search
           {isSubmitting && <Spinner size="sm" color="secondary" />}
