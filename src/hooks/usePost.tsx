@@ -49,18 +49,26 @@ export const usePost = () => {
 
   // Crear un nuevo post
   const postCreate = useMutation({
-    mutationFn: (post: Omit<Post, 'id'>) => PostService.createPost(post),
+    mutationFn: async (post: Omit<Post, 'id'>) => {
+      toast.info('Creando post...');
+      return await PostService.createPost(post);
+    },
     onSuccess: () => {
       toast.success('Post creado correctamente');
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       navigate('/posts');
     },
-    onError: () => handleError('Error al crear el post'),
+    onError: () => {
+      handleError(`Error al crear el post`)
+    },
   });
 
   // Actualizar un post existente con renderizado optimista
   const postUpdate = useMutation({
-    mutationFn: (post: Partial<Post>) => PostService.updatePost(post),
+    mutationFn: async (post: Partial<Post>) => {
+      toast.info('Actualizando post...');
+      return await PostService.updatePost(post);
+    },
     onMutate: async (updatedPost) => {
       if (selectedPostId) {
         const previousPost = queryClient.getQueryData<PostResponse>(['post', selectedPostId]);
@@ -88,7 +96,10 @@ export const usePost = () => {
 
   // Eliminar un post con renderizado optimista
   const postDelete = useMutation({
-    mutationFn: (postId: string) => PostService.deletePost(postId),
+    mutationFn: async (postId: string) => {
+      toast.info('Eliminando post...');
+      return await PostService.deletePost(postId);
+    },
     onMutate: async (postId: string) => {
       await queryClient.cancelQueries({ queryKey: ['posts'] });
 
