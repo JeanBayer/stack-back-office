@@ -13,7 +13,7 @@ export const Paginator = ({ changePage, page, maxPages }: PaginatorProps) => {
         isCompact
         showControls
         showShadow
-        color="secondary"
+        color="primary"
         page={page}
         total={maxPages}
         onChange={changePage}
