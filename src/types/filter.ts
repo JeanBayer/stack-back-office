@@ -7,5 +7,5 @@ export interface Filter {
 
 export const FilterSchema = z.object({
   estado: z.string().optional(),
-  title: z.string().min(3).max(255).optional(),
+  title: z.union([z.string().min(3).max(255), z.string().length(0)]).optional(),
 });
