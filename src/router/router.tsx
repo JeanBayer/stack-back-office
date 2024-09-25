@@ -4,6 +4,7 @@ import {
   PostDetail,
   PostEdit,
   PostsPage,
+  PruebaPage,
 } from '@/page';
 import { Route, Routes } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ export const CustomRouter = () => {
             </div>
           }
         />
+        <Route path="/prueba" element={<PruebaPage />} />
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/posts/:id/edit" element={<PostEdit />} />

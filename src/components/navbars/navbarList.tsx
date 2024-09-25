@@ -10,6 +10,11 @@ export const NavbarList = () => {
             Posts
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" to="/prueba">
+            prueba
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">

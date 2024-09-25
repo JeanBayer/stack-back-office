@@ -18,13 +18,29 @@ interface FormFilterProps {
   isSubmitting?: boolean;
 }
 
-const Monto = ({ ...props }) => {
+type Props = {
+  register: UseFormRegister<Filter>;
+  id: keyof Filter;
+};
+const Monto = ({ register, id }: Props) => {
   return (
     <Input
       label="Monto"
       placeholder="Search by monto"
       className="max-w-xs"
-      {...props}
+      {...register(id)}
+    />
+  );
+};
+
+const PercentageInput = ({ register, id }: Props) => {
+  return (
+    <Input
+      type="date"
+      label="Monto"
+      placeholder="Search by monto"
+      className="max-w-xs"
+      {...register(id)}
     />
   );
 };
@@ -37,7 +53,9 @@ interface Option {
     message: string;
     placeholder: string;
     tipo: {
-      id: 'monto-mision-instruccion-monto-mision';
+      id:
+        | 'monto-mision-instruccion-monto-mision'
+        | 'instruccion-input-instruccion';
       placeholder: string;
     };
   };
@@ -50,43 +68,60 @@ export const Factory = ({
 }: {
   register: UseFormRegister<Filter>;
   tipo: string;
-  option: Option;
+  option: Option | undefined;
 }) => {
   console.log('option', option);
-  const DICT: { [key: string]: JSX.Element } = {
-    monto: <Monto register={register} />,
-  };
+  // const DICT: { [key: string]: JSX.Element } = {
+  //   monto: <Monto register={register} />,
+  // };
   if (!tipo) return null;
+  if (!option) return null;
 
   if (option.tipo === 'instruccion-monto') {
     const subProperties = option.properties.tipo;
 
-    return (
-      <Monto
-        placeholder={subProperties.placeholder}
-        {...register(subProperties.id)}
-      />
-    );
+    return <Monto register={register} id={subProperties.id} />;
   }
 
-  if (!DICT[tipo]) return null;
+  if (option.tipo === 'instruccion-input') {
+    const subProperties = option.properties.tipo;
 
-  return DICT[tipo];
+    return <PercentageInput register={register} id={subProperties.id} />;
+  }
+
+  // if (!DICT[tipo]) return null;
+
+  // return DICT[tipo];
 };
 
-const option: Option = {
-  label: 'Misión con meta de compra (llegar a un monto de compra)',
-  id: 'instruccion-monto-mision',
-  tipo: 'instruccion-monto',
-  properties: {
-    message: 'title ...',
-    placeholder: 'Instrucción',
-    tipo: {
-      id: 'monto-mision-instruccion-monto-mision',
-      placeholder: 'Monto de compra',
+const optionsModuloMision: Option[] = [
+  {
+    label: 'Misión con meta de compra (llegar a un monto de compra)',
+    id: 'disponible',
+    tipo: 'instruccion-monto',
+    properties: {
+      message: 'title ...',
+      placeholder: 'Instrucción',
+      tipo: {
+        id: 'monto-mision-instruccion-monto-mision',
+        placeholder: 'Monto de compra',
+      },
     },
   },
-};
+  {
+    label: 'Misión con meta de compra (llegar a un monto de compra)',
+    id: 'archivado',
+    tipo: 'instruccion-input',
+    properties: {
+      message: 'title ...',
+      placeholder: 'Instrucción',
+      tipo: {
+        id: 'instruccion-input-instruccion',
+        placeholder: 'Monto de compra',
+      },
+    },
+  },
+];
 
 export const FormPrueba = ({
   filter,
@@ -110,6 +145,17 @@ export const FormPrueba = ({
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
 
   const optionEstado = watch('estado');
+  console.log('optionEstado', optionEstado);
+
+  const calculateOption = (optionIdSeleccionado: string, options: Option[]) => {
+    const optionEncontrado = options.find(
+      (option) => option.id === optionIdSeleccionado,
+    );
+    return optionEncontrado;
+  };
+
+  const optionModuloMision = calculateOption(optionEstado, optionsModuloMision);
+  console.log('optionModuloMision', optionModuloMision);
 
   return (
     <div>
@@ -124,7 +170,11 @@ export const FormPrueba = ({
           {(estado) => <SelectItem key={estado.key}>{estado.label}</SelectItem>}
         </Select>
         {/* NUEVO COMPONENTE */}
-        {Factory({ register, tipo: optionEstado, option: option })}
+        {Factory({
+          register,
+          tipo: optionEstado,
+          option: optionModuloMision,
+        })}
         {/* NUEVO COMPONENTE */}
 
         <Spacer y={1} />
