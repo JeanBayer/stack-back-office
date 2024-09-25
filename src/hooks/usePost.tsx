@@ -1,29 +1,16 @@
 import { PostService } from '@/services';
 import { useStore } from '@/store';
 import { Post, PostResponse } from '@/types';
-import { Constants } from '@/utils';
-import { keepPreviousData, QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Constants, ErrorUtil, QueryClientUtil } from '@/utils';
+import {
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { useShallow } from 'zustand/react/shallow';
 import { toast } from 'sonner';
-
-const rollbackOptimisticUpdate = (
-  queryClient: QueryClient,
-  queryKey: readonly unknown[],
-  context: { previousData: PostResponse | null | undefined }
-) => {
-  if (context?.previousData) {
-    queryClient.setQueryData(queryKey, context.previousData);
-  } else {
-    handleError('Rollback fallido: No se encontró previousData en el contexto.');
-  }
-};
-
-// Función auxiliar para manejar errores
-const handleError = (message: string): void => {
-  console.error(message);
-  toast.error(message);
-};
+import { useShallow } from 'zustand/react/shallow';
 
 export const usePost = () => {
   const queryClient = useQueryClient();
@@ -59,7 +46,7 @@ export const usePost = () => {
       navigate('/posts');
     },
     onError: () => {
-      handleError(`Error al crear el post`)
+      ErrorUtil.handleError(`Error al crear el post`);
     },
   });
 
@@ -71,7 +58,10 @@ export const usePost = () => {
     },
     onMutate: async (updatedPost) => {
       if (selectedPostId) {
-        const previousPost = queryClient.getQueryData<PostResponse>(['post', selectedPostId]);
+        const previousPost = queryClient.getQueryData<PostResponse>([
+          'post',
+          selectedPostId,
+        ]);
         queryClient.setQueryData(['post', selectedPostId], {
           ...previousPost,
           ...updatedPost,
@@ -81,9 +71,11 @@ export const usePost = () => {
       return { previousData: null }; // Aseguramos que el contexto tenga un valor
     },
     onError: (__err, __updatedPost, context) => {
-      if (context?.previousData) {
-        rollbackOptimisticUpdate(queryClient, ['post', selectedPostId], context);
-      }
+      QueryClientUtil.rollbackOptimisticUpdate(
+        queryClient,
+        ['post', selectedPostId!],
+        context,
+      );
       toast.error('Error al actualizar el post');
     },
     onSuccess: () => {
@@ -104,24 +96,25 @@ export const usePost = () => {
       await queryClient.cancelQueries({ queryKey: ['posts'] });
 
       // Captura el estado anterior
-      const previousPosts = queryClient.getQueryData<PostResponse>(['posts']);
+      const previousPosts = QueryClientUtil.getQueryData<PostResponse>(
+        queryClient,
+        ['posts'],
+      );
       if (previousPosts) {
         // Filtra el post eliminado optimistamente
-        queryClient.setQueryData(['posts'], {
+        const data = {
           ...previousPosts,
           items: previousPosts.items.filter((post) => post.id !== postId),
-        });
+        };
+        QueryClientUtil.setQueryData(queryClient, ['posts'], data);
       }
 
       return { previousData: previousPosts };
     },
     onError: (_, __, context) => {
-      if (context?.previousData) {
-        rollbackOptimisticUpdate(queryClient, ['posts'], context);
-      } else {
-        handleError('Error en la eliminación: No se pudo realizar el rollback.');
-      }
+      QueryClientUtil.rollbackOptimisticUpdate(queryClient, ['posts'], context);
     },
+
     onSuccess: () => {
       toast.success('Post eliminado correctamente');
       queryClient.invalidateQueries({ queryKey: ['posts'] });

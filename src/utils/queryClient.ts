@@ -1,4 +1,8 @@
+import { ErrorUtil } from '@/utils';
 import { QueryClient } from '@tanstack/react-query';
+interface ContextWithPreviousData {
+  previousData: unknown;
+}
 
 export class QueryClientUtil {
   public static extractQueryKeys(queryClient: QueryClient, key: string[]) {
@@ -24,5 +28,20 @@ export class QueryClientUtil {
     const queryKeyPosts = this.extractQueryKeys(queryClient, key);
     const query = queryClient.setQueryData<T>(queryKeyPosts, data);
     return query;
+  }
+
+  public static rollbackOptimisticUpdate<T extends ContextWithPreviousData>(
+    queryClient: QueryClient,
+    key: string[],
+    context: T | undefined,
+  ) {
+    const queryKeyPosts = this.extractQueryKeys(queryClient, key);
+    if (context?.previousData) {
+      queryClient.setQueryData(queryKeyPosts, context.previousData);
+    } else {
+      ErrorUtil.handleError(
+        'Rollback fallido: No se encontró previousData en el contexto.',
+      );
+    }
   }
 }
