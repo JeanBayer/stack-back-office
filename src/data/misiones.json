@@ -1,0 +1,51 @@
+{
+  "label": "Mision",
+  "placeholder": "Tipo de misión",
+  "options": [
+    {
+      "label": "Misión simple (una sola acción)",
+      "id": "instruccion-mision",
+      "tipo": "instruccion-simple",
+      "properties": {
+        "message": "texto dummy",
+        "placeholder": "Instrucción"
+      }
+    },
+    {
+      "label": "Misión con pasos (hacer una misma acción más de una vez)",
+      "id": "instruccion-pasos-mision",
+      "tipo": "instruccion-pasos",
+      "properties": {
+        "message": "texto dummy",
+        "placeholder": "instruccion",
+        "tipo": {
+          "placeholder": "Cantidad de pasos",
+          "id": "cantidad-pasos-mision + instruccion-pasos-mision",
+          "values": [
+            {
+              "id": 1,
+              "label": "1 paso"
+            },
+            {
+              "id": 2,
+              "label": "2 paso"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "Misión con meta de compra (llegar a un monto de compra)",
+      "id": "instruccion-monto-mision",
+      "tipo": "instruccion-monto",
+      "properties": {
+        "message": "title ...",
+        "placeholder": "Instrucción",
+        "tipo": {
+          "id": "monto-mision-instruccion-monto-mision",
+          "placeholder": "Monto de compra"
+        }
+      }
+    }
+  ]
+}
