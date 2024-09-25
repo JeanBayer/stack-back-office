@@ -26,7 +26,7 @@ export const PruebaPage = () => {
   // }
 
   async function handleSubmit(data: Filter) {
-    console.log('data', data);
+    console.log('data:::', data);
     // setFilterPost(data);
     // updateSearchParams(data);
   }
