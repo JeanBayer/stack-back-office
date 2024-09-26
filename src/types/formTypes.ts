@@ -1,34 +1,27 @@
+import { DynamicId, FieldsType, FilterPrueba, Status } from '@/types';
 import { UseFormRegister } from 'react-hook-form';
-import { Filter, Status } from '@/types';
 
 export interface FormFilterProps {
-  filter?: Filter;
+  filter?: FilterPrueba;
   status: Status[];
-  onSubmit: (updatedPost: Filter) => void;
+  onSubmit: (updatedPost: FilterPrueba) => void;
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
 }
 
 export interface Option {
   label: string;
-  id: string;
-  tipo: string;
+  id: DynamicId;
+  tipo: FieldsType;
   properties?: {
-    message: string;
-    placeholder: string;
-    tipo?: {
-      id: string;
-      placeholder?: string;
-      values?: Array<{ id: number; label: string }>;
-    };
+    id?: DynamicId;
+    placeholder?: string;
+    message?: string;
+    values?: Array<{ id: string; label: string }>;
   };
 }
 
 export interface FormComponentProps {
-  register: UseFormRegister<Filter>;
-  subProperties?: {
-    id: string;
-    placeholder?: string;
-    values?: Array<{ id: number; label: string }>;
-  };
+  register: UseFormRegister<FilterPrueba>;
+  option?: Option;
 }

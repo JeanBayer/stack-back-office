@@ -1,9 +1,9 @@
 import { FormComponentProps, Option } from '@/types';
-import {FormRegistry} from './FormRegistry';
+import { FormRegistry } from './FormRegistry';
 
 interface FactoryProps {
   register: FormComponentProps['register'];
-  option: Option | undefined;
+  option?: Option;
 }
 
 export const FormFactory = ({ register, option }: FactoryProps) => {
@@ -13,10 +13,5 @@ export const FormFactory = ({ register, option }: FactoryProps) => {
 
   if (!FormComponent) return null;
 
-  return (
-    <FormComponent
-      register={register}
-      subProperties={option.properties?.tipo}
-    />
-  );
+  return <FormComponent register={register} option={option} />;
 };

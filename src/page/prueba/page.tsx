@@ -4,7 +4,7 @@ import {
   useStatus,
 } from '@/hooks';
 import { useStore } from '@/store';
-import { Filter } from '@/types';
+import { FilterPrueba } from '@/types';
 // import { ObjectUtil } from '@/utils';
 
 export const PruebaPage = () => {
@@ -25,7 +25,7 @@ export const PruebaPage = () => {
   //   setFilterPost(validParams.data);
   // }
 
-  async function handleSubmit(data: Filter) {
+  async function handleSubmit(data: FilterPrueba) {
     console.log('data:::', data);
     // setFilterPost(data);
     // updateSearchParams(data);
@@ -51,7 +51,7 @@ export const PruebaPage = () => {
       >
         <FormPrueba
           key={JSON.stringify(filterPost)}
-          filter={filterPost}
+          // filter={filterPost}
           status={statusWithAll}
           onSubmit={handleSubmit}
           isDisabledButton={statusQuery?.isLoading}

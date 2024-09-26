@@ -1,52 +1,48 @@
 import { Option } from '@/types';
-
+export const result = [
+  {
+    'modulo-mision': 'modulo-mision-meta',
+    'modulo-mision-dynamic': '1000',
+    'modulo-mision-instruccion': 'una instruccion',
+  },
+  {
+    'modulo-mision': 'modulo-mision-simple',
+    'modulo-mision-instruccion': 'una instruccion',
+  },
+  {
+    'modulo-mision': 'modulo-mision-pasos',
+    'modulo-mision-dynamic': '1',
+    'modulo-mision-instruccion': 'una instruccion',
+  },
+];
 export const optionsModuloMision: Option[] = [
   {
     label: 'Misión con meta de compra',
-    id: 'disponible',
+    id: 'modulo-mision-meta',
     tipo: 'instruccion-monto',
     properties: {
-      message: 'Complete los datos de la misión con meta de compra.',
-      placeholder: 'Ingrese los detalles',
-      tipo: {
-        id: 'monto-mision-instruccion-monto-mision',
-        placeholder: 'Monto de compra',
-      },
+      id: 'modulo-mision-dynamic',
+      placeholder: 'Monto de compra',
     },
   },
   {
     label: 'Misión simple (sin propiedades)',
-    id: 'simple',
-    tipo: 'simple',
+    id: 'modulo-mision-simple',
+    tipo: 'empty',
   },
-  {
-    label: 'Misión con meta de compra (llegar a un monto de compra)',
-    id: 'archivado',
-    tipo: 'instruccion-input',
-    properties: {
-      message: 'title ...',
-      placeholder: 'Instrucción',
-      tipo: {
-        id: 'instruccion-input-instruccion',
-        placeholder: 'Monto de compra',
-      },
-    },
-  },
+
   {
     label: 'Misión con instrucción de pasos',
-    id: 'pasos',
+    id: 'modulo-mision-pasos',
     tipo: 'instruccion-pasos',
     properties: {
+      id: 'modulo-mision-dynamic',
       message: 'Complete los pasos de la misión.',
       placeholder: 'Seleccione los pasos',
-      tipo: {
-        id: 'cantidad-pasos-mision-instruccion-pasos-mision',
-        placeholder: 'Cantidad de pasos',
-        values: [
-          { id: 1, label: '1 paso' },
-          { id: 2, label: '2 pasos' },
-        ],
-      },
+      values: [
+        { id: '1', label: '1 paso' },
+        { id: '2', label: '2 pasos' },
+      ],
     },
   },
 ];

@@ -1,12 +1,13 @@
-import { FormComponentProps } from '@/types';
+import { FieldsType, FormComponentProps } from '@/types';
 import { InstruccionInputForm } from './InstruccionInputForm';
-import { MontoForm } from './MontoForm'
+import { InstruccionMonto } from './MontoForm';
 import { PasosForm } from './pasosForm/PasosForm';
 import { SimpleForm } from './SimpleForm';
 
-export  const FormRegistry: Record<string, React.FC<FormComponentProps>> = {
-  'instruccion-monto': MontoForm,
+export const FormRegistry: Record<FieldsType, React.FC<FormComponentProps>> = {
+  'instruccion-monto': InstruccionMonto,
   'instruccion-input': InstruccionInputForm,
   'instruccion-pasos': PasosForm,
-  'simple': SimpleForm,
+  simple: SimpleForm,
+  empty: () => null,
 };

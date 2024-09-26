@@ -1,28 +1,22 @@
-import { Input, Spacer } from '@nextui-org/react';
 import { FormComponentProps } from '@/types';
-import { CantidadPasosInput } from './CantidadPasosInput';
-import { CantidadPasosSelect } from './CantidadPasosSelect'
+import { Select, SelectItem } from '@nextui-org/react';
 
-export const PasosForm = ({ register, subProperties }: FormComponentProps) => {
-  const { placeholder = 'Ingrese la instrucción', values = [] } = subProperties || {};
+export const PasosForm = ({ register, option }: FormComponentProps) => {
+  if (!option || !option?.properties?.id) return null;
 
-  const cantidadPasosComponents: Record<string, JSX.Element> = {
-    select: <CantidadPasosSelect values={values} register={register} />,
-    input: <CantidadPasosInput register={register} />,
-  };
-
-  const cantidadPasosKey = values.length > 0 ? 'select' : 'input';
+  const { id, placeholder, values } = option.properties;
 
   return (
     <div>
-      <Input
-        label="Instrucción"
+      <Select
+        label="Selecciona"
         placeholder={placeholder}
         className="max-w-xs"
-        {...register('cantidad-pasos-mision-instruccion-pasos-mision')}
-      />
-      <Spacer y={1} />
-      {cantidadPasosComponents[cantidadPasosKey]}
+        items={values}
+        {...register(id)}
+      >
+        {(pasos) => <SelectItem key={pasos.id}>{pasos.label}</SelectItem>}
+      </Select>
     </div>
   );
 };

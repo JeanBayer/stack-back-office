@@ -1,32 +1,22 @@
-import { useForm } from 'react-hook-form';
+import {
+  DynamicId,
+  FilterPrueba,
+  FilterSchemaPrueba,
+  FormFilterProps,
+  Option,
+} from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Select, SelectItem, Spacer, Spinner } from '@nextui-org/react';
-import { Filter, FilterSchema, FormFilterProps } from '@/types';
+import {
+  Button,
+  Input,
+  Select,
+  SelectItem,
+  Spacer,
+  Spinner,
+} from '@nextui-org/react';
+import { useForm } from 'react-hook-form';
 import { FormFactory } from './FormFactory';
 import { optionsModuloMision } from './dummy';
-
-const status = [
-  {
-    "id": "mlX0AYexSh4NPKZqtE4e",
-    "label": "Disponible",
-    "key": "disponible"
-  },
-  {
-    "id": "ujV4nR5tQqWGN9nYu3gV",
-    "label": "Archivado",
-    "key": "archivado"
-  },
-  {
-    "id": "xxxnR5tQqWGN9nYu3gV",
-    "label": "Pasos",
-    "key": "pasos"
-  },
-  {
-    "id": "aaanR5tQqWGN9nYu3gV",
-    "label": "Simple",
-    "key": "simple"
-  }
-]
 
 export const FormPrueba = ({
   filter,
@@ -39,40 +29,52 @@ export const FormPrueba = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Filter>({
-    resolver: zodResolver(FilterSchema),
+  } = useForm<FilterPrueba>({
+    resolver: zodResolver(FilterSchemaPrueba),
     mode: 'all',
     criteriaMode: 'all',
     defaultValues: filter,
   });
 
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
-  const optionEstado = watch('estado');
+  const optionModuloMision = watch('modulo-mision') as DynamicId;
 
-  const optionModuloMision = () => optionsModuloMision.find((option) => option.id === optionEstado);
-
-
+  function findOption(listOptions: Option[], optionModuloMision: DynamicId) {
+    return listOptions.find((option) => option.id === optionModuloMision);
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-gray-900">
+        <Input
+          label="Instruccion"
+          placeholder="Instruccion"
+          className="max-w-xs"
+          {...register('modulo-mision-instruccion')}
+          isInvalid={!!errors?.['modulo-mision-instruccion']}
+          errorMessage={errors?.['modulo-mision-instruccion']?.message}
+        />
+        <Spacer y={1} />
+
         <Select
           label="State"
           placeholder="Select a State"
           className="max-w-xs"
-          {...register('estado', { required: 'Seleccione una opción' })}
+          items={optionsModuloMision}
+          {...register('modulo-mision')}
         >
-          {status.map((estado) => (
-            <SelectItem key={estado.key} value={estado.key}>
-              {estado.label}
-            </SelectItem>
-          ))}
+          {(estado) => <SelectItem key={estado.id}>{estado.label}</SelectItem>}
         </Select>
-        {errors.estado && <p className="text-red-500">{errors.estado.message}</p>}
+        {errors?.['modulo-mision'] && (
+          <p className="text-red-500">{errors?.['modulo-mision'].message}</p>
+        )}
 
         <Spacer y={1} />
 
-        <FormFactory register={register} option={optionModuloMision()} />
+        <FormFactory
+          register={register}
+          option={findOption(optionsModuloMision, optionModuloMision)}
+        />
 
         <Spacer y={1} />
         <Button type="submit" color="primary" isDisabled={disabledButton}>
@@ -82,4 +84,3 @@ export const FormPrueba = ({
     </div>
   );
 };
-
