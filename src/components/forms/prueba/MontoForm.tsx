@@ -14,3 +14,5 @@ export const InstruccionMonto = ({ register, option }: FormComponentProps) => {
     />
   );
 };
+
+
