@@ -9,7 +9,7 @@ import {
   cn,
   Image,
   Input,
-  Radio,
+
   RadioGroup,
   Select,
   SelectItem,
@@ -24,6 +24,7 @@ import {
   optionsModuloMision,
   optionsModuloPremio,
 } from './dummy';
+import { useState } from 'react';
 
 type Generic = Record<string, string>;
 
@@ -45,7 +46,7 @@ export const FormPrueba = ({
     criteriaMode: 'all',
     defaultValues: filter,
   });
-
+  const [selected, setSelected] = useState<string | null>(null);
   function findOption(listOptions: Option[], optionModuloMision: string) {
     return listOptions.find((option) => option.id === optionModuloMision);
   }
@@ -60,6 +61,7 @@ export const FormPrueba = ({
     optionModuloIcono,
   );
 
+  
   return (
     <div className="m-0 mx-auto w-fit p-4">
       <form onSubmit={handleSubmit(onSubmit)} className="text-gray-900 w-fit">
@@ -154,27 +156,43 @@ export const FormPrueba = ({
                     isInvalid={!!errors?.[NameInputs.MODULO_ICONO]}
                     errorMessage={errors?.[NameInputs.MODULO_ICONO]?.message}
                     {...field}
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      setSelected(value);
+                      field.onChange(value); // Asegura la sincronización con react-hook-form
+                    }}
                     className="border-blue-600"
                   >
                     {optionsModuloIcono?.map((option) => (
-                      <Radio
+                      <div
                         key={option.id}
-                        value={option.id}
-                        classNames={{
-                          base: cn(
-                            'inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between',
-                            'flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 border-transparent',
-                            'data-[selected=true]:border-blue-600 data-[selected=true]:bg-blue-100',
-                          ), // no funciona
+                        className={cn(
+                          'inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between',
+                          'flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2',
+                          selected === option.id ? 'border-blue-600 bg-blue-100' : 'border-transparent'
+                        )}
+                        onClick={() => {
+                          setSelected(option.id);
+                          field.onChange(option.id); // Asegura la sincronización con react-hook-form
                         }}
                       >
+                        {/* Radio button oculto */}
+                        <input
+                          type="radio"
+                          name="custom-radio"
+                          value={option.id}
+                          checked={selected === option.id}
+                          onChange={() => setSelected(option.id)}
+                          className="hidden"
+                        />
                         <Image
                           src={option.properties?.values as string}
                           width={50}
                           height={50}
+                          alt={option.label}
                         />
-                        <p>{option?.label}</p>
-                      </Radio>
+                        <span>{option?.label}</span>
+                      </div>
                     ))}
                   </RadioGroup>
                   <div>
