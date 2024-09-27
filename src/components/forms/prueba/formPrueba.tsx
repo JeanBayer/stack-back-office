@@ -11,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { FormFactory } from './FormFactory';
-import { optionsModuloMision } from './dummy';
+import { optionsModuloAudiencia, optionsModuloMision } from './dummy';
 
 type Generic = Record<string, string>;
 
@@ -35,6 +35,7 @@ export const FormPrueba = ({
 
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
   const optionModuloMision = watch(NameInputs.MODULO_MISION);
+  const optionModuloAudiencia = watch(NameInputs.MODULO_AUDIENCIA);
 
   function findOption(listOptions: Option[], optionModuloMision: string) {
     return listOptions.find((option) => option.id === optionModuloMision);
@@ -62,7 +63,11 @@ export const FormPrueba = ({
           errorMessage={errors?.[NameInputs.MODULO_MISION]?.message}
           {...register(NameInputs.MODULO_MISION)}
         >
-          {(estado) => <SelectItem key={estado.id}>{estado.label}</SelectItem>}
+          {(optionModuloMision) => (
+            <SelectItem key={optionModuloMision.id}>
+              {optionModuloMision.label}
+            </SelectItem>
+          )}
         </Select>
         <Spacer y={1} />
         <FormFactory
@@ -71,7 +76,33 @@ export const FormPrueba = ({
         />
         {/*  MODULO MISION */}
 
+        <Spacer y={3} />
+
+        {/*  MODULO AUDIENCIA */}
+        <Select
+          label="Selecciona"
+          placeholder="Audiencia"
+          className="max-w-xs"
+          items={optionsModuloAudiencia}
+          isInvalid={!!errors?.[NameInputs.MODULO_AUDIENCIA]}
+          errorMessage={errors?.[NameInputs.MODULO_AUDIENCIA]?.message}
+          {...register(NameInputs.MODULO_AUDIENCIA)}
+        >
+          {(optionModuloAudiencia) => (
+            <SelectItem key={optionModuloAudiencia.id}>
+              {optionModuloAudiencia.label}
+            </SelectItem>
+          )}
+        </Select>
         <Spacer y={1} />
+        <FormFactory
+          register={register}
+          option={findOption(optionsModuloAudiencia, optionModuloAudiencia)}
+        />
+        {/*  MODULO AUDIENCIA */}
+
+        <Spacer y={3} />
+
         <Button type="submit" color="primary" isDisabled={disabledButton}>
           {isSubmitting ? <Spinner size="sm" color="secondary" /> : 'Search'}
         </Button>

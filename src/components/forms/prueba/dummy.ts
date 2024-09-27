@@ -15,6 +15,7 @@ export const result = [
     'modulo-mision-instruccion': 'una instruccion',
   },
 ];
+
 export const optionsModuloMision: Option[] = [
   {
     label: 'Misión con meta de compra',
@@ -43,6 +44,24 @@ export const optionsModuloMision: Option[] = [
         { id: '1', label: '1 paso' },
         { id: '2', label: '2 pasos' },
       ],
+    },
+  },
+];
+
+export const optionsModuloAudiencia: Option[] = [
+  {
+    label: 'Todos los usuarios',
+    id: 'modulo-audiencia-todos',
+    tipo: 'empty',
+  },
+  {
+    label: 'Personalizada',
+    id: 'modulo-audiencia-personalizada',
+    tipo: 'csv',
+    properties: {
+      id: 'modulo-audiencia-dynamic',
+      message: 'Adjunta un archivo csv',
+      placeholder: 'Presiona para agregar un archivo',
     },
   },
 ];

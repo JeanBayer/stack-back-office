@@ -1,4 +1,5 @@
 import { FieldsType, FormComponentProps } from '@/types';
+import { CSVForm } from './CSVForm';
 import { InstruccionInputForm } from './InstruccionInputForm';
 import { InstruccionMonto } from './MontoForm';
 import { PasosForm } from './pasosForm/PasosForm';
@@ -10,4 +11,5 @@ export const FormRegistry: Record<FieldsType, React.FC<FormComponentProps>> = {
   'instruccion-pasos': PasosForm,
   simple: SimpleForm,
   empty: () => null,
+  csv: CSVForm,
 };
