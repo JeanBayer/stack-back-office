@@ -1,5 +1,5 @@
 import { FilterSchemaPrueba, FormFilterProps, Option } from '@/types';
-import { Constants } from '@/utils';
+import { NameInputs } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -34,7 +34,7 @@ export const FormPrueba = ({
   });
 
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
-  const optionModuloMision = watch(Constants.NAME_INPUTS['modulo-mision']);
+  const optionModuloMision = watch(NameInputs.MODULO_MISION);
 
   function findOption(listOptions: Option[], optionModuloMision: string) {
     return listOptions.find((option) => option.id === optionModuloMision);
@@ -43,42 +43,33 @@ export const FormPrueba = ({
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)} className="text-gray-900">
+        {/*  MODULO MISION */}
         <Input
-          label="Instruccion"
-          placeholder="Instruccion"
+          label="Titulo"
+          placeholder="Titulo: Instrucción de la misión"
           className="max-w-xs"
-          {...register(Constants.NAME_INPUTS['modulo-mision-instruccion'])}
-          isInvalid={
-            !!errors?.[Constants.NAME_INPUTS['modulo-mision-instruccion']]
-          }
-          errorMessage={
-            errors?.[Constants.NAME_INPUTS['modulo-mision-instruccion']]
-              ?.message
-          }
+          isInvalid={!!errors?.[NameInputs.MODULO_MISION_INSTRUCCION]}
+          errorMessage={errors?.[NameInputs.MODULO_MISION_INSTRUCCION]?.message}
+          {...register(NameInputs.MODULO_MISION_INSTRUCCION)}
         />
         <Spacer y={1} />
-
         <Select
-          label="State"
-          placeholder="Select a State"
+          label="Selecciona"
+          placeholder="Tipo de misión"
           className="max-w-xs"
           items={optionsModuloMision}
-          {...register(Constants.NAME_INPUTS['modulo-mision'])}
+          isInvalid={!!errors?.[NameInputs.MODULO_MISION]}
+          errorMessage={errors?.[NameInputs.MODULO_MISION]?.message}
+          {...register(NameInputs.MODULO_MISION)}
         >
           {(estado) => <SelectItem key={estado.id}>{estado.label}</SelectItem>}
         </Select>
-        {errors?.[Constants.NAME_INPUTS['modulo-mision']] && (
-          <p className="text-red-500">
-            {errors?.[Constants.NAME_INPUTS['modulo-mision']]?.message}
-          </p>
-        )}
-
         <Spacer y={1} />
-
         <FormFactory
           register={register}
           option={findOption(optionsModuloMision, optionModuloMision)}
         />
+        {/*  MODULO MISION */}
 
         <Spacer y={1} />
         <Button type="submit" color="primary" isDisabled={disabledButton}>
