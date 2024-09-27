@@ -65,3 +65,27 @@ export const optionsModuloAudiencia: Option[] = [
     },
   },
 ];
+
+export const optionsModuloIcono: Option[] = [
+  {
+    label: 'Compra',
+    id: 'modulo-icono-compra',
+    tipo: 'radio-image',
+    properties: {
+      message: 'Cuando la misión está asociada a una compra en BciPlus+',
+      placeholder: 'Compra:',
+      values: 'https://cdn-icons-png.flaticon.com/512/25/25236.png',
+    },
+  },
+  {
+    label: 'Tarjeta',
+    id: 'modulo-icono-tarjeta',
+    tipo: 'radio-image',
+    properties: {
+      message:
+        'Cuando la misión está asociada a una compra con Tarjeta BciPlus+',
+      placeholder: 'Tarjeta:',
+      values: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
+    },
+  },
+];

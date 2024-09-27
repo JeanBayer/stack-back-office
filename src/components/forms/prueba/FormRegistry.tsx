@@ -12,4 +12,5 @@ export const FormRegistry: Record<FieldsType, React.FC<FormComponentProps>> = {
   simple: SimpleForm,
   empty: () => null,
   csv: CSVForm,
+  'radio-image': () => null,
 };

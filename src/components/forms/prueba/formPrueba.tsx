@@ -3,15 +3,23 @@ import { NameInputs } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
+  cn,
+  Image,
   Input,
+  Radio,
+  RadioGroup,
   Select,
   SelectItem,
   Spacer,
   Spinner,
 } from '@nextui-org/react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { FormFactory } from './FormFactory';
-import { optionsModuloAudiencia, optionsModuloMision } from './dummy';
+import {
+  optionsModuloAudiencia,
+  optionsModuloIcono,
+  optionsModuloMision,
+} from './dummy';
 
 type Generic = Record<string, string>;
 
@@ -22,6 +30,7 @@ export const FormPrueba = ({
   isSubmitting,
 }: FormFilterProps<Generic>) => {
   const {
+    control,
     watch,
     register,
     handleSubmit,
@@ -33,13 +42,18 @@ export const FormPrueba = ({
     defaultValues: filter,
   });
 
-  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
-  const optionModuloMision = watch(NameInputs.MODULO_MISION);
-  const optionModuloAudiencia = watch(NameInputs.MODULO_AUDIENCIA);
-
   function findOption(listOptions: Option[], optionModuloMision: string) {
     return listOptions.find((option) => option.id === optionModuloMision);
   }
+
+  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
+  const optionModuloMision = watch(NameInputs.MODULO_MISION);
+  const optionModuloAudiencia = watch(NameInputs.MODULO_AUDIENCIA);
+  const optionModuloIcono = watch(NameInputs.MODULO_ICONO);
+  const selectedOptionMOduloIcono = findOption(
+    optionsModuloIcono,
+    optionModuloIcono,
+  );
 
   return (
     <div>
@@ -100,6 +114,53 @@ export const FormPrueba = ({
           option={findOption(optionsModuloAudiencia, optionModuloAudiencia)}
         />
         {/*  MODULO AUDIENCIA */}
+        <Spacer y={3} />
+
+        <Controller
+          name={NameInputs.MODULO_ICONO}
+          control={control}
+          render={({ field }) => (
+            <div>
+              <RadioGroup
+                label="Selecciona un ícono para acompañar la misión"
+                orientation="horizontal"
+                isInvalid={!!errors?.[NameInputs.MODULO_ICONO]}
+                errorMessage={errors?.[NameInputs.MODULO_ICONO]?.message}
+                {...field}
+                className="border-blue-600"
+              >
+                {optionsModuloIcono?.map((option) => (
+                  <Radio
+                    key={option.id}
+                    value={option.id}
+                    classNames={{
+                      base: cn(
+                        'inline-flex m-0 bg-content1 hover:bg-content2 items-center justify-between',
+                        'flex-row-reverse max-w-[300px] cursor-pointer rounded-lg gap-4 p-4 border-2 bg-slate-300 border-blue-600',
+                        'data-[selected=true]:border-blue-600',
+                      ), // no funciona
+                    }}
+                  >
+                    <Image
+                      src={option.properties?.values as string}
+                      width={50}
+                      height={50}
+                    />
+                    <p>{option?.label}</p>
+                  </Radio>
+                ))}
+              </RadioGroup>
+              <div>
+                {selectedOptionMOduloIcono?.properties?.message && (
+                  <p>
+                    {selectedOptionMOduloIcono?.properties?.placeholder}{' '}
+                    {selectedOptionMOduloIcono?.properties?.message}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        />
 
         <Spacer y={3} />
 

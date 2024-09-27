@@ -19,7 +19,7 @@ export interface Option {
     id?: string;
     placeholder?: string;
     message?: string;
-    values?: Array<{ id: string; label: string }>;
+    values?: Array<{ id: string; label: string }> | string;
   };
 }
 

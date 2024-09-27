@@ -3,8 +3,8 @@ import { Select, SelectItem } from '@nextui-org/react';
 
 export const PasosForm = ({ register, option }: FormComponentProps) => {
   if (!option || !option?.properties?.id) return null;
-
   const { id, placeholder, values } = option.properties;
+  if (typeof values === 'string') return null;
 
   return (
     <div>

@@ -28,4 +28,5 @@ export class NameInputs {
   public static readonly MODULO_MISION_INSTRUCCION =
     'modulo-mision-instruccion';
   public static readonly MODULO_AUDIENCIA = 'modulo-audiencia';
+  public static readonly MODULO_ICONO = 'modulo-icono';
 }

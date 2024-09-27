@@ -6,6 +6,7 @@ export type FieldsType =
   | 'instruccion-pasos'
   | 'csv'
   | 'simple'
+  | 'radio-image'
   | 'empty';
 
 export const MisionModuleSchema = z.object({
@@ -18,6 +19,7 @@ export const MisionModuleSchema = z.object({
   'modulo-audiencia-dynamic': z
     .union([z.string().min(1), z.string().min(10)])
     .optional(),
+  'modulo-icono': z.string().min(1),
 });
 
 // TODO: agregar un tipo merge para ir concatenando los Schema de otros modulos
