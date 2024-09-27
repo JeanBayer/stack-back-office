@@ -2,7 +2,7 @@ import { FormComponentProps } from '@/types';
 import { Input } from '@nextui-org/react';
 import { useState } from 'react';
 
-export const MontoForm = ({ register, option }: FormComponentProps) => {
+export const NumeroForm = ({ register, option }: FormComponentProps) => {
   const [messageModified, setMessageModified] = useState<string | undefined>(
     option?.properties?.message,
   );
@@ -18,9 +18,8 @@ export const MontoForm = ({ register, option }: FormComponentProps) => {
   return (
     <>
       <Input
-        label="Monto"
+        label="Numero"
         placeholder={placeholder}
-        startContent="$"
         className="max-w-xs"
         {...register(id, {
           onChange: (e) => {

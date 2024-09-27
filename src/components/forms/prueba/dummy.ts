@@ -20,7 +20,7 @@ export const optionsModuloMision: Option[] = [
   {
     label: 'Misión con meta de compra',
     id: 'modulo-mision-meta',
-    tipo: 'instruccion-monto',
+    tipo: 'monto',
     properties: {
       id: 'modulo-mision-dynamic',
       placeholder: 'Monto de compra',
@@ -86,6 +86,41 @@ export const optionsModuloIcono: Option[] = [
         'Cuando la misión está asociada a una compra con Tarjeta BciPlus+',
       placeholder: 'Tarjeta:',
       values: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
+    },
+  },
+];
+
+export const optionsModuloPremio: Option[] = [
+  {
+    label: 'Monto fijo',
+    id: 'modulo-premio-monto-fijo',
+    tipo: 'monto',
+    properties: {
+      id: 'modulo-premio-dynamic',
+      placeholder: 'Monto del premio',
+      message: 'Visualizacion: Conseguirás un premio de $[XX] de cashback',
+    },
+  },
+  {
+    label: 'Cashback extra generado por la compra',
+    id: 'modulo-premio-cashback-extra-compra',
+    tipo: 'porcentaje',
+    properties: {
+      id: 'modulo-premio-dynamic',
+      placeholder: 'Porcentaje de aumento',
+      message:
+        'Visualizacion: Conseguirás [XX]% extra de cashback sobre el total de tu compra',
+    },
+  },
+  {
+    label: 'Cashback extra por pago con Tarjeta BciPlus+',
+    id: 'modulo-premio-cashback-extra-tarjeta',
+    tipo: 'numero',
+    properties: {
+      id: 'modulo-premio-dynamic',
+      placeholder: 'Numero',
+      message:
+        'Visualizacion: Lograrás que tu tarjeta genere [XX] veces más cashback por tu compra',
     },
   },
 ];

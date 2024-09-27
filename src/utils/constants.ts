@@ -25,8 +25,12 @@ export class Constants {
 
 export class NameInputs {
   public static readonly MODULO_MISION = 'modulo-mision';
+  public static readonly MODULO_MISION_DYNAMIC = 'modulo-mision-dynamic';
   public static readonly MODULO_MISION_INSTRUCCION =
     'modulo-mision-instruccion';
   public static readonly MODULO_AUDIENCIA = 'modulo-audiencia';
+  public static readonly MODULO_AUDIENCIA_DYNAMIC = 'modulo-audiencia-dynamic';
   public static readonly MODULO_ICONO = 'modulo-icono';
+  public static readonly MODULO_PREMIO = 'modulo-premio';
+  public static readonly MODULO_PREMIO_DYNAMIC = 'modulo-premio-dynamic';
 }
