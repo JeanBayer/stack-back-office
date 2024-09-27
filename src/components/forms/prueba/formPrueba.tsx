@@ -1,10 +1,5 @@
-import {
-  DynamicId,
-  FilterPrueba,
-  FilterSchemaPrueba,
-  FormFilterProps,
-  Option,
-} from '@/types';
+import { FilterSchemaPrueba, FormFilterProps, Option } from '@/types';
+import { Constants } from '@/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -18,18 +13,20 @@ import { useForm } from 'react-hook-form';
 import { FormFactory } from './FormFactory';
 import { optionsModuloMision } from './dummy';
 
+type Generic = Record<string, string>;
+
 export const FormPrueba = ({
   filter,
   onSubmit,
   isDisabledButton = false,
   isSubmitting,
-}: FormFilterProps) => {
+}: FormFilterProps<Generic>) => {
   const {
     watch,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FilterPrueba>({
+  } = useForm<Generic>({
     resolver: zodResolver(FilterSchemaPrueba),
     mode: 'all',
     criteriaMode: 'all',
@@ -37,9 +34,9 @@ export const FormPrueba = ({
   });
 
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
-  const optionModuloMision = watch('modulo-mision') as DynamicId;
+  const optionModuloMision = watch(Constants.NAME_INPUTS['modulo-mision']);
 
-  function findOption(listOptions: Option[], optionModuloMision: DynamicId) {
+  function findOption(listOptions: Option[], optionModuloMision: string) {
     return listOptions.find((option) => option.id === optionModuloMision);
   }
 
@@ -50,9 +47,14 @@ export const FormPrueba = ({
           label="Instruccion"
           placeholder="Instruccion"
           className="max-w-xs"
-          {...register('modulo-mision-instruccion')}
-          isInvalid={!!errors?.['modulo-mision-instruccion']}
-          errorMessage={errors?.['modulo-mision-instruccion']?.message}
+          {...register(Constants.NAME_INPUTS['modulo-mision-instruccion'])}
+          isInvalid={
+            !!errors?.[Constants.NAME_INPUTS['modulo-mision-instruccion']]
+          }
+          errorMessage={
+            errors?.[Constants.NAME_INPUTS['modulo-mision-instruccion']]
+              ?.message
+          }
         />
         <Spacer y={1} />
 
@@ -61,12 +63,14 @@ export const FormPrueba = ({
           placeholder="Select a State"
           className="max-w-xs"
           items={optionsModuloMision}
-          {...register('modulo-mision')}
+          {...register(Constants.NAME_INPUTS['modulo-mision'])}
         >
           {(estado) => <SelectItem key={estado.id}>{estado.label}</SelectItem>}
         </Select>
-        {errors?.['modulo-mision'] && (
-          <p className="text-red-500">{errors?.['modulo-mision'].message}</p>
+        {errors?.[Constants.NAME_INPUTS['modulo-mision']] && (
+          <p className="text-red-500">
+            {errors?.[Constants.NAME_INPUTS['modulo-mision']]?.message}
+          </p>
         )}
 
         <Spacer y={1} />

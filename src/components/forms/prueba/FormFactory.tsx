@@ -1,12 +1,7 @@
-import { FormComponentProps, Option } from '@/types';
+import { FormComponentProps } from '@/types';
 import { FormRegistry } from './FormRegistry';
 
-interface FactoryProps {
-  register: FormComponentProps['register'];
-  option?: Option;
-}
-
-export const FormFactory = ({ register, option }: FactoryProps) => {
+export const FormFactory = ({ register, option }: FormComponentProps) => {
   if (!option) return null;
 
   const FormComponent = FormRegistry[option.tipo];

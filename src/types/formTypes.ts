@@ -1,27 +1,29 @@
-import { DynamicId, FieldsType, FilterPrueba, Status } from '@/types';
-import { UseFormRegister } from 'react-hook-form';
+import { FieldsType, Generic, Status } from '@/types';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
-export interface FormFilterProps {
-  filter?: FilterPrueba;
+export interface FormFilterProps<T> {
+  filter?: T;
   status: Status[];
-  onSubmit: (updatedPost: FilterPrueba) => void;
+  onSubmit: (updatedPost: T) => void;
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
 }
 
+export type ExtendedFormFilterProps<T, K> = FormFilterProps<T> & K;
+
 export interface Option {
   label: string;
-  id: DynamicId;
+  id: string;
   tipo: FieldsType;
   properties?: {
-    id?: DynamicId;
+    id?: string;
     placeholder?: string;
     message?: string;
     values?: Array<{ id: string; label: string }>;
   };
 }
 
-export interface FormComponentProps {
-  register: UseFormRegister<FilterPrueba>;
+export interface FormComponentProps<T extends FieldValues = Generic> {
+  register: UseFormRegister<T>;
   option?: Option;
 }
