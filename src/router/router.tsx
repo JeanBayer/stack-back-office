@@ -6,6 +6,7 @@ import {
   PruebaPage,
 } from '@/page';
 import { PostsPage } from '@tabla-simple/page';
+import { TablaCompleja } from '@tabla-compleja/page';
 import { Route, Routes } from 'react-router-dom';
 
 export const CustomRouter = () => {
@@ -29,6 +30,7 @@ export const CustomRouter = () => {
         />
         <Route path="/prueba" element={<PruebaPage />} />
         <Route path="/tabla-simple" element={<PostsPage />} />
+        <Route path="/tabla-compleja" element={<TablaCompleja />} />
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/posts/:id/edit" element={<PostEdit />} />
         <Route path="/posts/create" element={<PostCreate />} />

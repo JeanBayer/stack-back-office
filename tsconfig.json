@@ -17,6 +17,7 @@
     "paths": {
       "@/*": ["./*"],
       "@tabla-simple/*": ["./examples/tabla-simple/*"],
+      "@tabla-compleja/*": ["./examples/tabla-compleja/*"],
     }
   },
   "include": ["src"]
