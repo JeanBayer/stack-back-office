@@ -6,18 +6,13 @@ export const NavbarList = () => {
     <Navbar>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" to="/tabla-simple">
-            tabla-simple
+          <Link color="foreground" to="/posts">
+            Posts
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" to="/tabla-compleja">
-            tabla-compleja
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" to="/form-dinamico-back">
-            form-dinamico-back
+          <Link color="foreground" to="/prueba">
+            prueba
           </Link>
         </NavbarItem>
       </NavbarContent>

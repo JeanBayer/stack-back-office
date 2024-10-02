@@ -18,6 +18,7 @@
       "@/*": ["./*"],
       "@tabla-simple/*": ["./examples/tabla-simple/*"],
       "@tabla-compleja/*": ["./examples/tabla-compleja/*"],
+      "@form-dinamico-back/*": ["./examples/form-dinamico-back/*"],
     }
   },
   "include": ["src"]
