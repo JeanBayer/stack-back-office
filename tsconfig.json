@@ -15,7 +15,8 @@
     "allowImportingTsExtensions": true,
     "baseUrl": "./src", // Establece la base de las rutas relativas como la raíz del proyecto
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@tabla-simple/*": ["./examples/tabla-simple/*"],
     }
   },
   "include": ["src"]

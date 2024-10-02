@@ -3,9 +3,9 @@ import {
   PostCreate,
   PostDetail,
   PostEdit,
-  PostsPage,
   PruebaPage,
 } from '@/page';
+import { PostsPage } from '@tabla-simple/page';
 import { Route, Routes } from 'react-router-dom';
 
 export const CustomRouter = () => {
@@ -28,7 +28,7 @@ export const CustomRouter = () => {
           }
         />
         <Route path="/prueba" element={<PruebaPage />} />
-        <Route path="/posts" element={<PostsPage />} />
+        <Route path="/tabla-simple" element={<PostsPage />} />
         <Route path="/posts/:id" element={<PostDetail />} />
         <Route path="/posts/:id/edit" element={<PostEdit />} />
         <Route path="/posts/create" element={<PostCreate />} />
