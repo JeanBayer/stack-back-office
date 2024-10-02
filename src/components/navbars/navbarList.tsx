@@ -21,6 +21,11 @@ export const NavbarList = () => {
             form-dinamico-back
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" to="/form-dinamico-back">
+            form-dinamico-estatico
+          </Link>
+        </NavbarItem>
         <NavbarItem className="flex items-center">
           <p>form-simple</p>
           <Actions

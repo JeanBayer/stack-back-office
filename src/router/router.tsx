@@ -1,5 +1,6 @@
 import { HomeLayout } from '@/page';
 import { FormDinamicoBackPage } from '@form-dinamico-back/page';
+import { FormDinamicoEstaticoPage } from '@form-dinamico-estatico/page';
 import { PostCreate, PostDetail, PostEdit } from '@form-simple/page';
 import { TablaCompleja } from '@tabla-compleja/page';
 import { PostsPage } from '@tabla-simple/page';
@@ -25,6 +26,10 @@ export const CustomRouter = () => {
           }
         />
         <Route path="/form-dinamico-back" element={<FormDinamicoBackPage />} />
+        <Route
+          path="/form-dinamico-estatico"
+          element={<FormDinamicoEstaticoPage />}
+        />
         <Route path="/tabla-simple" element={<PostsPage />} />
         <Route path="/tabla-compleja" element={<TablaCompleja />} />
         <Route path="/form-simple/posts/:id" element={<PostDetail />} />
