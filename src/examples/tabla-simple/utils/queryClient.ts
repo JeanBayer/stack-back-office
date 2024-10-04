@@ -1,4 +1,4 @@
-import { ErrorUtil } from '@/utils';
+import { ErrorUtil } from '@tabla-simple/utils';
 import { QueryClient } from '@tanstack/react-query';
 interface ContextWithPreviousData {
   previousData: unknown;

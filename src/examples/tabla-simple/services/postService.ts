@@ -1,19 +1,12 @@
 import { api } from '@tabla-simple/api';
-import {
-  Filter,
-  type Paginate,
-  type Post,
-  type PostResponse,
-  PostSchema,
-  Status,
-} from '@tabla-simple/types';
-import { ObjectUtil } from '@tabla-simple/utils';
+import { Filter, Paginate, PostResponse, Status } from '@tabla-simple/types';
 
 type GetPosts = {
   page: Paginate['page'];
   perPage: Paginate['perPage'];
   filter: Partial<Filter>;
 };
+
 export class PostService {
   public static async getPosts({
     page,
@@ -37,41 +30,6 @@ export class PostService {
       return response.data;
     } catch (error) {
       console.error('Error in getPosts method', error);
-      throw error;
-    }
-  }
-
-  public static async getPostById(postId: string): Promise<Post> {
-    try {
-      const response = await api.get<Post>(`/items/${postId}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error in getPostById method', error);
-      throw error;
-    }
-  }
-
-  public static async createPost(post: Omit<Post, 'id'>): Promise<Post> {
-    try {
-      const validPost = PostSchema.parse(post);
-      const postFormData = ObjectUtil.toFormData(validPost);
-      const response = await api.post<Post>('/items', postFormData);
-      return response.data;
-    } catch (error) {
-      console.error('Error in createPost method', error);
-      throw error;
-    }
-  }
-
-  public static async updatePost(post: Partial<Post>): Promise<Post> {
-    try {
-      const { id, ...restPost } = post;
-      const validPost = PostSchema.partial().parse(restPost);
-      const postFormData = ObjectUtil.toFormData(validPost);
-      const response = await api.patch<Post>(`/items/${id}`, postFormData);
-      return response.data;
-    } catch (error) {
-      console.error('Error in updatePost method', error);
       throw error;
     }
   }

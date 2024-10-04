@@ -1,6 +1,6 @@
-import { Label } from '@tabla-simple/components';
-import { useHandleImageFile } from '@tabla-simple/hooks';
-import { type ImageInput } from '@tabla-simple/types';
+import { Label } from '@form-dinamico-back/components';
+import { useHandleImageFile } from '@form-dinamico-back/hooks';
+import { type ImageInput } from '@form-dinamico-back/types';
 import { Image, Input } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';

@@ -1,90 +1,13 @@
 import { PostService } from '@tabla-simple/services';
-import { useStore } from '@tabla-simple/store';
-import { Post, PostResponse } from '@tabla-simple/types';
-import { Constants, ErrorUtil, QueryClientUtil } from '@tabla-simple/utils';
-import {
-  keepPreviousData,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { PostResponse } from '@tabla-simple/types';
+import { QueryClientUtil } from '@tabla-simple/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
-import { useShallow } from 'zustand/react/shallow';
 
 export const usePost = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-
-  const { selectedPostId } = useStore(
-    useShallow((state) => ({
-      selectedPostId: state.selectedPostId,
-    })),
-  );
-
-  // Consulta para obtener un post
-  const postQuery = useQuery({
-    queryKey: ['post', selectedPostId],
-    queryFn: async () => {
-      if (!selectedPostId) throw new Error('No post selected');
-      return await PostService.getPostById(selectedPostId);
-    },
-    enabled: !!selectedPostId,
-    placeholderData: keepPreviousData,
-    staleTime: Constants?.CACHE_TIME_GET_POST,
-  });
-
-  // Crear un nuevo post
-  const postCreate = useMutation({
-    mutationFn: async (post: Omit<Post, 'id'>) => {
-      toast.info('Creando post...');
-      return await PostService.createPost(post);
-    },
-    onSuccess: () => {
-      toast.success('Post creado correctamente');
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-      navigate('/posts');
-    },
-    onError: () => {
-      ErrorUtil.handleError(`Error al crear el post`);
-    },
-  });
-
-  // Actualizar un post existente con renderizado optimista
-  const postUpdate = useMutation({
-    mutationFn: async (post: Partial<Post>) => {
-      toast.info('Actualizando post...');
-      return await PostService.updatePost(post);
-    },
-    onMutate: async (updatedPost) => {
-      if (selectedPostId) {
-        const previousPost = queryClient.getQueryData<PostResponse>([
-          'post',
-          selectedPostId,
-        ]);
-        queryClient.setQueryData(['post', selectedPostId], {
-          ...previousPost,
-          ...updatedPost,
-        });
-        return { previousData: previousPost };
-      }
-      return { previousData: null }; // Aseguramos que el contexto tenga un valor
-    },
-    onError: (__err, __updatedPost, context) => {
-      QueryClientUtil.rollbackOptimisticUpdate(
-        queryClient,
-        ['post', selectedPostId!],
-        context,
-      );
-      toast.error('Error al actualizar el post');
-    },
-    onSuccess: () => {
-      toast.success('Post actualizado correctamente');
-      queryClient.invalidateQueries({ queryKey: ['post', selectedPostId] });
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-      navigate('/posts');
-    },
-  });
 
   // Eliminar un post con renderizado optimista
   const postDelete = useMutation({
@@ -123,9 +46,6 @@ export const usePost = () => {
   });
 
   return {
-    postQuery,
-    postCreate,
-    postUpdate,
     postDelete,
   };
 };

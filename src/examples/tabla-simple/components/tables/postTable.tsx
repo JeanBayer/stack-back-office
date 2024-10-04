@@ -1,5 +1,3 @@
-import { Actions, Paginator } from '@tabla-simple/components';
-import type { Post } from '@tabla-simple/types';
 import {
   Table,
   TableBody,
@@ -8,6 +6,8 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
+import { Actions, Paginator } from '@tabla-simple/components';
+import type { Post } from '@tabla-simple/types';
 import { Link } from 'react-router-dom';
 
 type PostTable = {

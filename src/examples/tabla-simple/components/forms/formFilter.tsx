@@ -1,4 +1,3 @@
-import { Filter, FilterSchema, Status } from '@tabla-simple/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -8,6 +7,7 @@ import {
   Spacer,
   Spinner,
 } from '@nextui-org/react';
+import { Filter, FilterSchema, Status } from '@tabla-simple/types';
 import { useForm } from 'react-hook-form';
 
 interface FormFilterProps {

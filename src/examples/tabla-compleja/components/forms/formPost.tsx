@@ -1,4 +1,4 @@
-import { InputImage } from '@tabla-simple/components';
+import { InputImage } from '@tabla-compleja/components';
 import { type Post, PostSchema, Status } from '@tabla-simple/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {

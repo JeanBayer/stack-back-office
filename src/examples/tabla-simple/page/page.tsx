@@ -1,13 +1,13 @@
+import { Link, Spacer } from '@nextui-org/react';
 import {
   Fallback,
   FilterPosts,
   PostTable,
   TableSkeleton,
   WrapperStateContent,
-} from '@/components';
+} from '@tabla-simple/components';
 import { usePost, usePosts } from '@tabla-simple/hooks';
-import { useStore } from '@/store';
-import { Link, Spacer } from '@nextui-org/react';
+import { useStore } from '@tabla-simple/store';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {

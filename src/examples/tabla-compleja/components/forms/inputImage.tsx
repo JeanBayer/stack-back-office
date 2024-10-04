@@ -1,6 +1,6 @@
-import { Label } from '@tabla-simple/components';
-import { useHandleImageFile } from '@tabla-simple/hooks';
-import { type ImageInput } from '@tabla-simple/types';
+import { Label } from '@tabla-compleja/components';
+import { useHandleImageFile } from '@tabla-compleja/hooks';
+import { type ImageInput } from '@tabla-compleja/types';
 import { Image, Input } from '@nextui-org/react';
 import { useMemo } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';

@@ -1,4 +1,9 @@
-import { ErrorCard, Fallback, FilterSkeleton, FormFilter } from '@tabla-simple/components';
+import {
+  ErrorCard,
+  Fallback,
+  FilterSkeleton,
+  FormFilter,
+} from '@tabla-simple/components';
 import { useHandleChangeURLParams, useStatus } from '@tabla-simple/hooks';
 import { useStore } from '@tabla-simple/store';
 import { Filter, FilterSchema } from '@tabla-simple/types';

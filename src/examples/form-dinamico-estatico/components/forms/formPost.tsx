@@ -1,5 +1,5 @@
-import { InputImage } from '@tabla-simple/components';
-import { type Post, PostSchema, Status } from '@tabla-simple/types';
+import { InputImage } from '@form-dinamico-estatico/components';
+import { type Post, PostSchema, Status } from '@form-dinamico-estatico/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,

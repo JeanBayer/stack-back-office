@@ -1,5 +1,5 @@
-import { FieldSkeleton } from '@tabla-simple/components';
 import { Spacer } from '@nextui-org/react';
+import { FieldSkeleton } from '@tabla-simple/components';
 
 export const FilterSkeleton = () => {
   return (
