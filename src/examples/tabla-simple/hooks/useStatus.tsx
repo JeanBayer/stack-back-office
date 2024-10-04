@@ -4,7 +4,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 export const useStatus = () => {
   const statusQuery = useQuery({
-    queryKey: ['status'],
+    queryKey: [Constants.KEYS.STATUS],
     queryFn: PostService.getStatus,
     placeholderData: keepPreviousData,
     staleTime: Constants.CACHE_TIME_GET_LIST_STATUS,

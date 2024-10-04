@@ -36,6 +36,8 @@ export class PostService {
 
   public static async deletePost(postId: string): Promise<void> {
     try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      throw new Error('Error en deletePost');
       await api.delete(`/items/${postId}`);
     } catch (error) {
       console.error('Error in deletePost method', error);

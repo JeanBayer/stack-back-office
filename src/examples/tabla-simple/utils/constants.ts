@@ -7,4 +7,13 @@ export class Constants {
 
   public static readonly CACHE_TIME_GET_LIST_STATUS: number =
     import.meta.env.PUBLIC_CACHE_TIME_GET_LIST_STATUS || 0;
+
+  public static readonly ROUTES = {
+    POSTS: '/tabla-simple',
+  } as const;
+
+  public static readonly KEYS = {
+    POSTS: 'posts',
+    STATUS: 'status',
+  } as const;
 }

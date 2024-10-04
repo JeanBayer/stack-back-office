@@ -1,4 +1,9 @@
-import { ErrorCard, Fallback, FormPost, FormSkeleton } from '@form-simple/components';
+import {
+  ErrorCard,
+  Fallback,
+  FormPost,
+  FormSkeleton,
+} from '@form-simple/components';
 import { usePost, useStatus } from '@form-simple/hooks';
 import { type Post } from '@form-simple/types';
 import { Constants, FileUtil } from '@form-simple/utils';
@@ -31,7 +36,10 @@ export const PostCreate = () => {
         <FormPost
           status={statusQuery.data || []}
           onSubmit={handleSubmit}
-          isDisabledButton={postCreate.isPending || postCreate.isSuccess}
+          isDisabledButton={
+            // postCreate.isPending || postCreate.isSuccess
+            false
+          }
           isSubmitting={postCreate.isPending}
         />
       </Fallback>
