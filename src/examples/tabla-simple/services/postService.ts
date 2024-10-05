@@ -47,8 +47,8 @@ export class PostService {
 
   public static async getStatus(): Promise<Status[]> {
     try {
-      const response = await api.get<Status[]>(`/status`);
-      return response.data;
+      const { data } = await api.get<Status[]>(`/status`);
+      return [{ key: '', label: 'Todos' }, ...(data || [])];
     } catch (error) {
       console.error('Error in getStatus method', error);
       throw error;
