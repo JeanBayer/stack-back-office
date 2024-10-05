@@ -17,6 +17,7 @@ export const useStore = create<PaginationState>((set) => ({
   previousPage: 1,
   filterPost: {
     estado: '',
+    views: '',
   },
 
   setPage: (page) =>

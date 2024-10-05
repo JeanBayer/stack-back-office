@@ -28,7 +28,7 @@ export const FormFilter = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Filter>({
     resolver: zodResolver(FilterSchema),
     mode: 'all', // muestre los errores en onchange, blur y submit
@@ -36,7 +36,8 @@ export const FormFilter = ({
     defaultValues: filter,
   });
 
-  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
+  const disabledButton =
+    isDisabledButton || Object.keys(errors).length > 0 || !isDirty;
 
   return (
     <div>
