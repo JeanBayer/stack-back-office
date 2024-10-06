@@ -10,6 +10,9 @@ export class Constants {
 
   public static readonly ROUTES = {
     POSTS: '/tabla-simple',
+    POSTS_FORM: '/form-simple/posts/:id',
+    POSTS_FORM_EDIT: '/form-simple/posts/:id/edit',
+    POSTS_FORM_CREATE: '/form-simple/posts/create',
   } as const;
 
   public static readonly KEYS = {

@@ -6,9 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-import { Actions, Paginator } from '@tabla-simple/components';
+import { ActionsCRUD, Paginator } from '@tabla-simple/components';
 import type { Post } from '@tabla-simple/types';
-import { Link } from 'react-router-dom';
+import { Constants } from '@tabla-simple/utils';
 
 type PostTable = {
   data: Post[];
@@ -55,36 +55,11 @@ export const PostTable = ({
             <TableCell>{post.views}</TableCell>
             <TableCell>{post.estado}</TableCell>
             <TableCell width={30}>
-              <Actions
-                actions={[
-                  {
-                    value: (
-                      <Link
-                        to={`/posts/${post.id}`}
-                        className="flex items-center"
-                      >
-                        View
-                      </Link>
-                    ),
-                    label: 'View',
-                  },
-                  {
-                    value: (
-                      <Link
-                        to={`/posts/${post.id}/edit`}
-                        className="flex items-center"
-                      >
-                        Edit
-                      </Link>
-                    ),
-                    label: 'Edit',
-                  },
-                  {
-                    value: 'Delete',
-                    label: 'Delete',
-                    handleClick: () => onDelete(post.id),
-                  },
-                ]}
+              <ActionsCRUD
+                viewItemRoute={Constants.ROUTES.POSTS_FORM}
+                editItemRoute={Constants.ROUTES.POSTS_FORM_EDIT}
+                onDeleteItem={onDelete}
+                idItem={post.id}
               />
             </TableCell>
           </TableRow>
