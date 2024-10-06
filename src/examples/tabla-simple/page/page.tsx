@@ -8,6 +8,7 @@ import {
 } from '@tabla-simple/components';
 import { usePost, usePosts } from '@tabla-simple/hooks';
 import { useStore } from '@tabla-simple/store';
+import { Constants } from '@tabla-simple/utils';
 import { useShallow } from 'zustand/react/shallow';
 
 export const PostsPage = () => {
@@ -24,8 +25,11 @@ export const PostsPage = () => {
   return (
     <div className="content p-4">
       <div className="flex justify-between items-center mb-4 px-4">
-        <h1 className="text-2xl font-bold">Listado de ofertas</h1>
-        <Link href="/posts/create" className="text-blue-500 hover:underline">
+        <h1 className="text-2xl font-bold">Listado de Posts</h1>
+        <Link
+          href={Constants.ROUTES.POSTS_FORM_CREATE}
+          className="text-blue-500 hover:underline"
+        >
           Crear Post
         </Link>
       </div>
