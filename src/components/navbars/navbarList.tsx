@@ -1,5 +1,6 @@
 import { Actions } from '@/components';
-import { Button, Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
+import { Constants } from '@/utils';
+import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/react';
 import { Link } from 'react-router-dom';
 
 export const NavbarList = () => {
@@ -7,22 +8,22 @@ export const NavbarList = () => {
     <Navbar>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" to="/tabla-simple">
+          <Link color="foreground" to={Constants.ROUTES.POSTS}>
             tabla-simple
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" to="/tabla-compleja">
+          <Link color="foreground" to={Constants.ROUTES.VENTAS}>
             tabla-compleja
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" to="/form-dinamico-back">
+          <Link color="foreground" to={Constants.ROUTES.MISIONES_BACK}>
             form-dinamico-back
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" to="/form-dinamico-back">
+          <Link color="foreground" to={Constants.ROUTES.MISIONES_ESTATICO}>
             form-dinamico-estatico
           </Link>
         </NavbarItem>
@@ -32,7 +33,10 @@ export const NavbarList = () => {
             actions={[
               {
                 value: (
-                  <Link color="foreground" to="/form-simple/posts/create">
+                  <Link
+                    color="foreground"
+                    to={Constants.ROUTES.POSTS_FORM_CREATE}
+                  >
                     CREATE
                   </Link>
                 ),
@@ -41,7 +45,10 @@ export const NavbarList = () => {
               {
                 value: (
                   <Link
-                    to={`/form-simple/posts/Jb25IN3jShwlASWk1Q1i/edit`}
+                    to={Constants.ROUTES.POSTS_FORM_EDIT.replace(
+                      ':id',
+                      'Jb25IN3jShwlASWk1Q1i',
+                    )}
                     className="flex items-center"
                   >
                     EDIT
@@ -52,7 +59,10 @@ export const NavbarList = () => {
               {
                 value: (
                   <Link
-                    to={`/form-simple/posts/Jb25IN3jShwlASWk1Q1i`}
+                    to={Constants.ROUTES.POSTS_FORM.replace(
+                      ':id',
+                      'Jb25IN3jShwlASWk1Q1i',
+                    )}
                     className="flex items-center"
                   >
                     SHOW
@@ -62,16 +72,6 @@ export const NavbarList = () => {
               },
             ]}
           />
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link to="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" to="#" variant="flat">
-            Sign Up
-          </Button>
         </NavbarItem>
       </NavbarContent>
     </Navbar>

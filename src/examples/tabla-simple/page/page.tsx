@@ -26,7 +26,7 @@ export const PostsPage = () => {
       <div className="flex justify-between items-center mb-4 px-4">
         <h1 className="text-2xl font-bold">Listado de ofertas</h1>
         <Link href="/posts/create" className="text-blue-500 hover:underline">
-          Crear oferta
+          Crear Post
         </Link>
       </div>
 

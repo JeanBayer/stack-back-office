@@ -21,6 +21,17 @@ export class Constants {
     'modulo-mision': 'modulo-mision',
     'modulo-mision-instruccion': 'modulo-mision-instruccion',
   } as const;
+
+  public static readonly ROUTES = {
+    HOME: '/',
+    POSTS: '/tabla-simple',
+    VENTAS: '/tabla-compleja',
+    POSTS_FORM: '/form-simple/posts/:id',
+    POSTS_FORM_EDIT: '/form-simple/posts/:id/edit',
+    POSTS_FORM_CREATE: '/form-simple/posts/create',
+    MISIONES_BACK: '/form-dinamico-back',
+    MISIONES_ESTATICO: '/form-dinamico-estatico',
+  } as const;
 }
 
 export class NameInputs {
