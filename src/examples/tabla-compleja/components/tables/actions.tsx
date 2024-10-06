@@ -1,4 +1,3 @@
-import { VerticalDotsIcon } from '@tabla-compleja/components';
 import {
   Button,
   Dropdown,
@@ -6,6 +5,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from '@nextui-org/react';
+import { VerticalDotsIcon } from '@tabla-compleja/components';
 import React from 'react';
 
 type ActionsProps = {

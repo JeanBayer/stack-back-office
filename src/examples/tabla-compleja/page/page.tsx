@@ -1,3 +1,4 @@
+import { Link, Spacer } from '@nextui-org/react';
 import {
   Fallback,
   FilterPosts,
@@ -5,12 +6,12 @@ import {
   TableSkeleton,
   WrapperStateContent,
 } from '@tabla-compleja/components';
-import { useStore } from '@tabla-compleja/store';
-import { Link, Spacer } from '@nextui-org/react';
 import { usePost, usePosts } from '@tabla-compleja/hooks';
+import { useStore } from '@tabla-compleja/store';
+import { Constants } from '@tabla-compleja/utils';
 import { useShallow } from 'zustand/react/shallow';
 
-export const TablaCompleja = () => {
+export const PostsPage = () => {
   const { postsQuery } = usePosts();
   const { postDelete } = usePost();
 
@@ -24,9 +25,12 @@ export const TablaCompleja = () => {
   return (
     <div className="content p-4">
       <div className="flex justify-between items-center mb-4 px-4">
-        <h1 className="text-2xl font-bold">Listado de ofertas</h1>
-        <Link href="/posts/create" className="text-blue-500 hover:underline">
-          Crear oferta
+        <h1 className="text-2xl font-bold">Listado de Posts</h1>
+        <Link
+          href={Constants.ROUTES.POSTS_FORM_CREATE}
+          className="text-blue-500 hover:underline"
+        >
+          Crear Post
         </Link>
       </div>
 

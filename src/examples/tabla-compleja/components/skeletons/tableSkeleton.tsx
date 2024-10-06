@@ -1,4 +1,3 @@
-import { FieldSkeleton, Paginator } from '@tabla-compleja/components';
 import {
   Table,
   TableBody,
@@ -7,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/react';
+import { FieldSkeleton, Paginator } from '@tabla-compleja/components';
 
 const ITEMS = Array.from({ length: 10 }).map((_, i) => i);
 

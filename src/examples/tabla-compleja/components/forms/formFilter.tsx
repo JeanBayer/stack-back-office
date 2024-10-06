@@ -1,4 +1,3 @@
-import { Filter, FilterSchema, Status } from '@tabla-simple/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -8,10 +7,11 @@ import {
   Spacer,
   Spinner,
 } from '@nextui-org/react';
+import { Filter, FilterSchema, Status } from '@tabla-compleja/types';
 import { useForm } from 'react-hook-form';
 
 interface FormFilterProps {
-  filter?: Filter;
+  filter?: Partial<Filter>;
   status: Status[];
   onSubmit: (updatedPost: Filter) => void;
   isDisabledButton?: boolean;
@@ -28,7 +28,7 @@ export const FormFilter = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<Filter>({
     resolver: zodResolver(FilterSchema),
     mode: 'all', // muestre los errores en onchange, blur y submit
@@ -36,7 +36,8 @@ export const FormFilter = ({
     defaultValues: filter,
   });
 
-  const disabledButton = isDisabledButton || Object.keys(errors).length > 0;
+  const disabledButton =
+    isDisabledButton || Object.keys(errors).length > 0 || !isDirty;
 
   return (
     <div>
@@ -52,12 +53,13 @@ export const FormFilter = ({
         </Select>
         <Spacer y={1} />
         <Input
-          label="Title"
-          placeholder="Search by title"
+          label="Views"
+          type="number"
+          placeholder="Search by views"
           className="max-w-xs"
-          {...register('title')}
-          isInvalid={!!errors.title}
-          errorMessage={errors.title?.message}
+          {...register('views')}
+          isInvalid={!!errors.views}
+          errorMessage={errors.views?.message}
         />
         <Spacer y={1} />
         <Button type="submit" color="primary" isDisabled={disabledButton}>

@@ -44,4 +44,20 @@ export class QueryClientUtil {
       );
     }
   }
+
+  public static async updateOptimisticData<T>(
+    queryClient: QueryClient,
+    key: string[],
+    onChange: (data: T) => T,
+  ) {
+    await queryClient.cancelQueries({ queryKey: key });
+    const previousData = this.getQueryData<T>(queryClient, key);
+    if (previousData) {
+      const data = onChange(previousData);
+      console.log('data in previous', data);
+      this.setQueryData(queryClient, key, data);
+    }
+
+    return previousData;
+  }
 }

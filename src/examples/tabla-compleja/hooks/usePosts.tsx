@@ -17,7 +17,7 @@ export const usePosts = () => {
   );
 
   const postsQuery = useQuery({
-    queryKey: ['posts', page, perPage, filterPost],
+    queryKey: [Constants.KEYS.POSTS, page, perPage, filterPost],
     queryFn: async () => {
       try {
         const response = await PostService.getPosts({
@@ -26,8 +26,7 @@ export const usePosts = () => {
           filter: filterPost,
         });
         const currentPageAPI = response.pagination.currentPage;
-        if (currentPageAPI !== page)
-          changePage(response.pagination.currentPage);
+        if (currentPageAPI !== page) changePage(currentPageAPI);
         return response;
       } catch (error) {
         toast.error(`Error al cargar los posts de la pagina ${page}`);
@@ -36,16 +35,10 @@ export const usePosts = () => {
       }
     },
     placeholderData: keepPreviousData,
-    staleTime:  Constants.CACHE_TIME_GET_LIST_POST,
+    staleTime: Constants.CACHE_TIME_GET_LIST_POST,
   });
 
-  const pagination = postsQuery.data?.pagination;
-
-  const maxPages = pagination?.totalPages || 1;
-  const currentPage = pagination?.currentPage || 1;
-
-  const haveNextPage = currentPage < maxPages ? true : false;
-  const havePrevPage = currentPage > 1 ? true : false;
+  const maxPages = postsQuery.data?.pagination?.totalPages || 1;
 
   return {
     postsQuery: {
@@ -56,8 +49,6 @@ export const usePosts = () => {
       isFetching: postsQuery.isFetching,
       isPlaceholderData: postsQuery.isPlaceholderData,
       maxPages,
-      haveNextPage,
-      havePrevPage,
       refetch: postsQuery.refetch,
     },
   };
