@@ -1,6 +1,11 @@
-import { ErrorCard, Fallback, FormPost, FormSkeleton } from '@form-simple/components';
+import {
+  ErrorCard,
+  Fallback,
+  FormPost,
+  FormSkeleton,
+} from '@form-simple/components';
 import { usePost, useSelectId, useStatus } from '@form-simple/hooks';
-import { Post } from '@/types';
+import { type Post } from '@form-simple/types';
 import { Constants, FileUtil, ObjectUtil } from '@form-simple/utils';
 
 export const PostEdit = () => {

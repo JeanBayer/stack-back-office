@@ -12,6 +12,7 @@ type InputImageProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: UseFormRegister<any>;
   error: FieldError | undefined;
+  disabled?: boolean;
 };
 
 export const InputImage = ({
@@ -20,6 +21,7 @@ export const InputImage = ({
   image,
   register,
   error,
+  disabled = false,
 }: InputImageProps) => {
   const { previewImagenURL, hiddenInputRef, handleUploadedFile } =
     useHandleImageFile({ url: image.url });
@@ -56,6 +58,7 @@ export const InputImage = ({
           errorMessage={error?.message}
           fullWidth
           className="hidden"
+          disabled={disabled}
         />
       </Label>
       {previewImagenURL && (

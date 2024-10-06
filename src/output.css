@@ -2875,6 +2875,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-primary-600 {
+  --tw-text-opacity: 1;
+  color: hsl(var(--nextui-primary-600) / var(--nextui-primary-600-opacity, var(--tw-text-opacity)));
+}
+
 .underline {
   text-decoration-line: underline;
 }

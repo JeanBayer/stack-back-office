@@ -1,5 +1,6 @@
 import { InputImage } from '@form-simple/components';
 import { type Post, PostSchema, Status } from '@form-simple/types';
+import { Constants } from '@form-simple/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   Button,
@@ -10,6 +11,7 @@ import {
   Spinner,
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 interface formPostProps {
   post?: Post;
@@ -17,6 +19,7 @@ interface formPostProps {
   onSubmit: (updatedPost: Post) => void;
   isDisabledButton?: boolean;
   isSubmitting?: boolean;
+  isDisabledForm?: boolean;
 }
 
 export const FormPost = ({
@@ -25,6 +28,7 @@ export const FormPost = ({
   onSubmit,
   isDisabledButton = false,
   isSubmitting,
+  isDisabledForm = false,
 }: formPostProps) => {
   const {
     register,
@@ -50,6 +54,7 @@ export const FormPost = ({
           isInvalid={!!errors.title}
           errorMessage={errors.title?.message}
           fullWidth
+          disabled={isDisabledForm}
         />
         <Spacer y={1} />
         <Input
@@ -59,6 +64,7 @@ export const FormPost = ({
           isInvalid={!!errors.author}
           errorMessage={errors.author?.message}
           fullWidth
+          disabled={isDisabledForm}
         />
         <Spacer y={1} />
         <Input
@@ -68,6 +74,7 @@ export const FormPost = ({
           isInvalid={!!errors.views}
           errorMessage={errors.views?.message}
           fullWidth
+          disabled={isDisabledForm}
         />
         <Spacer y={1} />
         <Input
@@ -77,6 +84,7 @@ export const FormPost = ({
           isInvalid={!!errors.date}
           errorMessage={errors.date?.message}
           fullWidth
+          disabled={isDisabledForm}
         />
         <Spacer y={1} />
         <Select
@@ -87,8 +95,13 @@ export const FormPost = ({
           isInvalid={!!errors.estado}
           errorMessage={errors.estado?.message}
           fullWidth
+          disabled={isDisabledForm}
         >
-          {(estado) => <SelectItem key={estado.key}>{estado.label}</SelectItem>}
+          {(estado) => (
+            <SelectItem key={estado.key} isReadOnly={isDisabledForm}>
+              {estado.label}
+            </SelectItem>
+          )}
         </Select>
         <Spacer y={1} />
 
@@ -104,12 +117,22 @@ export const FormPost = ({
             height: 113,
             className: 'mt-2',
           }}
+          disabled={isDisabledForm}
         />
         <Spacer y={1} />
-        <Button type="submit" color="primary" isDisabled={disabledButton}>
-          Save
-          {isSubmitting && <Spinner size="sm" color="secondary" />}
-        </Button>
+        {isDisabledForm ? (
+          <Link
+            to={Constants.ROUTES.POSTS_FORM_EDIT.replace(':id', post?.id || '')}
+            className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap font-normal subpixel-antialiased overflow-hidden tap-highlight-transparent data-[pressed=true]:scale-[0.97] outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-4 min-w-20 h-10 text-small gap-2 rounded-medium [&>svg]:max-w-[theme(spacing.8)] transition-transform-colors-opacity motion-reduce:transition-none bg-primary text-primary-foreground data-[hover=true]:opacity-hover"
+          >
+            Edit
+          </Link>
+        ) : (
+          <Button type="submit" color="primary" isDisabled={disabledButton}>
+            Save
+            {isSubmitting && <Spinner size="sm" color="secondary" />}
+          </Button>
+        )}
       </form>
     </div>
   );

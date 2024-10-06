@@ -21,6 +21,10 @@ export class Constants {
     'modulo-mision': 'modulo-mision',
     'modulo-mision-instruccion': 'modulo-mision-instruccion',
   } as const;
+
+  public static readonly ROUTES = {
+    POSTS_FORM_EDIT: '/form-simple/posts/:id/edit',
+  } as const;
 }
 
 export class NameInputs {
