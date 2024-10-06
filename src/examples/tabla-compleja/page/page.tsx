@@ -11,7 +11,7 @@ import { useStore } from '@tabla-compleja/store';
 import { Constants } from '@tabla-compleja/utils';
 import { useShallow } from 'zustand/react/shallow';
 
-export const PostsPage = () => {
+export const TablaCompleja = () => {
   const { postsQuery } = usePosts();
   const { postDelete } = usePost();
 

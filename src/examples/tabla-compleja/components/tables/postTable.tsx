@@ -9,6 +9,7 @@ import {
 import { ActionsCRUD, Paginator } from '@tabla-compleja/components';
 import type { Post } from '@tabla-compleja/types';
 import { Constants } from '@tabla-compleja/utils';
+import { useEffect, useState } from 'react';
 
 type PostTable = {
   data: Post[];
@@ -27,11 +28,71 @@ export const PostTable = ({
   emptyContent,
   onDelete,
 }: PostTable) => {
+  const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]));
+  const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
+  const [selectedData, setSelectedData] = useState<Post[]>([]);
+  const [actionMode, setActionMode] = useState<string | null>(null);
+
+  useEffect(() => {
+    const selectedData = data?.filter((post) => selectedKeys?.has(post.id));
+
+    if (selectedData.length === 0) {
+      setDisabledKeys([]);
+      setActionMode(null);
+    } else if (selectedData.every((post) => post.estado === 'disponible')) {
+      const disabledData = data?.filter((post) => post.estado !== 'disponible');
+      setDisabledKeys(disabledData.map((post) => post.id));
+      setActionMode('publicar');
+    } else if (selectedData.every((post) => post.estado === 'pausado')) {
+      const disabledData = data?.filter((post) => post.estado !== 'pausado');
+      setDisabledKeys(disabledData.map((post) => post.id));
+      setActionMode('disponibilizar');
+    } else if (selectedData.every((post) => post.estado === 'archivado')) {
+      const disabledData = data?.filter((post) => post.estado !== 'archivado');
+      setDisabledKeys(disabledData.map((post) => post.id));
+      setActionMode('desarchivar');
+    } else {
+      setSelectedKeys(new Set([]));
+      setDisabledKeys([]);
+      setActionMode(null);
+    }
+
+    setSelectedData(selectedData);
+  }, [selectedKeys, data]);
+
+  console.log(selectedData);
+  console.log(actionMode);
+
   return (
     <Table
       aria-label="Example static collection table"
       className="text-slate-900"
-      selectionMode="single"
+      selectionMode="multiple"
+      disabledKeys={disabledKeys}
+      selectedKeys={selectedKeys}
+      onSelectionChange={(keys) => {
+        if (keys === 'all') {
+          setSelectedKeys(new Set(data?.map((post) => post?.id)));
+          return;
+        }
+        setSelectedKeys(keys as Set<string>);
+      }}
+      topContentPlacement="outside"
+      topContent={
+        <>
+          {actionMode && (
+            <div>
+              <button
+                onClick={() => {
+                  console.log(selectedData);
+                }}
+              >
+                {actionMode}
+              </button>
+            </div>
+          )}
+        </>
+      }
       bottomContent={
         <Paginator
           changePage={paginator.changePage}
