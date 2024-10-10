@@ -6,7 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-import { ActionsCRUD, Paginator } from '@tabla-compleja/components';
+import {
+  ActionsCRUD,
+  OutsideAction,
+  Paginator,
+} from '@tabla-compleja/components';
 import { useMultipleSelectedItem } from '@tabla-compleja/hooks';
 import type { ActionSelection, Post } from '@tabla-compleja/types';
 import { Constants } from '@tabla-compleja/utils';
@@ -21,10 +25,15 @@ type PostTable = {
   emptyContent?: React.ReactNode;
   onDelete: (id: string) => void;
 };
+
 const actionSelection: ActionSelection[] = [
   {
     estado: 'disponible',
     actionMode: 'publicar',
+  },
+  {
+    estado: 'archivado',
+    actionMode: 'desarchivar',
   },
 ];
 
@@ -34,16 +43,11 @@ export const PostTable = ({
   emptyContent,
   onDelete,
 }: PostTable) => {
-  const {
-    selectedKeys,
-    disabledKeys,
-    selectedData,
-    actionMode,
-    handleSelectionChange,
-  } = useMultipleSelectedItem({
-    data,
-    actionSelection,
-  });
+  const { selectedKeys, disabledKeys, actionMode, handleSelectionChange } =
+    useMultipleSelectedItem({
+      data,
+      actionSelection,
+    });
 
   return (
     <Table
@@ -55,19 +59,10 @@ export const PostTable = ({
       onSelectionChange={handleSelectionChange}
       topContentPlacement="outside"
       topContent={
-        <>
-          {actionMode && (
-            <div>
-              <button
-                onClick={() => {
-                  console.log(selectedData);
-                }}
-              >
-                {actionMode}
-              </button>
-            </div>
-          )}
-        </>
+        <OutsideAction
+          actionMode={actionMode}
+          handleClick={() => console.log('Action')}
+        />
       }
       bottomContent={
         <Paginator

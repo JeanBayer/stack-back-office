@@ -42,7 +42,7 @@ export const useMultipleSelectedItem = ({
       return [false, null, []] as const;
     }
 
-    if (selectedData.length === 0) return;
+    if (selectedData.length === 0) return resetMode();
 
     const [isMatch, actionMode, disabledDataIds] = handleAllSelection();
     if (!isMatch) {
@@ -67,7 +67,6 @@ export const useMultipleSelectedItem = ({
   return {
     selectedKeys,
     disabledKeys,
-    selectedData,
     actionMode,
     handleSelectionChange,
   };
