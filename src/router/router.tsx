@@ -1,3 +1,5 @@
+import { MisionCreate, MisionEdit } from '@/examples/form-dinamico-back/page';
+import { MisionDetails } from '@/examples/form-dinamico-back/page/[id]/page';
 import { HomeLayout } from '@/page';
 import { FormDinamicoBackPage } from '@form-dinamico-back/page';
 import { FormDinamicoEstaticoPage } from '@form-dinamico-estatico/page';
@@ -26,6 +28,11 @@ export const CustomRouter = () => {
           }
         />
         <Route path="/form-dinamico-back" element={<FormDinamicoBackPage />} />
+        <Route path="/form-dinamico-back/create" element={ <MisionCreate />} />
+        <Route path="/form-dinamico-back/create" element={ <MisionCreate />} />
+        <Route path="/form-dinamico-back/:id/edit" element={<MisionEdit />} />
+        <Route path="/form-dinamico-back/:id" element={<MisionDetails />} />
+        
         <Route
           path="/form-dinamico-estatico"
           element={<FormDinamicoEstaticoPage />}

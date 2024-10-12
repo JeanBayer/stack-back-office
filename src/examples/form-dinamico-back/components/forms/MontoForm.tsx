@@ -21,7 +21,6 @@ export const MontoForm = ({ register, option }: FormComponentProps) => {
         label="Monto"
         placeholder={placeholder}
         startContent="$"
-        className="max-w-xs"
         {...register(id, {
           onChange: (e) => {
             const message = replaceText(e.target.value);

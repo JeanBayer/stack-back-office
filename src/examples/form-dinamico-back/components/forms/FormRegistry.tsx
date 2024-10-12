@@ -1,11 +1,12 @@
 import { FieldsType, FormComponentProps } from '@/types';
-import { CSVForm } from './CSVForm';
-import { InstruccionInputForm } from './InstruccionInputForm';
 import { MontoForm } from './MontoForm';
 import { NumeroForm } from './NumeroForm';
-import { PasosForm } from './pasosForm/PasosForm';
 import { PorcentajeForm } from './PorcentajeForm';
+import { InstruccionInputForm } from './InstruccionInputForm';
+import { PasosForm } from './PasosForm';
 import { SimpleForm } from './SimpleForm';
+import { CSVForm } from './CSVForm';
+
 
 export const FormRegistry: Record<FieldsType, React.FC<FormComponentProps>> = {
   monto: MontoForm,
@@ -15,6 +16,6 @@ export const FormRegistry: Record<FieldsType, React.FC<FormComponentProps>> = {
   'instruccion-pasos': PasosForm,
   simple: SimpleForm,
   empty: () => null,
-  csv: CSVForm,
+  csv: CSVForm as unknown as React.FC<FormComponentProps>,
   'radio-image': () => null,
 };

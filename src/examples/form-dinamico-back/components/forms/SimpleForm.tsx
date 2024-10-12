@@ -5,7 +5,6 @@ export const SimpleForm = ({ register }: FormComponentProps) => (
   <Input
     label="Simple Field"
     placeholder="Enter some value"
-    className="max-w-xs"
     {...register('simple')}
   />
 );

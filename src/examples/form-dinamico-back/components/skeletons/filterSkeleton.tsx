@@ -1,4 +1,4 @@
-import { FieldSkeleton } from '@form-dinamico-back/components';
+import { FieldSkeleton } from '@/components';
 import { Spacer } from '@nextui-org/react';
 
 export const FilterSkeleton = () => {

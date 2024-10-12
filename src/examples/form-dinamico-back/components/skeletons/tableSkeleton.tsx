@@ -1,4 +1,4 @@
-import { FieldSkeleton, Paginator } from '@form-dinamico-back/components';
+import { FieldSkeleton } from '@/components';
 import {
   Table,
   TableBody,
@@ -16,7 +16,6 @@ export const TableSkeleton = () => {
       aria-label="Skeleton table"
       className="text-slate-900"
       selectionMode="single"
-      bottomContent={<Paginator changePage={() => {}} page={1} maxPages={1} />}
     >
       <TableHeader>
         <TableColumn>

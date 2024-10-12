@@ -11,11 +11,10 @@ export const PasosForm = ({ register, option }: FormComponentProps) => {
       <Select
         label="Selecciona"
         placeholder={placeholder}
-        className="max-w-xs"
         items={values}
         {...register(id)}
       >
-        {(pasos) => <SelectItem key={pasos.id}>{pasos.label}</SelectItem>}
+        {(pasos: { id: string; label: string }) => <SelectItem key={pasos.id}>{pasos.label}</SelectItem>}
       </Select>
     </div>
   );

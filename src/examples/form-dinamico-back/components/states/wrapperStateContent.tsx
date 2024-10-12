@@ -1,4 +1,4 @@
-import { ErrorCard } from '@form-dinamico-back/components';
+import { ErrorCard } from '@form-dinamico-estatico/components';
 
 type WrapperStateContentProps = {
   isError: boolean;

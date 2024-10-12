@@ -1,60 +1,43 @@
-import { ErrorCard, Fallback, FilterSkeleton, FormPrueba } from '@form-dinamico-back/components';
-import {
-  //  useHandleChangeURLParams,
-  useStatus,
-} from '@form-dinamico-back/hooks';
-import { useStore } from '@form-dinamico-back/store';
-// import { ObjectUtil } from '@/utils';
+import { ErrorCard, Fallback, WrapperStateContent, PostTable, TableSkeleton } from '@form-dinamico-back/components';
+import { useMisiones, useMisione } from '../hooks';
+import { Link } from 'react-router-dom';
+
 
 export const FormDinamicoBackPage = () => {
-  const filterPost = useStore((state) => state.filterPost);
-  // const setFilterPost = useStore((state) => state.setFilterPost);
-  const { statusQuery } = useStatus();
-  // const { updateSearchParams } = useHandleChangeURLParams({
-  //   handleChangeParams,
-  // });
-
-  // function handleChangeParams(params: Record<string, string>) {
-  //   const exactFields = ObjectUtil.extractExactFields(
-  //     params,
-  //     Object.keys(FilterSchema.shape),
-  //   );
-  //   const validParams = FilterSchema.safeParse(exactFields);
-  //   if (validParams.error) return;
-  //   setFilterPost(validParams.data);
-  // }
-
-  async function handleSubmit(data: Record<string, string>) {
-    console.log('data:::', data);
-    // setFilterPost(data);
-    // updateSearchParams(data);
-  }
-
-  const statusWithAll = [
-    { key: '', label: 'Todos' },
-    ...(statusQuery?.data || []),
-  ];
-
+  const { misioneQuery } = useMisiones();
+const { postDelete } = useMisione();
   return (
     <div>
+      <div className="flex justify-between items-center mb-4 mt-4 px-4">
+        <h1 className="text-2xl text-blue-500 font-bold">Listado de Misiones</h1>
+        <Link to="/form-dinamico-back/create" className="text-blue-500 hover:underline">
+          Crear Mision
+        </Link>
+      </div>
+
       <Fallback
-        isLoading={statusQuery?.isLoading}
-        fallbackLoading={<FilterSkeleton />}
-        isError={statusQuery?.isError}
+        isLoading={misioneQuery?.isPending}
+        isError={misioneQuery?.isError}
+        fallbackLoading={<TableSkeleton />}
         fallbackError={
           <ErrorCard
-            onRetry={statusQuery?.refetch}
-            errorMessage={statusQuery?.error?.message || 'Error'}
+            onRetry={misioneQuery?.refetch}
+            errorMessage={misioneQuery?.error?.message || 'Error'}
           />
         }
       >
-        <FormPrueba
-          key={JSON.stringify(filterPost)}
-          // filter={filterPost}
-          status={statusWithAll}
-          onSubmit={handleSubmit}
-          isDisabledButton={statusQuery?.isLoading}
-          isSubmitting={statusQuery?.isLoading}
+        <PostTable
+          data={misioneQuery.data || []}
+          emptyContent={
+            <WrapperStateContent
+              isError={misioneQuery.isError}
+              errorMessage={misioneQuery.error?.message || 'Error'}
+              refetch={misioneQuery.refetch}
+              isEmpty={!misioneQuery.data?.length}
+              emptyMessage="No hay Posts"
+            />
+          }
+          onDelete={postDelete.mutate}
         />
       </Fallback>
     </div>

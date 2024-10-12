@@ -7,7 +7,6 @@ export const InstruccionInputForm = ({ register }: FormComponentProps) => (
       type="date"
       label="Fecha de Inicio"
       placeholder="Seleccionar fecha"
-      className="max-w-xs"
       {...register('instruccion-input-instruccion')}
     />
   </div>

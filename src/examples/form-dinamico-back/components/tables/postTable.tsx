@@ -1,5 +1,4 @@
-import { Actions, Paginator } from '@form-dinamico-back/components';
-import type { Post } from '@form-dinamico-back/types';
+import { Actions } from '@tabla-simple/components';
 import {
   Table,
   TableBody,
@@ -9,58 +8,47 @@ import {
   TableRow,
 } from '@nextui-org/table';
 import { Link } from 'react-router-dom';
+import { PostData } from '@/types';
 
-type PostTable = {
-  data: Post[];
-  paginator: {
-    changePage: (page: number) => void;
-    page: number;
-    maxPages: number;
-  };
+type PostTableProps = {
+  data: PostData[];
   emptyContent?: React.ReactNode;
   onDelete: (id: string) => void;
 };
 
 export const PostTable = ({
   data,
-  paginator,
   emptyContent,
   onDelete,
-}: PostTable) => {
+}: PostTableProps) => {
+
   return (
     <Table
       aria-label="Example static collection table"
       className="text-slate-900"
       selectionMode="single"
-      bottomContent={
-        <Paginator
-          changePage={paginator.changePage}
-          page={paginator.page}
-          maxPages={paginator.maxPages}
-        />
-      }
     >
       <TableHeader>
-        <TableColumn>TITLE</TableColumn>
-        <TableColumn>AUTHOR</TableColumn>
-        <TableColumn>VIEWS</TableColumn>
-        <TableColumn>STATE</TableColumn>
+        <TableColumn>Modulo Audiencia</TableColumn>
+        <TableColumn>Modulo MisionDynamic</TableColumn>
+        <TableColumn>Modulo Icono</TableColumn>
+        <TableColumn>Modulo Mision</TableColumn>
         <TableColumn>ACTIONS</TableColumn>
       </TableHeader>
       <TableBody emptyContent={emptyContent}>
         {data?.map((post) => (
           <TableRow key={post.id}>
-            <TableCell>{post.title}</TableCell>
-            <TableCell>{post.author}</TableCell>
-            <TableCell>{post.views}</TableCell>
-            <TableCell>{post.estado}</TableCell>
+            <TableCell>{post['modulo-mision-instruccion']}</TableCell>
+            <TableCell>{post['modulo-mision-dynamic']}</TableCell>
+            <TableCell>{post['modulo-icono']}</TableCell>
+            <TableCell>{post['modulo-mision']}</TableCell>
             <TableCell width={30}>
               <Actions
                 actions={[
                   {
                     value: (
                       <Link
-                        to={`/posts/${post.id}`}
+                        to={`/form-dinamico-back/${post.id}`}
                         className="flex items-center"
                       >
                         View
@@ -71,7 +59,7 @@ export const PostTable = ({
                   {
                     value: (
                       <Link
-                        to={`/posts/${post.id}/edit`}
+                        to={`/form-dinamico-back/${post.id}/edit`}
                         className="flex items-center"
                       >
                         Edit

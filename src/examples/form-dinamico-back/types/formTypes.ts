@@ -27,3 +27,15 @@ export interface FormComponentProps<T extends FieldValues = Generic> {
   register: UseFormRegister<T>;
   option?: Option;
 }
+
+export type PostMisione = {
+  id?: string | undefined;
+  "modulo-mision"?: string,
+  "modulo-mision-instruccion"?: string,
+  "modulo-mision-dynamic"?: number,
+  "modulo-audiencia"?: string,
+  "modulo-audiencia-dynamic"?: File,
+  "modulo-icono"?: string,
+  "modulo-premio"?: string,
+  "modulo-premio-dynamic"?: number
+}

@@ -1,4 +1,4 @@
-import { VerticalDotsIcon } from '@form-dinamico-back/components';
+import { VerticalDotsIcon } from '@tabla-simple/components';
 import {
   Button,
   Dropdown,

@@ -2,7 +2,7 @@ import { FormComponentProps } from '@/types';
 import { Input } from '@nextui-org/react';
 import { useState } from 'react';
 
-export const PorcentajeForm = ({ register, option }: FormComponentProps) => {
+export const NumeroForm = ({ register, option }: FormComponentProps) => {
   const [messageModified, setMessageModified] = useState<string | undefined>(
     option?.properties?.message,
   );
@@ -18,10 +18,8 @@ export const PorcentajeForm = ({ register, option }: FormComponentProps) => {
   return (
     <>
       <Input
-        label="Porcentaje"
+        label="Numero"
         placeholder={placeholder}
-        className="max-w-xs"
-        endContent="%"
         {...register(id, {
           onChange: (e) => {
             const message = replaceText(e.target.value);
