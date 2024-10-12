@@ -1,5 +1,11 @@
 import { api } from '@tabla-compleja/api';
-import { Filter, Paginate, PostResponse, Status } from '@tabla-compleja/types';
+import {
+  ActionMode,
+  Filter,
+  Paginate,
+  PostResponse,
+  Status,
+} from '@tabla-compleja/types';
 
 type GetPosts = {
   page: Paginate['page'];
@@ -51,6 +57,21 @@ export class PostService {
       return [{ key: '', label: 'Todos' }, ...(data || [])];
     } catch (error) {
       console.error('Error in getStatus method', error);
+      throw error;
+    }
+  }
+
+  public static async changePostStatus(
+    postsId: string[],
+    status: ActionMode,
+  ): Promise<void> {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await api.post<PostResponse>(`/status/${status}`, {
+        itemIds: postsId,
+      });
+    } catch (error) {
+      console.error('Error in changePostStatus method', error);
       throw error;
     }
   }

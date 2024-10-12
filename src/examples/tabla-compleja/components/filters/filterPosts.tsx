@@ -4,7 +4,8 @@ import {
   FilterSkeleton,
   FormFilter,
 } from '@tabla-compleja/components';
-import { useFilter, useStatus } from '@tabla-compleja/hooks';
+import { useFilter } from '@tabla-compleja/hooks';
+import { useStatus } from '@tabla-compleja/queries';
 import { useStore } from '@tabla-compleja/store';
 
 export const FilterPosts = () => {

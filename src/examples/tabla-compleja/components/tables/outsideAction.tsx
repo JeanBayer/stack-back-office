@@ -3,10 +3,12 @@ import { ActionMode } from '@tabla-compleja/types';
 
 type OutsideActionProps = {
   actionMode: ActionMode | null;
+  isLoading: boolean;
   handleClick: () => void;
 };
 export const OutsideAction = ({
   actionMode,
+  isLoading,
   handleClick,
 }: OutsideActionProps) => {
   return (
@@ -15,7 +17,13 @@ export const OutsideAction = ({
       style={{ paddingRight: '1.25rem' }}
     >
       {actionMode && (
-        <Button variant="solid" color="primary" onClick={handleClick}>
+        <Button
+          variant="solid"
+          color="primary"
+          onClick={handleClick}
+          isDisabled={isLoading}
+          isLoading={isLoading}
+        >
           {actionMode}
         </Button>
       )}

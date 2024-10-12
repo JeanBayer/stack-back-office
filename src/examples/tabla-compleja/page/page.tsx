@@ -6,13 +6,13 @@ import {
   TableSkeleton,
   WrapperStateContent,
 } from '@tabla-compleja/components';
-import { usePost, usePosts } from '@tabla-compleja/hooks';
+import { usePost, usePosts } from '@tabla-compleja/queries';
 import { useStore } from '@tabla-compleja/store';
 import { Constants } from '@tabla-compleja/utils';
 import { useShallow } from 'zustand/react/shallow';
 
 export const TablaCompleja = () => {
-  const { postsQuery } = usePosts();
+  const { postsQuery, statusMutation } = usePosts();
   const { postDelete } = usePost();
 
   const { page, changePage } = useStore(
@@ -57,6 +57,8 @@ export const TablaCompleja = () => {
             />
           }
           onDelete={postDelete.mutate}
+          onChangeStatus={statusMutation.mutate}
+          isOutsideActionLoading={statusMutation.isPending}
         />
       </Fallback>
     </div>

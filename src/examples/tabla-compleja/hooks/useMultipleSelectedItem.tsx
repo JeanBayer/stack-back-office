@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 type UseMultipleSelectedItemProps = {
   data: Post[];
-  actionSelection: ActionSelection[];
+  actionSelection: ReadonlyArray<Readonly<ActionSelection>>;
 };
 
 export const useMultipleSelectedItem = ({
@@ -25,6 +25,12 @@ export const useMultipleSelectedItem = ({
     setDisabledKeys(disabledKeys);
     setActionMode(actionMode);
   }
+
+  // Resetear las selecciones cuando cambie la data
+  useEffect(() => {
+    resetMode();
+    setSelectedData([]);
+  }, [data]);
 
   useEffect(() => {
     function handleAllSelection() {

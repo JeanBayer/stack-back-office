@@ -12,7 +12,7 @@ import {
   Paginator,
 } from '@tabla-compleja/components';
 import { useMultipleSelectedItem } from '@tabla-compleja/hooks';
-import type { ActionSelection, Post } from '@tabla-compleja/types';
+import type { ActionMode, Post } from '@tabla-compleja/types';
 import { Constants } from '@tabla-compleja/utils';
 
 type PostTable = {
@@ -24,29 +24,22 @@ type PostTable = {
   };
   emptyContent?: React.ReactNode;
   onDelete: (id: string) => void;
+  onChangeStatus: (params: { postsId: string[]; status: ActionMode }) => void;
+  isOutsideActionLoading?: boolean;
 };
-
-const actionSelection: ActionSelection[] = [
-  {
-    estado: 'disponible',
-    actionMode: 'publicar',
-  },
-  {
-    estado: 'archivado',
-    actionMode: 'desarchivar',
-  },
-];
 
 export const PostTable = ({
   data,
   paginator,
   emptyContent,
   onDelete,
+  onChangeStatus,
+  isOutsideActionLoading = false,
 }: PostTable) => {
   const { selectedKeys, disabledKeys, actionMode, handleSelectionChange } =
     useMultipleSelectedItem({
       data,
-      actionSelection,
+      actionSelection: Constants.ACTION_SELECTION,
     });
 
   return (
@@ -61,7 +54,13 @@ export const PostTable = ({
       topContent={
         <OutsideAction
           actionMode={actionMode}
-          handleClick={() => console.log('Action')}
+          isLoading={isOutsideActionLoading}
+          handleClick={() =>
+            onChangeStatus({
+              postsId: Array.from(selectedKeys),
+              status: actionMode!,
+            })
+          }
         />
       }
       bottomContent={
