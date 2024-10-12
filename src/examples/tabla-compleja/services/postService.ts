@@ -66,8 +66,7 @@ export class PostService {
     status: ActionMode,
   ): Promise<void> {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      await api.post<PostResponse>(`/status/${status}`, {
+      await api.patch<PostResponse>(`/status/${status}`, {
         itemIds: postsId,
       });
     } catch (error) {

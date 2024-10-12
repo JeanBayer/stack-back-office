@@ -11,6 +11,7 @@ import {
   OutsideAction,
   Paginator,
 } from '@tabla-compleja/components';
+import { ACTION_SELECTION } from '@tabla-compleja/data';
 import { useMultipleSelectedItem } from '@tabla-compleja/hooks';
 import type { ActionMode, Post } from '@tabla-compleja/types';
 import { Constants } from '@tabla-compleja/utils';
@@ -36,11 +37,18 @@ export const PostTable = ({
   onChangeStatus,
   isOutsideActionLoading = false,
 }: PostTable) => {
-  const { selectedKeys, disabledKeys, actionMode, handleSelectionChange } =
+  const { selectedKeys, disabledKeys, actionsMode, handleSelectionChange } =
     useMultipleSelectedItem({
       data,
-      actionSelection: Constants.ACTION_SELECTION,
+      actionSelection: ACTION_SELECTION,
     });
+
+  function handleChangeStatus(action: ActionMode) {
+    onChangeStatus({
+      postsId: Array.from(selectedKeys),
+      status: action,
+    });
+  }
 
   return (
     <Table
@@ -53,14 +61,9 @@ export const PostTable = ({
       topContentPlacement="outside"
       topContent={
         <OutsideAction
-          actionMode={actionMode}
+          actionsMode={actionsMode}
           isLoading={isOutsideActionLoading}
-          handleClick={() =>
-            onChangeStatus({
-              postsId: Array.from(selectedKeys),
-              status: actionMode!,
-            })
-          }
+          handleClick={handleChangeStatus}
         />
       }
       bottomContent={

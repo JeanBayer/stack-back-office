@@ -1,5 +1,3 @@
-import { ActionSelection } from '@tabla-compleja/types';
-
 export class Constants {
   public static readonly CACHE_TIME_GET_LIST_POST: number =
     import.meta.env.PUBLIC_CACHE_TIME_GET_LIST_POST || 0;
@@ -21,21 +19,4 @@ export class Constants {
     POSTS: 'posts',
     STATUS: 'status',
   } as const;
-
-  public static readonly ACTION_SELECTION: ReadonlyArray<
-    Readonly<ActionSelection>
-  > = [
-    {
-      estado: 'pausado',
-      actionMode: 'disponibilizar',
-    },
-    {
-      estado: 'archivado',
-      actionMode: 'publicar',
-    },
-    {
-      estado: 'disponible',
-      actionMode: 'archivar',
-    },
-  ] as const;
 }

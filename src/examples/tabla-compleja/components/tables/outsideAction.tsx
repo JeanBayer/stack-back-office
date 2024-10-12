@@ -1,32 +1,33 @@
 import { Button } from '@nextui-org/react';
-import { ActionMode } from '@tabla-compleja/types';
+import { type ActionMode } from '@tabla-compleja/types';
 
 type OutsideActionProps = {
-  actionMode: ActionMode | null;
+  actionsMode: ActionMode[];
   isLoading: boolean;
-  handleClick: () => void;
+  handleClick: (action: ActionMode) => void;
 };
 export const OutsideAction = ({
-  actionMode,
+  actionsMode,
   isLoading,
   handleClick,
 }: OutsideActionProps) => {
   return (
     <div
-      className="flex justify-end items-center w-full"
+      className="flex justify-end items-center w-full gap-4"
       style={{ paddingRight: '1.25rem' }}
     >
-      {actionMode && (
+      {actionsMode.map((action) => (
         <Button
+          key={action}
           variant="solid"
           color="primary"
-          onClick={handleClick}
+          onClick={() => handleClick(action)}
           isDisabled={isLoading}
           isLoading={isLoading}
         >
-          {actionMode}
+          {action}
         </Button>
-      )}
+      ))}
     </div>
   );
 };

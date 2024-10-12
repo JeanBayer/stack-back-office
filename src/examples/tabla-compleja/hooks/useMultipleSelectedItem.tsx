@@ -14,16 +14,16 @@ export const useMultipleSelectedItem = ({
   const [selectedKeys, setSelectedKeys] = useState<Set<string>>(new Set([]));
   const [disabledKeys, setDisabledKeys] = useState<string[]>([]);
   const [selectedData, setSelectedData] = useState<Post[]>([]);
-  const [actionMode, setActionMode] = useState<ActionMode | null>(null);
+  const [actionsMode, setActionsMode] = useState<ActionMode[]>([]);
 
   function resetMode(
     selectedKeys: Set<string> | null = new Set<string>([]),
     disabledKeys: string[] = [],
-    actionMode: ActionMode | null = null,
+    actionMode: ActionMode[] = [],
   ) {
     if (selectedKeys !== null) setSelectedKeys(selectedKeys);
     setDisabledKeys(disabledKeys);
-    setActionMode(actionMode);
+    setActionsMode(actionMode);
   }
 
   // Resetear las selecciones cuando cambie la data
@@ -73,7 +73,7 @@ export const useMultipleSelectedItem = ({
   return {
     selectedKeys,
     disabledKeys,
-    actionMode,
+    actionsMode,
     handleSelectionChange,
   };
 };
