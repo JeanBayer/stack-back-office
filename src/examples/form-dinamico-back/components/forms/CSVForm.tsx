@@ -3,6 +3,7 @@ import { Input } from '@nextui-org/react';
 import { FaFileCsv } from 'react-icons/fa';
 import { UseFormRegister } from 'react-hook-form';
 import { useFileUpload } from '../../hooks';
+import { useStore } from '../../store';
 
 type CSVFormProps = {
   register: UseFormRegister<File>;
@@ -11,7 +12,8 @@ type CSVFormProps = {
 };
 
 
-export const CSVForm = ({ register, option, csv }: CSVFormProps) => {
+export const CSVForm = ({ register, option }: CSVFormProps) => {
+  const csv = useStore((state) => state.csvUrl);
   const hiddenInputRef = useRef<HTMLInputElement | null>(null);
   const { placeholder = '', id } = option?.properties || {};
   const MAX_FILE_SIZE = 5 * 1024 * 1024;

@@ -26,5 +26,4 @@ export interface Option {
 export interface FormComponentProps<T extends FieldValues = Generic> {
   register: UseFormRegister<T>;
   option?: Option;
-  csv: File;
 }

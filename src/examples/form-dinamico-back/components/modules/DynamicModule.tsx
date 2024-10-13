@@ -1,9 +1,10 @@
 import { Button, Spacer, Spinner } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { ModuloMision, ModuloAudiencia, ModuloIcono, ModuloPremio } from './';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MisionModuleSchema, PostMisione } from '../../types';
+import { useStore } from '../../store';
 
 type Generic = Record<string, string>;
 type Props = {
@@ -30,17 +31,21 @@ export const DynamicModule = ({
       defaultValues: Object.fromEntries(Object.entries(post).map(([key, value]) => [key, String(value)])),
       resolver: zodResolver(MisionModuleSchema),
     });
-
   const [selected, setSelected] = useState<string | null>(post && post["modulo-icono"] ? post["modulo-icono"] : null);
-
+  const setCvs = useStore((state) => state.setCsvUrl);
   const disabledButton = isDisabledButton || Object.keys(errors).length > 0 || !isDirty || !isValid;
 
+   useEffect(() => {
+    setCvs(post['modulo-audiencia-dynamic'])
+   }, [post, setCvs])
+    
+   console.log("hola")
   return (
     <div className="m-0 mx-auto w-fit p-4">
       <form onSubmit={handleSubmit(onSubmit)} className="text-gray-900 w-fit">
         <ModuloMision register={register} watch={watch} errors={errors} />
         <Spacer y={3} />
-        <ModuloAudiencia register={register} watch={watch} errors={errors} csv={post && post['modulo-audiencia-dynamic'] ? String(post['modulo-audiencia-dynamic']) : ''} />
+        <ModuloAudiencia register={register} watch={watch} errors={errors} />
         <Spacer y={3} />
         <ModuloIcono control={control} errors={errors} selected={selected} setSelected={setSelected} />
         <Spacer y={3} />

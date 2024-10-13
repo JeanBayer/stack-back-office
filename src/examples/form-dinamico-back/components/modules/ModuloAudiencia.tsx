@@ -10,10 +10,9 @@ type ModuloAudienciaProps = {
   register: UseFormRegister<FieldValues>;
   watch: UseFormWatch<FieldValues>
   errors: FieldErrors<Generic>;
-  csv: string;
 }
 
-export const ModuloAudiencia = ({ register, watch, errors, csv }: ModuloAudienciaProps) => {
+export const ModuloAudiencia = ({ register, watch, errors }: ModuloAudienciaProps) => {
   const optionModuloAudiencia = watch(NameInputs.MODULO_AUDIENCIA);
 
   return (
@@ -43,7 +42,6 @@ export const ModuloAudiencia = ({ register, watch, errors, csv }: ModuloAudienci
         <FormFactory 
           register={register} 
           option={findOption(optionsModuloAudiencia, optionModuloAudiencia)}
-          csv={csv} 
         />
       </CardBody>
     </Card>

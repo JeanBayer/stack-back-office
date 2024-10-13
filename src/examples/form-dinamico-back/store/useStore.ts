@@ -8,6 +8,8 @@ interface PaginationState {
   previousPage: number;
   selectedPostId: string | null;
   filterPost: Filter;
+  csvUrl: string | null; // Nuevo estado para la URL del CSV
+  setCsvUrl: any
   setFilterPost: (filterPost: Partial<Filter>) => void;
   setPage: (page: number) => void;
   incrementPage: () => void;
@@ -26,7 +28,7 @@ export const useStore = create<PaginationState>((set) => ({
     estado: '',
     title: '',
   },
-
+  csvUrl: null, // Iniciamos con null porque no hay un CSV aún
   setPage: (page) =>
     set((state) => {
       if (state.page !== page) {
@@ -44,4 +46,5 @@ export const useStore = create<PaginationState>((set) => ({
   setPerPage: (perPage) => set({ perPage }),
   selectPostId: (postId) => set({ selectedPostId: postId }),
   clearSelectedPostId: () => set({ selectedPostId: null }),
+  setCsvUrl: (url: string) => set({ csvUrl: url }),
 }));

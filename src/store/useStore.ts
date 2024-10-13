@@ -24,6 +24,7 @@ export const useStore = create<PaginationState>((set) => ({
   selectedPostId: null,
   filterPost: {
     estado: '',
+    title: ''
   },
 
   setPage: (page) =>
